@@ -1,0 +1,13 @@
+react-native
+react-native-safe-area-context
+react-native-vector-icons
+react-native-image-slider-banner
+react-native-swiper-flatlist
+react-native-ui-datepicker
+react-navigation
+react-navigation/material-bottom-tabs
+expo-google-fonts
+expo-fonts
+expo-status-bar
+npx@3.0.0
+npm@10.5.0
