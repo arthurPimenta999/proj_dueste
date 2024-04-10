@@ -1,0 +1,16 @@
+o repositório agora é remoto pra todo o grupo do TCC.
+
+antes de abrir o projeto, instalem o Node.js no PC de vcs.
+
+baixem o projeto como .zip pelo github mesmo, e quando terminar, abram o
+vscode e abram a pasta POR LÁ, ok?
+
+quando estiverem com a pasta do projeto aberta no vscode, apertem:
+CTRL, SHIFT e aspas
+pra abrir um terminal dentro do vscode
+
+feito isso e o terminal aberto na parte inferior da tela, executem os comandos um de cada vez
+npm -i
+npm i expo
+
+acredito que isso vá funcionar. caso tenham dúvida me chamem no zap =D
