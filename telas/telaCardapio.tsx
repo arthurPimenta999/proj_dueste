@@ -10,9 +10,19 @@ import AppLoading from "expo-app-loading";
 import { useNavigation } from "@react-navigation/native";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { Card } from "react-native-paper";
+import * as React from "react";
+import stylePadrao from "../styles/stylesDefault";
 
 function TelaCardapio() {
   const navigation = useNavigation();
+
+  {
+    /*
+  useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
+  só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
+  ~Stardust
+  */
+  }
 
   let [fontsLoaded] = useFonts({
     Montserrat_400Regular,
@@ -26,8 +36,8 @@ function TelaCardapio() {
     <SafeAreaView>
       {/* cabeçalho */}
 
-      <View style={styleCardapio.textTopAlign}>
-        <Text style={styleCardapio.textTop}>Cardápio</Text>
+      <View style={stylePadrao.textTopAlign}>
+        <Text style={stylePadrao.textTop}>Cardápio</Text>
       </View>
 
       {/*
@@ -36,7 +46,7 @@ function TelaCardapio() {
       */}
 
       <Pressable
-        style={styleCardapio.backBtn}
+        style={stylePadrao.backBtn}
         onPress={() => navigation.navigate("Início")}
       >
         <Ionicon name="arrow-back" size={18} color={"#333"} />

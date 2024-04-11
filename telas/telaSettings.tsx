@@ -16,7 +16,7 @@ import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import TelaProfile from "./conta/telaPerfil";
 
 function TelaConfigs() {
@@ -35,12 +35,11 @@ function TelaConfigs() {
   }
 
   return (
-    
     <SafeAreaView>
       {/* cabeçalho */}
 
-      <View style={styleSettings.textTopAlign}>
-        <Text style={styleSettings.textTop}>Configurações</Text>
+      <View style={stylePadrao.textTopAlign}>
+        <Text style={stylePadrao.textTop}>Configurações</Text>
       </View>
 
       {/*
@@ -49,7 +48,7 @@ function TelaConfigs() {
       */}
 
       <Pressable
-        style={styleSettings.backBtn}
+        style={stylePadrao.backBtn}
         onPress={() => navigation.navigate("Início")}
       >
         <Ionicon name="arrow-back" size={18} color={"#333"} />
@@ -81,9 +80,9 @@ function TelaConfigs() {
 
         <View style={styleSettings.alignConfig}>
           <View style={styleSettings.configSection}>
-            <Pressable 
-            style={styleSettings.pressableSpace} 
-            onPress={() => navigation.navigate("Perfil")}
+            <Pressable
+              style={styleSettings.pressableSpace}
+              onPress={() => navigation.navigate("Perfil")}
             >
               <MCI name="account-circle" size={25} color={"#000"} />
               <Text
@@ -199,19 +198,19 @@ function TelaConfigs() {
           </View>
         </View>
       </ScrollView>
-
-  
     </SafeAreaView>
   );
 }
 
 function Telas() {
   return (
-    <Stack.Navigator screenOptions={{
-    headerShown: false
-  }}>
-       <Stack.Screen name="Configurações" component={TelaConfigs} />
-       <Stack.Screen name="Perfil" component={TelaProfile} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Configs" component={TelaConfigs} />
+      <Stack.Screen name="Perfil" component={TelaProfile} />
     </Stack.Navigator>
   );
 }
