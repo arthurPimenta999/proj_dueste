@@ -15,7 +15,9 @@ import MatIcons from "react-native-vector-icons/MaterialIcons";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import 'react-native-gesture-handler';
+import TelaProfile from "./conta/telaPerfil";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -33,6 +35,7 @@ function TelaConfigs() {
   }
 
   return (
+    
     <SafeAreaView>
       {/* cabeçalho */}
 
@@ -78,7 +81,10 @@ function TelaConfigs() {
 
         <View style={styleSettings.alignConfig}>
           <View style={styleSettings.configSection}>
-            <Pressable style={styleSettings.pressableSpace}>
+            <Pressable 
+            style={styleSettings.pressableSpace} 
+            onPress={() => navigation.navigate("Perfil")}
+            >
               <MCI name="account-circle" size={25} color={"#000"} />
               <Text
                 style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -193,16 +199,23 @@ function TelaConfigs() {
           </View>
         </View>
       </ScrollView>
+
+  
     </SafeAreaView>
   );
 }
 
 function Telas() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen></Tab.Screen>
-    </Tab.Navigator>
+    <Stack.Navigator screenOptions={{
+    headerShown: false
+  }}>
+       <Stack.Screen name="Configurações" component={TelaConfigs} />
+       <Stack.Screen name="Perfil" component={TelaProfile} />
+    </Stack.Navigator>
   );
 }
 
-export default TelaConfigs;
+const Stack = createStackNavigator();
+
+export default Telas;

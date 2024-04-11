@@ -10,6 +10,7 @@ import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTheme } from "react-native-paper";
+import { createStackNavigator } from "@react-navigation/stack";
 
 //=========== app ==========
 
@@ -48,6 +49,7 @@ function MyTabs() {
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={{ backgroundColor: "#dedede", borderTopWidth: 0 }}
+      
     >
       <Tab.Screen
         name="Sabores"
@@ -94,5 +96,7 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
+const Stack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();

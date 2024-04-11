@@ -6,6 +6,7 @@ react-native-swiper-flatlist
 react-native-ui-datepicker
 react-navigation
 react-navigation/material-bottom-tabs
+react-navigation/stack
 expo-google-fonts
 expo-fonts
 expo-status-bar
