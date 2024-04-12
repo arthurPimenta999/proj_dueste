@@ -12,6 +12,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { Card } from "react-native-paper";
 import * as React from "react";
 import stylePadrao from "../styles/stylesDefault";
+import Ant from "react-native-vector-icons/AntDesign"
 
 function TelaCardapio() {
   const navigation = useNavigation();
@@ -54,12 +55,26 @@ function TelaCardapio() {
 
       {/* cartões de sabores e itens no cardápio */}
 
+
       <View style={styleCardapio.yellow}>
         <View>
           <Card>
-            <Card.Title title="titulo-teste" subtitle="subtitulo-teste" />
+            <Card.Title title="Pizzas salgadas" subtitle="subtitulo-teste" />
             <Card.Content>
-              <Text>oii rsrs</Text>
+              <View style={styleCardapio.iconSpace}>
+                <Ant name="down" size={20} />
+                <Text>pizza peperoni {"\n"}</Text>
+              </View> 
+              <Text>pizza Mussarela{"\n"}</Text>
+              <Text>pizza 4 queijos{"\n"}</Text>
+              <Text>pizza alho{"\n"}</Text>
+              <Text>pizza hot dog{"\n"}</Text>
+            </Card.Content>
+          </Card>
+          <Card>
+            <Card.Title title="titulo-teste" subtitle="subtitulo-teste" />
+            <Card.Content style={styleCardapio.styleCard}>
+              <Text>pizza peperonni</Text>
             </Card.Content>
           </Card>
         </View>

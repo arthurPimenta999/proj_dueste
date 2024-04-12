@@ -22,7 +22,7 @@ function TelaProfile() {
       useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
       só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
       ~Stardust
-      */
+    */
   }
 
   let [fontsLoaded] = useFonts({

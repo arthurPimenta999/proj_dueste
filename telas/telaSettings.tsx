@@ -88,7 +88,7 @@ function TelaConfigs() {
               <Text
                 style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
               >
-                Perfil
+                Editar dados
               </Text>
             </Pressable>
 

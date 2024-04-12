@@ -33,6 +33,15 @@ const styleCardapio = StyleSheet.create({
     marginLeft: width * 0.06,
     backgroundColor: "#ccc",
   },
+
+  styleCard:{
+    backgroundColor : "#FF22FF"
+  },
+
+  iconSpace:{
+    flexDirection:"row",
+    gap: 100,
+  }
 });
 
 export default styleCardapio;
