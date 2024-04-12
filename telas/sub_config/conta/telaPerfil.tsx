@@ -6,13 +6,13 @@ import {
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
 import AppLoading from "expo-app-loading";
-import stylePerfil from "../../styles/conta/stylesPerfil";
+import stylePerfil from "../../../styles/conta/stylesPerfil";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
-import stylePadrao from "../../styles/stylesDefault";
+import stylePadrao from "../../../styles/stylesDefault";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
-import Telas from "../telaSettings";
+import Telas from "../../telaSettings";
 
 function TelaProfile() {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ function TelaProfile() {
   }
 
   return (
-    <SafeAreaView style={stylePerfil.AndroidSafeArea}>
+    <SafeAreaView style={stylePadrao.AndroidSafeArea}>
       {/* cabeçalho */}
 
       <View style={stylePadrao.textTopAlign}>

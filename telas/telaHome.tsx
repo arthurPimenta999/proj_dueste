@@ -18,9 +18,14 @@ import FA5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import logoDueste from "../components/images/duesteLogo.png";
 import AppLoading from "expo-app-loading";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import TelaReserva from "./sub_home/reserva";
 
 function TelaPrincipal() {
   const { height } = useWindowDimensions();
+
+  const navigation = useNavigation();
 
   const marginTop = Platform.OS === "android" ? height * 0.1 : height * 0.05;
 
@@ -156,7 +161,10 @@ function TelaPrincipal() {
               </Text>
             </Pressable>
 
-            <Pressable style={styleHome.btn}>
+            <Pressable
+              style={styleHome.btn}
+              onPress={() => navigation.navigate("Reserva")}
+            >
               <Text
                 style={{
                   fontFamily: "Montserrat_400Regular",
@@ -174,4 +182,19 @@ function TelaPrincipal() {
   );
 }
 
-export default TelaPrincipal;
+function Telas() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Home" component={TelaPrincipal} />
+      <Stack.Screen name="Reserva" component={TelaReserva} />
+    </Stack.Navigator>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default Telas;

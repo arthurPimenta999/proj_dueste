@@ -4,8 +4,16 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 
 const marginOS = Platform.OS === "android" ? height * 0.03 : height * 0.01;
+const marginTopOS = Platform.OS === "android" ? height * 0.04 : height * 0;
 
 const stylePadrao = StyleSheet.create({
+  // safe area view da tela do perfil não funciona direito no android.
+  // função feita pra CASO o celular for android, aplicar esse estilo.
+  // caso contrário, não aplicar. :)                         ~Stardust
+  AndroidSafeArea: {
+    paddingTop: marginTopOS,
+  },
+
   styleHome: {
     backgroundColor: "#fff",
     color: "#fff",

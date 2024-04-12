@@ -1,16 +1,17 @@
-o repositório agora é remoto pra todo o grupo do TCC.
+instale o Node.js antes de clonar o repositório
 
-antes de abrir o projeto, instalem o Node.js no PC de vcs.
+clone o repositório no vscode
 
-baixem o projeto como .zip pelo github mesmo, e quando terminar, abram o
-vscode e abram a pasta POR LÁ, ok?
+aperte ctrl + shift + aspas pra abrir um terminal novo
+execute o comando: npm i
 
-quando estiverem com a pasta do projeto aberta no vscode, apertem:
-CTRL, SHIFT e aspas
-pra abrir um terminal dentro do vscode
+reinicie o vscode
 
-feito isso e o terminal aberto na parte inferior da tela, executem os comandos um de cada vez
-npm -i
-npm i expo
+pra iniciar o projeto e aparecer o codigo qr:
 
-acredito que isso vá funcionar. caso tenham dúvida me chamem no zap =D
+veja se o celular e o computador estão conectados na mesma rede.
+o qr code é local, então se não estiver na mesma rede, não vai conectar
+
+execute o comando: npx expo start
+
+depois disso vai aparecer o qr code. é só escanear e codar :)

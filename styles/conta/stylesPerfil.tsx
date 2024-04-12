@@ -3,15 +3,9 @@ import { StyleSheet, Dimensions, Platform } from "react-native";
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 
-const marginTopOS = Platform.OS === "android" ? height * 0.04 : height * 0;
+const marginOS = Platform.OS === "android" ? height * 0.04 : height * 0;
 
 const stylePerfil = StyleSheet.create({
-  // safe area view da tela do perfil não funciona direito no android.
-  // função feita pra CASO o celular for android, aplicar esse estilo.
-  // caso contrário, não aplicar. :)                         ~Stardust
-  AndroidSafeArea: {
-    paddingTop: marginTopOS,
-  },
   // style da imagem placeholder da foto de perfil do usuário.
   userContentAlign: {
     alignItems: "center",
