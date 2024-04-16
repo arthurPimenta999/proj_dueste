@@ -58,7 +58,7 @@ function TelaConfigs() {
       ~Stardust
       */}
 
-      <ScrollView style={styleSettings.scrollStyle}>
+      <ScrollView style={stylePadrao.scrollStyle}>
         <View style={styleSettings.searchBarAlign}>
           <View style={styleSettings.searchBar}>
             <AntDesign name="search1" size={20} color={"#333"} />

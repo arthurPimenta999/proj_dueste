@@ -53,16 +53,117 @@ function TelaCardapio() {
         <Ionicon name="arrow-back" size={18} color={"#333"} />
       </Pressable>
 
-      {/* cartões de sabores e itens no cardápio */}
+      <ScrollView style={stylePadrao.scrollStyle}>
+        {/*
+      barra de pesquisa da página de configurações
+      ~Stardust
+      */}
 
-      <View style={styleCardapio.cardsAlign}>
+        <View style={stylePadrao.searchBarAlign}>
+          <View style={stylePadrao.searchBar}>
+            <Ant name="search1" size={20} color={"#333"} />
+          </View>
+        </View>
+
+        {/* cartões de sabores e itens no cardápio */}
+        <View style={styleCardapio.pizzaTitleAlign}>
+          <Text style={styleCardapio.pizzaTitleStyle}>Pizzas salgadas</Text>
+        </View>
+
+        <View style={styleCardapio.cardsAlign}>
+          <View style={styleCardapio.cardRow}>
+            <Pressable>
+              <Card style={styleCardapio.styleCard}>
+                <Card.Cover
+                  source={{
+                    uri: "https://files.mob-cdn.co.uk/recipes/2023/10/Garlic-Pizza-Bread.jpg",
+                  }}
+                  style={styleCardapio.styleCover}
+                />
+                <Card.Title
+                  title="rsrsrsrs"
+                  titleStyle={styleCardapio.cardTitle}
+                />
+                <Card.Content>
+                  <View style={styleCardapio.iconSpace}>
+                    <Text>pizza merda</Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </Pressable>
+
+            <Pressable>
+              <Card style={styleCardapio.styleCard}>
+                <Card.Cover
+                  source={{
+                    uri: "https://eu.ooni.com/cdn/shop/articles/pepperoni-pizza.jpg?crop=center&height=800&v=1587043733&width=800",
+                  }}
+                  style={styleCardapio.styleCover}
+                />
+                <Card.Title
+                  title="rsrsrsrs"
+                  titleStyle={styleCardapio.cardTitle}
+                />
+                <Card.Content>
+                  <View style={styleCardapio.iconSpace}>
+                    <Text>pizza merda</Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </Pressable>
+          </View>
+
+          <View style={styleCardapio.cardRow}>
+            <Pressable>
+              <Card style={styleCardapio.styleCard}>
+                <Card.Cover
+                  source={{
+                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuWaGD5ipO5-S6j1KPluu9nQeBMv-9cv7DIozP1F5vZQ&s",
+                  }}
+                  style={styleCardapio.styleCover}
+                />
+                <Card.Title
+                  title="rsrsrsrs"
+                  titleStyle={styleCardapio.cardTitle}
+                />
+                <Card.Content>
+                  <View style={styleCardapio.iconSpace}>
+                    <Text>pizza merda</Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </Pressable>
+
+            <Pressable>
+              <Card style={styleCardapio.styleCard}>
+                <Card.Cover
+                  source={{
+                    uri: "https://files.mob-cdn.co.uk/recipes/2023/10/Garlic-Pizza-Bread.jpg",
+                  }}
+                  style={styleCardapio.styleCover}
+                />
+                <Card.Title
+                  title="rsrsrsrs"
+                  titleStyle={styleCardapio.cardTitle}
+                />
+                <Card.Content>
+                  <View style={styleCardapio.iconSpace}>
+                    <Text>pizza merda</Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </Pressable>
+          </View>
+        </View>
+
         <View style={styleCardapio.cardRow}>
           <Pressable>
             <Card style={styleCardapio.styleCard}>
               <Card.Cover
                 source={{
-                  uri: "https://casbri.com.br/wp-content/uploads/2019/07/alhofrito_57e575f2d901c.jpg",
+                  uri: "https://files.mob-cdn.co.uk/recipes/2023/10/Garlic-Pizza-Bread.jpg",
                 }}
+                style={styleCardapio.styleCover}
               />
               <Card.Title
                 title="rsrsrsrs"
@@ -71,7 +172,6 @@ function TelaCardapio() {
               <Card.Content>
                 <View style={styleCardapio.iconSpace}>
                   <Text>pizza merda</Text>
-                  <Ant name="down" size={20} />
                 </View>
               </Card.Content>
             </Card>
@@ -79,7 +179,12 @@ function TelaCardapio() {
 
           <Pressable>
             <Card style={styleCardapio.styleCard}>
-              <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+              <Card.Cover
+                source={{
+                  uri: "https://files.mob-cdn.co.uk/recipes/2023/10/Garlic-Pizza-Bread.jpg",
+                }}
+                style={styleCardapio.styleCover}
+              />
               <Card.Title
                 title="rsrsrsrs"
                 titleStyle={styleCardapio.cardTitle}
@@ -87,13 +192,12 @@ function TelaCardapio() {
               <Card.Content>
                 <View style={styleCardapio.iconSpace}>
                   <Text>pizza merda</Text>
-                  <Ant name="down" size={20} />
                 </View>
               </Card.Content>
             </Card>
           </Pressable>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

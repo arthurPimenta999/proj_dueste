@@ -34,17 +34,26 @@ const styleCardapio = StyleSheet.create({
 
   // estilos dos cartões
 
+  pizzaTitleAlign: {
+    marginHorizontal: width * 0.05,
+    marginVertical: height * 0.01,
+  },
+  pizzaTitleStyle: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 20,
+  },
   cardsAlign: {
-    marginVertical: height * 0.04,
+    marginVertical: height * 0.01,
   },
 
   styleCard: {
-    marginHorizontal: width * 0.05,
+    width: width * 0.4,
+    height: height * 0.3,
   },
 
   iconSpace: {
     flexDirection: "row",
-    gap: width * 0.55,
+    gap: width * 0.4,
     justifyContent: "center",
   },
 
@@ -53,8 +62,14 @@ const styleCardapio = StyleSheet.create({
     fontSize: 18,
   },
   cardRow: {
+    justifyContent: "center",
     flexDirection: "row",
-    gap: 10,
+    gap: width * 0.08,
+    marginBottom: height * 0.04,
+  },
+  styleCover: {
+    width: width * 0.4,
+    height: height * 0.2,
   },
 });
 

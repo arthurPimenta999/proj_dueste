@@ -5,6 +5,8 @@ const { height } = Dimensions.get("window");
 
 const marginOS = Platform.OS === "android" ? height * 0.03 : height * 0.01;
 const marginTopOS = Platform.OS === "android" ? height * 0.04 : height * 0;
+const marginScrollOS =
+  Platform.OS === "android" ? height * 0.091 : height * 0.0091;
 
 const stylePadrao = StyleSheet.create({
   // safe area view da tela do perfil não funciona direito no android.
@@ -49,6 +51,31 @@ const stylePadrao = StyleSheet.create({
     marginTop: height * 0.06,
     marginLeft: width * 0.06,
     backgroundColor: "#ccc",
+  },
+
+  // ajustes scrollView
+
+  scrollStyle: {
+    marginBottom: marginScrollOS,
+  },
+
+  //barra de pesquisa
+  searchBarAlign: {
+    marginHorizontal: width * 0.06,
+    marginVertical: height * 0.03,
+  },
+  searchBar: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
 });
 

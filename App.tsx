@@ -45,7 +45,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Início"
+      initialRouteName="Sabores"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={{ backgroundColor: "#dedede", borderTopWidth: 0 }}

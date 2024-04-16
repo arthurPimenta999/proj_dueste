@@ -8,11 +8,6 @@ const marginScrollOS =
   Platform.OS === "android" ? height * 0.091 : height * 0.0091;
 
 const styleSettings = StyleSheet.create({
-  //scrollview
-  scrollStyle: {
-    marginBottom: marginScrollOS,
-  },
-
   //título
   textTopAlign: {
     alignItems: "center",
