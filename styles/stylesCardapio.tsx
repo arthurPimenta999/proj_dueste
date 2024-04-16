@@ -6,19 +6,6 @@ const { height } = Dimensions.get("window");
 const marginOS = Platform.OS === "android" ? height * 0.03 : height * 0.01;
 
 const styleCardapio = StyleSheet.create({
-  yellow: {
-    backgroundColor: "#fcba03",
-  },
-  textTopAlign: {
-    alignItems: "center",
-    marginVertical: marginOS,
-  },
-
-  textTop: {
-    fontFamily: "Montserrat_600SemiBold",
-    fontSize: 20,
-  },
-
   //botão pra voltar pra tela index
 
   backBtn: {
@@ -34,14 +21,41 @@ const styleCardapio = StyleSheet.create({
     backgroundColor: "#ccc",
   },
 
-  styleCard:{
-    backgroundColor : "#FF22FF"
+  textTop: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 20,
   },
 
-  iconSpace:{
-    flexDirection:"row",
-    gap: 100,
-  }
+  // estilo amarelo
+  textTopAlign: {
+    alignItems: "center",
+    marginVertical: marginOS,
+  },
+
+  // estilos dos cartões
+
+  cardsAlign: {
+    marginVertical: height * 0.04,
+  },
+
+  styleCard: {
+    marginHorizontal: width * 0.05,
+  },
+
+  iconSpace: {
+    flexDirection: "row",
+    gap: width * 0.55,
+    justifyContent: "center",
+  },
+
+  cardTitle: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 18,
+  },
+  cardRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
 });
 
 export default styleCardapio;

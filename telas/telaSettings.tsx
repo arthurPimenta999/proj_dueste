@@ -17,7 +17,6 @@ import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import "react-native-gesture-handler";
-import TelaProfile from "./sub_config/conta/telaPerfil";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -210,7 +209,7 @@ function Telas() {
       }}
     >
       <Stack.Screen name="Configs" component={TelaConfigs} />
-      <Stack.Screen name="Perfil" component={TelaProfile} />
+      <Stack.Screen name="Perfil" component={TelaConfigs} />
     </Stack.Navigator>
   );
 }

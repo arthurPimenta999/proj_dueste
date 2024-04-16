@@ -9,6 +9,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { useNavigation } from "@react-navigation/native";
 import Ionicon from "react-native-vector-icons/Ionicons";
+import styleReserva from "../../styles/sub_home/stylesReserva";
 
 function TelaReserva() {
   const navigation = useNavigation();
@@ -48,6 +49,21 @@ function TelaReserva() {
       >
         <Ionicon name="arrow-back" size={18} color={"#333"} />
       </Pressable>
+
+      {/* 
+        Aviso de horário. similar ao design do figma
+      */}
+
+      <View style={styleReserva.styleAviso}>
+        <View style={styleReserva.alignContentAviso}>
+          <Ionicon name="warning" size={40} color="#fff" />
+          <Text style={styleReserva.textAviso}>
+            O horário de funcionamento do restaurante é das 18h às 23h. Caso o
+            cliente não chegue em 1h30min a partir do início das atividades do
+            restaurante, a reserva será automaticamente cancelada.
+          </Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 }

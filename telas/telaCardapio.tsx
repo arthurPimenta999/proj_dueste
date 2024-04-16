@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleCardapio from "../styles/stylesCardapio";
 import { useFonts } from "@expo-google-fonts/montserrat";
@@ -12,7 +12,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { Card } from "react-native-paper";
 import * as React from "react";
 import stylePadrao from "../styles/stylesDefault";
-import Ant from "react-native-vector-icons/AntDesign"
+import Ant from "react-native-vector-icons/AntDesign";
 
 function TelaCardapio() {
   const navigation = useNavigation();
@@ -55,28 +55,43 @@ function TelaCardapio() {
 
       {/* cartões de sabores e itens no cardápio */}
 
+      <View style={styleCardapio.cardsAlign}>
+        <View style={styleCardapio.cardRow}>
+          <Pressable>
+            <Card style={styleCardapio.styleCard}>
+              <Card.Cover
+                source={{
+                  uri: "https://casbri.com.br/wp-content/uploads/2019/07/alhofrito_57e575f2d901c.jpg",
+                }}
+              />
+              <Card.Title
+                title="rsrsrsrs"
+                titleStyle={styleCardapio.cardTitle}
+              />
+              <Card.Content>
+                <View style={styleCardapio.iconSpace}>
+                  <Text>pizza merda</Text>
+                  <Ant name="down" size={20} />
+                </View>
+              </Card.Content>
+            </Card>
+          </Pressable>
 
-      <View style={styleCardapio.yellow}>
-        <View>
-          <Card>
-            <Card.Title title="Pizzas salgadas" subtitle="subtitulo-teste" />
-            <Card.Content>
-              <View style={styleCardapio.iconSpace}>
-                <Ant name="down" size={20} />
-                <Text>pizza peperoni {"\n"}</Text>
-              </View> 
-              <Text>pizza Mussarela{"\n"}</Text>
-              <Text>pizza 4 queijos{"\n"}</Text>
-              <Text>pizza alho{"\n"}</Text>
-              <Text>pizza hot dog{"\n"}</Text>
-            </Card.Content>
-          </Card>
-          <Card>
-            <Card.Title title="titulo-teste" subtitle="subtitulo-teste" />
-            <Card.Content style={styleCardapio.styleCard}>
-              <Text>pizza peperonni</Text>
-            </Card.Content>
-          </Card>
+          <Pressable>
+            <Card style={styleCardapio.styleCard}>
+              <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+              <Card.Title
+                title="rsrsrsrs"
+                titleStyle={styleCardapio.cardTitle}
+              />
+              <Card.Content>
+                <View style={styleCardapio.iconSpace}>
+                  <Text>pizza merda</Text>
+                  <Ant name="down" size={20} />
+                </View>
+              </Card.Content>
+            </Card>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
