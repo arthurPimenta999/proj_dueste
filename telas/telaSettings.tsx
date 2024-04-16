@@ -15,7 +15,8 @@ import MatIcons from "react-native-vector-icons/MaterialIcons";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import "react-native-gesture-handler";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -36,8 +37,8 @@ function TelaConfigs() {
     <SafeAreaView>
       {/* cabeçalho */}
 
-      <View style={styleSettings.textTopAlign}>
-        <Text style={styleSettings.textTop}>Configurações</Text>
+      <View style={stylePadrao.textTopAlign}>
+        <Text style={stylePadrao.textTop}>Configurações</Text>
       </View>
 
       {/*
@@ -46,7 +47,7 @@ function TelaConfigs() {
       */}
 
       <Pressable
-        style={styleSettings.backBtn}
+        style={stylePadrao.backBtn}
         onPress={() => navigation.navigate("Início")}
       >
         <Ionicon name="arrow-back" size={18} color={"#333"} />
@@ -57,7 +58,7 @@ function TelaConfigs() {
       ~Stardust
       */}
 
-      <ScrollView style={styleSettings.scrollStyle}>
+      <ScrollView style={stylePadrao.scrollStyle}>
         <View style={styleSettings.searchBarAlign}>
           <View style={styleSettings.searchBar}>
             <AntDesign name="search1" size={20} color={"#333"} />
@@ -78,12 +79,15 @@ function TelaConfigs() {
 
         <View style={styleSettings.alignConfig}>
           <View style={styleSettings.configSection}>
-            <Pressable style={styleSettings.pressableSpace}>
+            <Pressable
+              style={styleSettings.pressableSpace}
+              onPress={() => navigation.navigate("Perfil")}
+            >
               <MCI name="account-circle" size={25} color={"#000"} />
               <Text
                 style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
               >
-                Perfil
+                Editar dados
               </Text>
             </Pressable>
 
@@ -199,10 +203,17 @@ function TelaConfigs() {
 
 function Telas() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen></Tab.Screen>
-    </Tab.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Configs" component={TelaConfigs} />
+      <Stack.Screen name="Perfil" component={TelaConfigs} />
+    </Stack.Navigator>
   );
 }
+
+const Stack = createStackNavigator();
 
 export default TelaConfigs;
