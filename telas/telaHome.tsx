@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   useWindowDimensions,
   Platform,
+  Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleHome from "../styles/stylesHome";
@@ -24,6 +25,7 @@ import TelaReserva from "./sub_home/reserva";
 
 function TelaPrincipal() {
   const { height } = useWindowDimensions();
+  const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
 
@@ -71,14 +73,29 @@ function TelaPrincipal() {
             index={2}
             showPagination
           >
-            <View style={[styleHome.child, { backgroundColor: "tomato" }]}>
-              <Text style={styleHome.text}>1</Text>
+            <View style={styleHome.child}>
+              <Image
+                source={{
+                  uri: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjI1&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
+                }}
+                style={styleHome.child}
+              />
             </View>
-            <View style={[styleHome.child, { backgroundColor: "thistle" }]}>
-              <Text style={styleHome.text}>2</Text>
+            <View>
+              <Image
+                source={{
+                  uri: "https://images.unsplash.com/photo-1620374645310-f9d97e733268?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjM5&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
+                }}
+                style={styleHome.child}
+              />
             </View>
-            <View style={[styleHome.child, { backgroundColor: "skyblue" }]}>
-              <Text style={styleHome.text}>3</Text>
+            <View>
+              <Image
+                source={{
+                  uri: "https://images.unsplash.com/photo-1571407921708-4202261ea9e9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjUx&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
+                }}
+                style={styleHome.child}
+              />
             </View>
           </SwiperFlatList>
         </View>

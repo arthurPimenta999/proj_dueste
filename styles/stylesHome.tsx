@@ -45,12 +45,12 @@ const styleHome = StyleSheet.create({
     marginTop: 40,
   },
   container: {
-    flex: 1,
     backgroundColor: "white",
   },
   child: {
     width,
-    justifyContent: "center",
+    height: 250,
+    backgroundColor: "#eee",
   },
   text: {
     fontSize: width * 0.5,

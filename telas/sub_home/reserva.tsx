@@ -50,7 +50,7 @@ function TelaReserva() {
         <Ionicon name="arrow-back" size={18} color={"#333"} />
       </Pressable>
 
-      {/* 
+      {/*
         Aviso de horário. similar ao design do figma
       */}
 
