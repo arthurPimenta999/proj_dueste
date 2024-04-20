@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -10,7 +10,6 @@ import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTheme } from "react-native-paper";
-import { createStackNavigator } from "@react-navigation/stack";
 
 //=========== app ==========
 
@@ -27,6 +26,8 @@ export default function App() {
 
 //========== consts & functions ==========
 
+const { height } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,6 +36,11 @@ const styles = StyleSheet.create({
   icons: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  materialTabStyle: {
+    backgroundColor: "#dedede",
+    borderTopWidth: 0,
+    height: height * 0.1,
   },
 });
 
@@ -48,7 +54,7 @@ function MyTabs() {
       initialRouteName="Configurações"
       activeColor="#d69e04"
       inactiveColor="#000"
-      barStyle={{ backgroundColor: "#dedede", borderTopWidth: 0 }}
+      barStyle={styles.materialTabStyle}
     >
       <Tab.Screen
         name="Sabores"
@@ -95,7 +101,4 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
-const Stack = createStackNavigator();
-
 const Tab = createMaterialBottomTabNavigator();

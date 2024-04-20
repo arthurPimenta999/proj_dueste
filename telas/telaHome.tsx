@@ -32,6 +32,13 @@ function TelaPrincipal() {
 
   const marginTop = Platform.OS === "android" ? height * 0.1 : height * 0.05;
 
+  const imagensBanner = [
+    "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGl6emF8ZW58MHx8MHx8fDA%3D",
+    "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHwwfDB8fHww",
+    "https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHBpenphfGVufDB8MHwwfHx8MA%3D%3D",
+  ];
+  const placeholder = {};
+
   {
     /*
   useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
@@ -54,10 +61,8 @@ function TelaPrincipal() {
       ~Stardust
       */}
 
-      <View style={styleHome.styleYellow}>
-        <View style={styleHome.logoAlign}>
-          <Image source={logoDueste} style={styleHome.logoStyle} />
-        </View>
+      <View style={styleHome.logoAlign}>
+        <Image source={logoDueste} style={styleHome.logoStyle} />
       </View>
 
       {/*
@@ -66,7 +71,34 @@ function TelaPrincipal() {
       */}
 
       <View style={stylePadrao.styleHome}>
-        <View style={styleHome.bannerStyle}></View>
+        <View style={styleHome.bannerStyle}>
+          <Carousel
+            loop
+            width={width}
+            height={240}
+            autoPlay={true}
+            mode="parallax"
+            modeConfig={{
+              parallaxScrollingScale: 0.9,
+              parallaxScrollingOffset: 50,
+            }}
+            data={imagensBanner}
+            scrollAnimationDuration={1000}
+            onSnapToItem={(index) => console.log("current index:", index)}
+            renderItem={({ index }) => (
+              <View style={styleHome.bannerView}>
+                <View style={styleHome.child}>
+                  <Image
+                    source={{
+                      uri: imagensBanner[index],
+                    }}
+                    style={styleHome.child}
+                  />
+                </View>
+              </View>
+            )}
+          />
+        </View>
 
         {/*balão que mostra o endereço de entrega escolhido pelo usuário
         ~Stardust

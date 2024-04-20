@@ -19,8 +19,8 @@ const stylePadrao = StyleSheet.create({
   styleHome: {
     backgroundColor: "#fff",
     color: "#fff",
-    width: "100%",
-    height: "100%",
+    width: width,
+    height: height,
     borderWidth: 0,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
