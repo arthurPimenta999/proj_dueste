@@ -22,6 +22,7 @@ import AppLoading from "expo-app-loading";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/reserva";
+import Carousel from "react-native-reanimated-carousel";
 
 function TelaPrincipal() {
   const { height } = useWindowDimensions();
@@ -65,40 +66,7 @@ function TelaPrincipal() {
       */}
 
       <View style={stylePadrao.styleHome}>
-        <View style={styleHome.bannerStyle}>
-          <SwiperFlatList
-            autoplay
-            autoplayDelay={4}
-            autoplayLoop
-            index={2}
-            showPagination
-          >
-            <View style={styleHome.child}>
-              <Image
-                source={{
-                  uri: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjI1&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
-                }}
-                style={styleHome.child}
-              />
-            </View>
-            <View>
-              <Image
-                source={{
-                  uri: "https://images.unsplash.com/photo-1620374645310-f9d97e733268?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjM5&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
-                }}
-                style={styleHome.child}
-              />
-            </View>
-            <View>
-              <Image
-                source={{
-                  uri: "https://images.unsplash.com/photo-1571407921708-4202261ea9e9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=768&ixid=MnwxfDB8MXxyYW5kb218MHx8cGl6emF8fHx8fHwxNzEzMzE0MjUx&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1024",
-                }}
-                style={styleHome.child}
-              />
-            </View>
-          </SwiperFlatList>
-        </View>
+        <View style={styleHome.bannerStyle}></View>
 
         {/*balão que mostra o endereço de entrega escolhido pelo usuário
         ~Stardust
