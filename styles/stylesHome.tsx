@@ -6,16 +6,16 @@ const { height } = Dimensions.get("window");
 const marginTopBtn = Platform.OS === "android" ? height * 0.03 : height * 0.01;
 
 const styleHome = StyleSheet.create({
-  //amarelo kkkkkkk
-  styleYellow: {
-    height: height * 0.2,
+  //alinhamento logo
+
+  logoAlign: {
+    alignItems: "center",
+    marginTop: height * 0.03,
+    marginBottom: height * 0.05,
   },
-
-  // ===== style geral da tela =====
-
-  styleCurve: {
-    width: width * 1,
-    height: height * 4,
+  logoStyle: {
+    width: width * 0.8,
+    height: height * 0.12,
   },
 
   // ===== botões delivery/reserva =====
@@ -42,15 +42,17 @@ const styleHome = StyleSheet.create({
   //===== banner =====
 
   bannerStyle: {
-    marginTop: 40,
+    marginTop: height * 0.05,
+  },
+  bannerView: {
+    flex: 1,
+    justifyContent: "center",
   },
   container: {
-    flex: 1,
     backgroundColor: "white",
   },
   child: {
-    width,
-    justifyContent: "center",
+    height: 250,
   },
   text: {
     fontSize: width * 0.5,
@@ -61,17 +63,6 @@ const styleHome = StyleSheet.create({
 
   fixCinza: {
     backgroundColor: "#fcba03",
-  },
-
-  //alinhamento logo
-
-  logoAlign: {
-    alignItems: "center",
-    marginTop: 25,
-  },
-  logoStyle: {
-    width: 300,
-    height: 100,
   },
 
   //balão de endereço
