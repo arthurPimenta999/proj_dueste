@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleSettings from "../styles/stylesSettings";
 import stylePadrao from "../styles/stylesDefault";
@@ -53,15 +53,21 @@ function TelaConfigs() {
         <Ionicon name="arrow-back" size={18} color={"#333"} />
       </Pressable>
 
-      {/*
+      <ScrollView style={stylePadrao.scrollStyle}>
+        {/*
       barra de pesquisa da página de configurações
       ~Stardust
       */}
 
-      <ScrollView style={stylePadrao.scrollStyle}>
-        <View style={styleSettings.searchBarAlign}>
-          <View style={styleSettings.searchBar}>
-            <AntDesign name="search1" size={20} color={"#333"} />
+        <View style={stylePadrao.searchBarAlign}>
+          <View style={stylePadrao.searchBar}>
+            <View style={stylePadrao.alignInput}>
+              <AntDesign name="search1" size={20} color={"#333"} />
+              <TextInput
+                selectionColor={"#d69e04"}
+                style={stylePadrao.inputStyle}
+              />
+            </View>
           </View>
         </View>
 

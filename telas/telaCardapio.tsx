@@ -1,4 +1,4 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Text, Pressable, ScrollView, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleCardapio from "../styles/stylesCardapio";
 import { useFonts } from "@expo-google-fonts/montserrat";
@@ -12,7 +12,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { Card } from "react-native-paper";
 import * as React from "react";
 import stylePadrao from "../styles/stylesDefault";
-import Ant from "react-native-vector-icons/AntDesign";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 function TelaCardapio() {
   const navigation = useNavigation();
@@ -61,7 +61,13 @@ function TelaCardapio() {
 
         <View style={stylePadrao.searchBarAlign}>
           <View style={stylePadrao.searchBar}>
-            <Ant name="search1" size={20} color={"#333"} />
+            <View style={stylePadrao.alignInput}>
+              <AntDesign name="search1" size={20} color={"#333"} />
+              <TextInput
+                selectionColor={"#d69e04"}
+                style={stylePadrao.inputStyle}
+              />
+            </View>
           </View>
         </View>
 
