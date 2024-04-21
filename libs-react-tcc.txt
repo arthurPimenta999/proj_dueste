@@ -2,7 +2,9 @@ react-native
 react-native-safe-area-context
 react-native-vector-icons
 react-native-image-slider-banner
-react-native-swiper-flatlist
+react-native-reanimated
+react-native-reanimated-carousel
+react-native-gesture-handler
 react-native-ui-datepicker
 react-navigation
 react-navigation/material-bottom-tabs

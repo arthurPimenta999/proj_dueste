@@ -1,3 +1,4 @@
+import * as React from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleSettings from "../styles/stylesSettings";
@@ -15,7 +16,6 @@ import MatIcons from "react-native-vector-icons/MaterialIcons";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
 import "react-native-gesture-handler";
 
 function TelaConfigs() {
