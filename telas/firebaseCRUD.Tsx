@@ -11,8 +11,7 @@ import {
 } from "react-native";
 import stylePadrao from "../styles/stylesDefault";
 import styleHome from "../styles/stylesHome";
-
-
+import firestroecrud from "../Firebase/firebaseConfig"
 
 function crudfirebase(){
 

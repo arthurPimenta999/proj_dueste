@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "989713015226",
+    "firebase_url": "https://projetodueste-default-rtdb.firebaseio.com",
+    "project_id": "projetodueste",
+    "storage_bucket": "projetodueste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989713015226:android:4b14d8a6146494f8c93d83",
+        "android_client_info": {
+          "package_name": "com.anonymous.proj_dueste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQm0cWAvfisx97g4A0C2t9pddIZ0lGeNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
