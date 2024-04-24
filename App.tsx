@@ -51,13 +51,13 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Configurações"
+      initialRouteName="Cardápio"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}
     >
       <Tab.Screen
-        name="Sabores"
+        name="Cardápio"
         component={TelaCardapio}
         options={{
           tabBarIcon: ({ focused }) => (

@@ -1,3 +1,5 @@
+libs usadas:
+
 react-native
 react-native-safe-area-context
 react-native-vector-icons
@@ -14,3 +16,11 @@ expo-fonts
 expo-status-bar
 npx@3.0.0
 npm@10.5.0
+
+===========================================================
+
+variáveis padrão do banco de dados:
+
+titlePizza
+precoPizza
+imageURL
