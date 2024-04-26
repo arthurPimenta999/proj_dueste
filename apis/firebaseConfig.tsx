@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { initializeApp } from "firebase/app";
-import firestore from "@react-native-firebase/firestore";
+import { firestore } from "firebase-admin";
 import { FlatList } from "react-native";
 
 const firebaseConfig = {
