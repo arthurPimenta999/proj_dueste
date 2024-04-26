@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from "react";
+import { View, Text, Image } from "react-native";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, addDoc } from "firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
+import { FlatList } from "react-native";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -13,6 +15,42 @@ const firebaseConfig = {
   measurementId: "G-BH2VJ1FDZN",
 };
 
-const app = initializeApp(firebaseConfig);
+const FirestoreDB = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+function Users() {
+  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const nomes = firestore()
+      .collection("catogries")
+      .onSnapshot((querySnapshot) => {
+        const categories = [];
+
+        querySnapshot.forEach((documentSnapshot) => {
+          categories.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setCategories(categories);
+        setLoading(false);
+      });
+
+    return () => nomes();
+  }, []);
+
+  return (
+    <FlatList
+      data={categories}
+      renderItem={({ item }) => (
+        <View>
+          <Text>Nome: {item.title}</Text>
+        </View>
+      )}
+    />
+  );
+}
+
+export default Users;

@@ -20,12 +20,8 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { Card } from "react-native-paper";
 import stylePadrao from "../styles/stylesDefault";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { firebase } from "../apis/firebaseConfig";
 
 function TelaCardapio() {
-  const [users, setUsers] = useState([]);
-  const todoRef = firebase.firestore().collection("pizzaSal");
-
   const navigation = useNavigation();
 
   {

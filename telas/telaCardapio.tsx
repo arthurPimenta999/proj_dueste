@@ -17,9 +17,12 @@ import {
 import AppLoading from "expo-app-loading";
 import { useNavigation } from "@react-navigation/native";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import { Card } from "react-native-paper";
 import stylePadrao from "../styles/stylesDefault";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import FirestoreDB from "../apis/firebaseConfig";
+import { ActivityIndicator } from "react-native";
+import firestore from "@react-native-firebase/firestore";
+import Users from "../apis/firebaseConfig";
 
 function TelaCardapio() {
   const navigation = useNavigation();
@@ -107,6 +110,8 @@ function TelaCardapio() {
             </View>
           </View>
         ))}
+
+        <Users />
       </ScrollView>
     </SafeAreaView>
   );
