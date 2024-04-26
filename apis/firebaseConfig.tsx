@@ -1,7 +1,19 @@
+// pra manusear melhor os dados, tudo relacionado
+// ao firebase ou firestore será colocado aqui.
+// isso inclui tanto funções assíncronas pra
+// leitura/gravação de dados, quanto views e
+// componentes criados que usam dados do DB. :)
+
 import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -17,6 +29,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+// ========== funções exemplo pra ler/gravar dados ==========
 
 async function readData() {
   const querySnapshot = await getDocs(collection(db, "cardapioData"));
@@ -38,6 +52,12 @@ async function writeData() {
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+}
+
+// ==========================================================
+
+async function cardapioCards() {
+  const querySnapshot = await getDocs(collection(db, "cardapioData"));
 }
 
 export default readData;
