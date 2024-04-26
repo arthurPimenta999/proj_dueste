@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
 
-const { width } = Dimensions.get("window");
-const { height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const marginOS = Platform.OS === "android" ? height * 0.03 : height * 0.01;
 const marginScrollOS =
@@ -86,6 +85,19 @@ const styleSettings = StyleSheet.create({
     flexDirection: "row",
     gap: 15,
     alignItems: "center",
+  },
+
+  // estilos da modal bottom-sheet
+  modalStyle: {
+    backgroundColor: "rgba(52, 52, 52, 0.0)",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 100,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 24,
+    elevation: 10,
   },
 });
 

@@ -77,6 +77,16 @@ const stylePadrao = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7,
   },
+  alignInput: {
+    flexDirection: "row",
+  },
+  inputStyle: {
+    flex: 1,
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 18,
+    height: height * 0.025,
+    marginLeft: width * 0.02,
+  },
 });
 
 export default stylePadrao;

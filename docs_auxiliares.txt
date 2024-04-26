@@ -1,3 +1,5 @@
+libs usadas:
+
 react-native
 react-native-safe-area-context
 react-native-vector-icons
@@ -6,11 +8,25 @@ react-native-reanimated
 react-native-reanimated-carousel
 react-native-gesture-handler
 react-native-ui-datepicker
+react-native-firebase
 react-navigation
 react-navigation/material-bottom-tabs
 react-navigation/stack
+expo-app-loading
+expo-dev-client
 expo-google-fonts
 expo-fonts
 expo-status-bar
 npx@3.0.0
 npm@10.5.0
+@gorhom/bottom-sheet
+firebase-admin
+
+
+===========================================================
+
+variáveis padrão do banco de dados:
+
+titlePizza
+precoPizza
+imageURL
