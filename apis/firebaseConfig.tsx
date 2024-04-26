@@ -16,15 +16,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
-
-try {
-  const docRef = await addDoc(collection(db, "pizzaSal"), {
-    imageURL:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuWaGD5ipO5-S6j1KPluu9nQeBMv-9cv7DIozP1F5vZQ&s",
-    precoPizza: "R$40,00",
-    titlePizza: "Pizza Bauru",
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
