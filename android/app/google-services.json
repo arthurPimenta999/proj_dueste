@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710761041599",
+    "project_id": "proj-dueste",
+    "storage_bucket": "proj-dueste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710761041599:android:4b7150a88df450ac73c00a",
+        "android_client_info": {
+          "package_name": "com.anonymous.proj_dueste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA19-2M-AuTEO6YFpnGNbP1-QMzZ-FlXMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

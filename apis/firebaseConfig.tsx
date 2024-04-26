@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { initializeApp } from "firebase/app";
-import { firestore } from "firebase-admin";
-import { FlatList } from "react-native";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -15,42 +14,30 @@ const firebaseConfig = {
   measurementId: "G-BH2VJ1FDZN",
 };
 
-const FirestoreDB = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-function Users() {
-  const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState([]);
+const db = getFirestore(app);
 
-  useEffect(() => {
-    const nomes = firestore()
-      .collection("catogries")
-      .onSnapshot((querySnapshot) => {
-        const categories = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          categories.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setCategories(categories);
-        setLoading(false);
-      });
-
-    return () => nomes();
-  }, []);
-
-  return (
-    <FlatList
-      data={categories}
-      renderItem={({ item }) => (
-        <View>
-          <Text>Nome: {item.title}</Text>
-        </View>
-      )}
-    />
-  );
+async function readData() {
+  const querySnapshot = await getDocs(collection(db, "cardapioData"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+  });
 }
 
-export default Users;
+async function writeData() {
+  try {
+    const docRef = await addDoc(collection(db, "teste"), {
+      first: "Alan",
+      middle: "Mathison",
+      last: "Turing",
+      born: 1912,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+export default readData;

@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   Image,
+  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleCardapio from "../styles/stylesCardapio";
@@ -22,7 +23,9 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import FirestoreDB from "../apis/firebaseConfig";
 import { ActivityIndicator } from "react-native";
 import firestore from "@react-native-firebase/firestore";
-import Users from "../apis/firebaseConfig";
+import Teste from "../apis/firebaseConfig";
+import crudFB from "../apis/firebaseConfig";
+import readData from "../apis/firebaseConfig";
 
 function TelaCardapio() {
   const navigation = useNavigation();
@@ -75,6 +78,8 @@ function TelaCardapio() {
         <Ionicon name="arrow-back" size={18} color={"#333"} />
       </Pressable>
 
+      <Button title="oii" onPress={readData} />
+
       <ScrollView style={stylePadrao.scrollStyle}>
         {/*
       barra de pesquisa da página de configurações
@@ -110,8 +115,6 @@ function TelaCardapio() {
             </View>
           </View>
         ))}
-
-        <Users />
       </ScrollView>
     </SafeAreaView>
   );
