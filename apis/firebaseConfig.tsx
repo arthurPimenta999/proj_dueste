@@ -12,8 +12,11 @@ import {
   collection,
   addDoc,
   getDocs,
-  onSnapshot,
+  getDoc,
+  doc,
 } from "firebase/firestore";
+import * as SplashScreen from "expo-splash-screen";
+import styleCardapio from "../styles/stylesCardapio";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -33,7 +36,7 @@ const db = getFirestore(app);
 // ========== funções exemplo pra ler/gravar dados ==========
 
 async function readData() {
-  const querySnapshot = await getDocs(collection(db, "cardapioData"));
+  const querySnapshot = await getDocs(collection(db, "cardapioURL"));
   querySnapshot.forEach((doc) => {
     console.log(`${doc.id} => ${doc.data()}`);
   });
@@ -41,11 +44,10 @@ async function readData() {
 
 async function writeData() {
   try {
-    const docRef = await addDoc(collection(db, "teste"), {
+    const docRef = await addDoc(collection(db, "oirsrs"), {
       first: "Alan",
       middle: "Mathison",
       last: "Turing",
-      born: 1912,
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -56,8 +58,54 @@ async function writeData() {
 
 // ==========================================================
 
-async function cardapioCards() {
-  const querySnapshot = await getDocs(collection(db, "cardapioData"));
+function PizzasSalgadas() {
+  const [pizzaURL, setPizzaURL] = useState([]);
+  const [pizzaTitle, setPizzaTitle] = useState([]);
+  const [pizzaPreco, setPizzaPreco] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // requisição dos itens de dos cartões de cardapio
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const cardRef = doc(db, "cardapioCards", "pizzaSal");
+      const cardSnap = await getDoc(cardRef);
+
+      // atribuindo os valores obtidos da requisição às variáveis do useState
+
+      if (cardSnap.exists()) {
+        setPizzaURL(cardSnap.data().pizzaURL);
+        setPizzaTitle(cardSnap.data().pizzaTitle);
+        setPizzaPreco(cardSnap.data().pizzaPreco);
+      } else {
+        console.log("Documento não encontrado.");
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return SplashScreen.preventAutoHideAsync();
+  }
+
+  return (
+    <View>
+      {pizzaTitle.map((title, index) => (
+        <View style={styleCardapio.styleCard}>
+          <Image
+            source={{ uri: pizzaURL[index] }}
+            style={styleCardapio.styleImage}
+          />
+          <View>
+            <Text style={styleCardapio.pizzaTitle}>{title}</Text>
+            <Text style={styleCardapio.precoAlign}>{pizzaPreco[index]}</Text>
+          </View>
+        </View>
+      ))}
+    </View>
+  );
 }
 
-export default readData;
+export default PizzasSalgadas;

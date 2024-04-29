@@ -26,6 +26,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
 import EditarDados from "./sub_config/conta/editarDados";
+import * as SplashScreen from "expo-splash-screen";
 
 function TelaConfigs() {
   const navigation = useNavigation();

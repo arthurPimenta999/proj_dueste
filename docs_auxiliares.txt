@@ -12,7 +12,7 @@ react-native-firebase
 react-navigation
 react-navigation/material-bottom-tabs
 react-navigation/stack
-expo-app-loading
+expo-splash-screen
 expo-dev-client
 expo-google-fonts
 expo-fonts

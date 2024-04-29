@@ -13,7 +13,6 @@ import styleHome from "../styles/stylesHome";
 import stylePadrao from "../styles/stylesDefault";
 import { useFonts } from "expo-font";
 import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
-import SwiperFlatList from "react-native-swiper-flatlist";
 import Feather from "react-native-vector-icons/Feather";
 import FA5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -23,21 +22,18 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/reserva";
 import Carousel from "react-native-reanimated-carousel";
+import * as SplashScreen from "expo-splash-screen";
 
 function TelaPrincipal() {
-  const { height } = useWindowDimensions();
   const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
-
-  const marginTop = Platform.OS === "android" ? height * 0.1 : height * 0.05;
 
   const imagensBanner = [
     "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGl6emF8ZW58MHx8MHx8fDA%3D",
     "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHwwfDB8fHww",
     "https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHBpenphfGVufDB8MHwwfHx8MA%3D%3D",
   ];
-  const placeholder = {};
 
   {
     /*
@@ -79,8 +75,8 @@ function TelaPrincipal() {
             autoPlay={true}
             mode="parallax"
             modeConfig={{
-              parallaxScrollingScale: 0.9,
-              parallaxScrollingOffset: 50,
+              parallaxScrollingScale: 0.85,
+              parallaxScrollingOffset: 70,
             }}
             data={imagensBanner}
             scrollAnimationDuration={1000}
