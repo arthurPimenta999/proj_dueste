@@ -1,13 +1,17 @@
-import * as React from "react";
-import { View, ScrollView, StyleSheet, Image, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Teste from "../../apis/firebaseConfig";
-import * as SplashScreen from "expo-splash-screen";
+import styleReserva from "../../styles/sub_home/stylesReserva";
+import AppLoading from "expo-app-loading";
 
-function Index() {
-  return <Teste />;
+function TelaReserva() {
+  return (
+    <SafeAreaView style={styleReserva.safeArea}>
+      <View style={styleReserva.teste}>
+        <Text>oii</Text>
+      </View>
+    </SafeAreaView>
+  );
 }
 
-const styles = StyleSheet.create({});
-
-export default Index;
+export default TelaReserva;

@@ -17,25 +17,35 @@ import {
 import { useFonts } from "@expo-google-fonts/montserrat";
 import AppLoading from "expo-app-loading";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
+import MatIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import MatIcons from "react-native-vector-icons/MaterialIcons";
+import Entypo from "react-native-vector-icons/Entypo";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
-import EditarDados from "./sub_config/conta/editarDados";
+import EditarDados from "./sub_config/configDados";
 import * as SplashScreen from "expo-splash-screen";
+import EditarSeguranca from "./sub_config/configSeguranca";
 
 function TelaConfigs() {
   const navigation = useNavigation();
 
   const { width, height } = Dimensions.get("window");
 
-  const bottomSheetRef = useRef(null);
-  const snapPoint = useMemo(() => ["25%", "40%"], []);
-  const handleOpen = () => bottomSheetRef.current?.expand();
+  //configurações da modal ///dados
+
+  const refDados = useRef(null);
+  const snapPointDados = useMemo(() => ["30%", "35%"], []);
+  const handleOpenDados = () => refDados.current?.expand();
+
+  //configurações da modal ///segurança
+
+  const refSeguranca = useRef(null);
+  const snapPointSeguranca = useMemo(() => ["40%", "60%"], []);
+  const handleOpenSeguranca = () => refSeguranca.current?.expand();
 
   // função pra mostrar uma tela de carregamento enquanto o
   // app carrega as fontes. se não for usada, as fontes saem
@@ -104,7 +114,7 @@ function TelaConfigs() {
             <View style={styleSettings.configSection}>
               <Pressable
                 style={styleSettings.pressableSpace}
-                onPress={handleOpen}
+                onPress={handleOpenDados}
               >
                 <MCI name="account-circle" size={25} color={"#000"} />
                 <Text
@@ -112,24 +122,39 @@ function TelaConfigs() {
                 >
                   Editar dados
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenSeguranca}
+              >
                 <MCI name="security" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
                 >
                   Segurança e Login
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenSeguranca}
+              >
                 <Ionicon name="notifications" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
                 >
                   Notificações
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
             </View>
           </View>
@@ -155,6 +180,9 @@ function TelaConfigs() {
                 >
                   Modo Escuro
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
               <Pressable style={styleSettings.pressableSpace}>
@@ -164,6 +192,9 @@ function TelaConfigs() {
                 >
                   Promoções
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
               <Pressable style={styleSettings.pressableSpace}>
@@ -173,6 +204,9 @@ function TelaConfigs() {
                 >
                   Histórico
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
             </View>
           </View>
@@ -198,15 +232,21 @@ function TelaConfigs() {
                 >
                   Ajuda
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
               <Pressable style={styleSettings.pressableSpace}>
-                <MatIcons name="feedback" size={25} color={"#000"} />
+                <MatIcons name="feedback" size={25} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
                 >
                   Feedback
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
 
               <Pressable style={styleSettings.pressableSpace}>
@@ -216,24 +256,42 @@ function TelaConfigs() {
                 >
                   Sobre
                 </Text>
+                <View style={styleSettings.arrowAlign}>
+                  <Entypo name="chevron-right" size={25} />
+                </View>
               </Pressable>
             </View>
           </View>
         </ScrollView>
 
         {/* 
-          modal estilo bottom-sheet
+          modal estilo bottom-sheet ///dados
         */}
 
         <BottomSheet
-          ref={bottomSheetRef}
+          ref={refDados}
           index={-1}
-          snapPoints={snapPoint}
+          snapPoints={snapPointDados}
           enablePanDownToClose={true}
           style={styleSettings.modalStyle}
           backgroundStyle={{ backgroundColor: "#fafafa" }}
         >
           <EditarDados />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///seguranca
+        */}
+
+        <BottomSheet
+          ref={refSeguranca}
+          index={-1}
+          snapPoints={snapPointSeguranca}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <EditarSeguranca />
         </BottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>

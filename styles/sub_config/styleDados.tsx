@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 
 const styleEditar = StyleSheet.create({
   container: {
-    marginHorizontal: width * 0.07,
+    marginHorizontal: width * 0.05,
     flex: 1,
   },
   optionAlign: {
@@ -19,9 +19,6 @@ const styleEditar = StyleSheet.create({
   nomeStyle: {
     fontFamily: "Montserrat_400Regular",
     fontSize: 16,
-  },
-  pencilAlign: {
-    marginLeft: width * 0.2,
   },
 
   // facebook
@@ -46,16 +43,6 @@ const styleEditar = StyleSheet.create({
     color: "#fff",
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 20,
-    maxWidth: "80%",
-  },
-
-  // recomendações
-
-  recomendaAlign: {
-    flexDirection: "row",
-  },
-  recomendaText: {
-    fontFamily: "Montserrat_400Regular",
     maxWidth: "90%",
   },
 });

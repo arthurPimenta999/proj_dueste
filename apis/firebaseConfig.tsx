@@ -17,6 +17,7 @@ import {
 } from "firebase/firestore";
 import * as SplashScreen from "expo-splash-screen";
 import styleCardapio from "../styles/stylesCardapio";
+import AppLoading from "expo-app-loading";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -45,9 +46,9 @@ async function readData() {
 async function writeData() {
   try {
     const docRef = await addDoc(collection(db, "oirsrs"), {
-      first: "Alan",
-      middle: "Mathison",
-      last: "Turing",
+      first: "Allan",
+      middle: "Diniz Raposo Moreira",
+      last: "de Góes",
     });
 
     console.log("Document written with ID: ", docRef.id);
@@ -68,7 +69,7 @@ function PizzasSalgadas() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cardRef = doc(db, "cardapioCards", "pizzaSal");
+      const cardRef = doc(db, "pizzaCards", "pizzaSal");
       const cardSnap = await getDoc(cardRef);
 
       // atribuindo os valores obtidos da requisição às variáveis do useState
@@ -87,7 +88,7 @@ function PizzasSalgadas() {
   }, []);
 
   if (loading) {
-    return SplashScreen.preventAutoHideAsync();
+    return <AppLoading />;
   }
 
   return (
