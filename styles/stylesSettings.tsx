@@ -86,6 +86,10 @@ const styleSettings = StyleSheet.create({
     gap: 15,
     alignItems: "center",
   },
+  arrowAlign: {
+    position: "absolute",
+    marginLeft: width * 0.72,
+  },
 
   // estilos da modal bottom-sheet
   modalStyle: {

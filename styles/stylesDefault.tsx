@@ -87,6 +87,25 @@ const stylePadrao = StyleSheet.create({
     height: height * 0.025,
     marginLeft: width * 0.02,
   },
+
+  // modal
+
+  container: {
+    flex: 1,
+    marginHorizontal: width * 0.1,
+  },
+  titleAlign: {
+    marginVertical: height * 0.01,
+    alignItems: "center",
+  },
+  title: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 20,
+  },
+  contentAlign: {
+    marginTop: height * 0.025,
+    alignItems: "center",
+  },
 });
 
 export default stylePadrao;
