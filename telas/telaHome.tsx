@@ -4,8 +4,7 @@ import {
   Text,
   Pressable,
   Image,
-  useWindowDimensions,
-  Platform,
+  Linking,
   Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -20,7 +19,7 @@ import logoDueste from "../components/images/duesteLogo.png";
 import AppLoading from "expo-app-loading";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import TelaReserva from "./sub_home/reserva";
+import TelaReserva from "./sub_home/telaReserva";
 import Carousel from "react-native-reanimated-carousel";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -28,6 +27,12 @@ function TelaPrincipal() {
   const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
+
+  const abrirDueste = () => {
+    Linking.openURL(
+      "https://www.ifood.com.br/delivery/sorocaba-sp/pizzaria-dueste-parque-dos-eucaliptos/eb313658-3916-4283-9181-c03b48c312db?prato=64558822"
+    );
+  };
 
   const imagensBanner = [
     "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGl6emF8ZW58MHx8MHx8fDA%3D",
@@ -68,32 +73,34 @@ function TelaPrincipal() {
 
       <View style={stylePadrao.styleHome}>
         <View style={styleHome.bannerStyle}>
-          <Carousel
-            loop
-            width={width}
-            height={240}
-            autoPlay={true}
-            mode="parallax"
-            modeConfig={{
-              parallaxScrollingScale: 0.85,
-              parallaxScrollingOffset: 70,
-            }}
-            data={imagensBanner}
-            scrollAnimationDuration={1000}
-            onSnapToItem={(index) => console.log("current index:", index)}
-            renderItem={({ index }) => (
-              <View style={styleHome.bannerView}>
-                <View style={styleHome.child}>
-                  <Image
-                    source={{
-                      uri: imagensBanner[index],
-                    }}
-                    style={styleHome.child}
-                  />
+          <Pressable onPress={abrirDueste}>
+            <Carousel
+              loop
+              width={width}
+              height={240}
+              autoPlay={true}
+              mode="parallax"
+              modeConfig={{
+                parallaxScrollingScale: 0.85,
+                parallaxScrollingOffset: 70,
+              }}
+              data={imagensBanner}
+              scrollAnimationDuration={1000}
+              onSnapToItem={(index) => console.log("current index:", index)}
+              renderItem={({ index }) => (
+                <View style={styleHome.bannerView}>
+                  <View style={styleHome.child}>
+                    <Image
+                      source={{
+                        uri: imagensBanner[index],
+                      }}
+                      style={styleHome.child}
+                    />
+                  </View>
                 </View>
-              </View>
-            )}
-          />
+              )}
+            />
+          </Pressable>
         </View>
 
         {/*balão que mostra o endereço de entrega escolhido pelo usuário
@@ -162,7 +169,7 @@ function TelaPrincipal() {
 
         <View style={styleHome.alignBtnRow}>
           <View style={styleHome.alignBtn}>
-            <Pressable style={styleHome.btn}>
+            <Pressable style={styleHome.btn} onPress={abrirDueste}>
               <Text
                 style={{
                   fontFamily: "Montserrat_400Regular",

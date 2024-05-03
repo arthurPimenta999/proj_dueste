@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 
 const styleEditar = StyleSheet.create({
   container: {
-    marginHorizontal: width * 0.05,
+    marginHorizontal: width * 0.1,
     flex: 1,
   },
   optionAlign: {

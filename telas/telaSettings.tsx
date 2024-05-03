@@ -27,8 +27,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
 import EditarDados from "./sub_config/configDados";
-import * as SplashScreen from "expo-splash-screen";
 import EditarSeguranca from "./sub_config/configSeguranca";
+import TelaNotificacoes from "./sub_config/configNotificacoes";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -46,6 +46,12 @@ function TelaConfigs() {
   const refSeguranca = useRef(null);
   const snapPointSeguranca = useMemo(() => ["40%", "60%"], []);
   const handleOpenSeguranca = () => refSeguranca.current?.expand();
+
+  //configurações da modal ///segurança
+
+  const refNotificacoes = useRef(null);
+  const snapPointNotificacoes = useMemo(() => ["40%", "60%"], []);
+  const handleOpenNotificacoes = () => refNotificacoes.current?.expand();
 
   // função pra mostrar uma tela de carregamento enquanto o
   // app carrega as fontes. se não for usada, as fontes saem
@@ -123,7 +129,7 @@ function TelaConfigs() {
                   Editar dados
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
@@ -138,13 +144,13 @@ function TelaConfigs() {
                   Segurança e Login
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
-                onPress={handleOpenSeguranca}
+                onPress={handleOpenNotificacoes}
               >
                 <Ionicon name="notifications" size={25} color={"#000"} />
                 <Text
@@ -153,7 +159,7 @@ function TelaConfigs() {
                   Notificações
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
             </View>
@@ -181,7 +187,7 @@ function TelaConfigs() {
                   Modo Escuro
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
@@ -193,7 +199,7 @@ function TelaConfigs() {
                   Promoções
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
@@ -205,7 +211,7 @@ function TelaConfigs() {
                   Histórico
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
             </View>
@@ -233,7 +239,7 @@ function TelaConfigs() {
                   Ajuda
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
@@ -245,7 +251,7 @@ function TelaConfigs() {
                   Feedback
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
 
@@ -257,7 +263,7 @@ function TelaConfigs() {
                   Sobre
                 </Text>
                 <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={25} />
+                  <Entypo name="chevron-right" size={18} />
                 </View>
               </Pressable>
             </View>
@@ -292,6 +298,21 @@ function TelaConfigs() {
           backgroundStyle={{ backgroundColor: "#fafafa" }}
         >
           <EditarSeguranca />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///notificações
+        */}
+
+        <BottomSheet
+          ref={refNotificacoes}
+          index={-1}
+          snapPoints={snapPointNotificacoes}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <TelaNotificacoes />
         </BottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>

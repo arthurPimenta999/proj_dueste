@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleReserva from "../../styles/sub_home/stylesReserva";
 import AppLoading from "expo-app-loading";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 function TelaReserva() {
   return (
