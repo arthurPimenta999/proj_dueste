@@ -38,9 +38,11 @@ function EditarSeguranca() {
               style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
             >
               <Text style={styleSeguranca.sectionTitle}>Email:</Text>
-              <Text style={styleSeguranca.sectionContentText}>
-                usuario.testesilva123@teste.com
-              </Text>
+              <View style={styleSeguranca.sectionContentText}>
+                <Text style={styleSeguranca.sectionContentFont}>
+                  usuario.testesilva123@teste.com
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -52,9 +54,9 @@ function EditarSeguranca() {
               style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
             >
               <Text style={styleSeguranca.sectionTitle}>Senha:</Text>
-              <Text style={styleSeguranca.sectionContentText2}>
-                ••••••••••••••••••••••
-              </Text>
+              <View style={styleSeguranca.sectionContentText2}>
+                <Text>••••••••••••••••••••••</Text>
+              </View>
 
               <View style={styleSeguranca.sideMargin}>
                 <Pressable>
