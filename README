@@ -10,7 +10,11 @@ reinicie o vscode
 pra iniciar o projeto e aparecer o codigo qr:
 
 veja se o celular e o computador estão conectados na mesma rede.
-o qr code é local, então se não estiver na mesma rede, não vai conectar
+o qr code é local, então se não estiver na mesma rede, não vai conectar.
+
+pra fazer isso na etec, tem que tirar o cabo de rede do notebook e
+rotear o wifi do celular no notebook. não precisa de 4g, só se vc for
+usar a internet.
 
 execute o comando: npx expo start
 
