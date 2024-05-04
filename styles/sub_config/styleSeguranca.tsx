@@ -34,11 +34,13 @@ const styleSeguranca = StyleSheet.create({
   },
 
   sectionContentText: {
-    fontFamily: "Montserrat_400Regular",
-    fontSize: 15,
     backgroundColor: "#dcdcdc",
     padding: 10,
     borderRadius: 7,
+  },
+  sectionContentFont: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 15,
   },
   sectionContent: {
     backgroundColor: "#aaa",

@@ -11,8 +11,14 @@ const styleReserva = StyleSheet.create({
     flex: 1,
     marginHorizontal: width * 0.05,
   },
-  teste: {
-    flex: 1,
+  //title
+  titleAlign: {
+    marginVertical: height * 0.025,
+    marginHorizontal: width * 0.01,
+  },
+  titleFont: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 30,
   },
 });
 
