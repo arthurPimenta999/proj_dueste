@@ -1,12 +1,5 @@
 import React from "react";
 import { View, Text, ScrollView, Switch } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import AppLoading from "expo-app-loading";
-import {
-  Montserrat_400Regular,
-  Montserrat_600SemiBold,
-} from "@expo-google-fonts/montserrat";
-import { useFonts } from "@expo-google-fonts/montserrat";
 import styleNotificacoes from "../../styles/sub_config/styleNotificacoes";
 import stylePadrao from "../../styles/stylesDefault";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
@@ -14,14 +7,6 @@ import MI from "react-native-vector-icons/MaterialIcons";
 import { Divider } from "react-native-paper";
 
 function TelaNotificacoes() {
-  let [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-    Montserrat_600SemiBold,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-
   return (
     <View style={stylePadrao.container}>
       <View style={stylePadrao.titleAlign}>

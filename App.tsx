@@ -10,10 +10,32 @@ import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTheme } from "react-native-paper";
+import { useFonts } from "@expo-google-fonts/montserrat";
+import {
+  Montserrat_400Regular,
+  Montserrat_600SemiBold,
+} from "@expo-google-fonts/montserrat";
+import AppLoading from "expo-app-loading";
 
 //=========== app ==========
 
 export default function App() {
+  {
+    /*
+  useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
+  só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
+  ~Stardust
+  */
+  }
+
+  let [fontsLoaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <SafeAreaProvider style={styles.container}>
       <NavigationContainer>

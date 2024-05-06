@@ -10,18 +10,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleHome from "../styles/stylesHome";
 import stylePadrao from "../styles/stylesDefault";
-import { useFonts } from "expo-font";
-import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 import Feather from "react-native-vector-icons/Feather";
 import FA5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import logoDueste from "../components/images/duesteLogo.png";
-import AppLoading from "expo-app-loading";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/telaReserva";
 import Carousel from "react-native-reanimated-carousel";
-import * as SplashScreen from "expo-splash-screen";
 
 function TelaPrincipal() {
   const width = Dimensions.get("window").width;
@@ -39,21 +35,6 @@ function TelaPrincipal() {
     "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHwwfDB8fHww",
     "https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fHBpenphfGVufDB8MHwwfHx8MA%3D%3D",
   ];
-
-  {
-    /*
-  useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
-  só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
-  ~Stardust
-  */
-  }
-
-  let [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   return (
     <SafeAreaView style={styleHome.fixCinza}>
@@ -86,7 +67,6 @@ function TelaPrincipal() {
               }}
               data={imagensBanner}
               scrollAnimationDuration={1000}
-              onSnapToItem={(index) => console.log("current index:", index)}
               renderItem={({ index }) => (
                 <View style={styleHome.bannerView}>
                   <View style={styleHome.child}>

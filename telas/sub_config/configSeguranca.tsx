@@ -5,24 +5,10 @@ import styleSeguranca from "../../styles/sub_config/styleSeguranca";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import FA from "react-native-vector-icons/FontAwesome";
-import { useFonts } from "@expo-google-fonts/montserrat";
-import {
-  Montserrat_400Regular,
-  Montserrat_600SemiBold,
-} from "@expo-google-fonts/montserrat";
-import AppLoading from "expo-app-loading";
 import stylePadrao from "../../styles/stylesDefault";
 
 function EditarSeguranca() {
   const { width, height } = Dimensions.get("window");
-
-  let [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-    Montserrat_600SemiBold,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   return (
     <View style={stylePadrao.container}>

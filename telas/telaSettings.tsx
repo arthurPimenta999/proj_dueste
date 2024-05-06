@@ -10,12 +10,6 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleSettings from "../styles/stylesSettings";
 import stylePadrao from "../styles/stylesDefault";
-import {
-  Montserrat_400Regular,
-  Montserrat_600SemiBold,
-} from "@expo-google-fonts/montserrat";
-import { useFonts } from "@expo-google-fonts/montserrat";
-import AppLoading from "expo-app-loading";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MatIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -29,11 +23,14 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import EditarDados from "./sub_config/configDados";
 import EditarSeguranca from "./sub_config/configSeguranca";
 import TelaNotificacoes from "./sub_config/configNotificacoes";
+import DarkModeModal from "./sub_config/configDarkMode";
 
 function TelaConfigs() {
   const navigation = useNavigation();
 
   const { width, height } = Dimensions.get("window");
+
+  // =============== MODALS ===============
 
   //configurações da modal ///dados
 
@@ -53,17 +50,13 @@ function TelaConfigs() {
   const snapPointNotificacoes = useMemo(() => ["40%", "60%"], []);
   const handleOpenNotificacoes = () => refNotificacoes.current?.expand();
 
-  // função pra mostrar uma tela de carregamento enquanto o
-  // app carrega as fontes. se não for usada, as fontes saem
-  // cortadas e não funcionam direito.
+  //configurações da modal ///segurança
 
-  let [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-    Montserrat_600SemiBold,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  const refDarkMode = useRef(null);
+  const snapPointDarkMode = useMemo(() => ["40%", "60%"], []);
+  const handleOpenDarkMode = () => refDarkMode.current?.expand();
+
+  // =============== FIM DAS MODALS ===============
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -179,7 +172,10 @@ function TelaConfigs() {
 
           <View style={styleSettings.alignConfig}>
             <View style={styleSettings.configSection}>
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenDarkMode}
+              >
                 <MCI name="theme-light-dark" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -307,12 +303,27 @@ function TelaConfigs() {
         <BottomSheet
           ref={refNotificacoes}
           index={-1}
-          snapPoints={snapPointNotificacoes}
+          snapPoints={snapPointDarkMode}
           enablePanDownToClose={true}
           style={styleSettings.modalStyle}
           backgroundStyle={{ backgroundColor: "#fafafa" }}
         >
           <TelaNotificacoes />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///modo escuro
+        */}
+
+        <BottomSheet
+          ref={refDarkMode}
+          index={-1}
+          snapPoints={snapPointNotificacoes}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <DarkModeModal />
         </BottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>
