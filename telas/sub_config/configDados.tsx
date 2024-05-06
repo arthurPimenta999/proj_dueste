@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, Switch } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import styleEditar from "../../styles/sub_config/styleDados";
 import stylePadrao from "../../styles/stylesDefault";
 import FA from "react-native-vector-icons/FontAwesome";
