@@ -24,6 +24,11 @@ import EditarDados from "./sub_config/configDados";
 import EditarSeguranca from "./sub_config/configSeguranca";
 import TelaNotificacoes from "./sub_config/configNotificacoes";
 import DarkModeModal from "./sub_config/configDarkMode";
+import TelaPromocoes from "./sub_config/configPromocoes";
+import TelaHistorico from "./sub_config/configHistorico";
+import TelaSobre from "./sub_config/configSobre";
+import TelaFeedback from "./sub_config/configFeedback";
+import TelaAjuda from "./sub_config/configAjuda";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -53,8 +58,26 @@ function TelaConfigs() {
   //configurações da modal ///segurança
 
   const refDarkMode = useRef(null);
-  const snapPointDarkMode = useMemo(() => ["40%", "60%"], []);
+  const snapPointDarkMode = useMemo(() => ["20%", "47%"], []);
   const handleOpenDarkMode = () => refDarkMode.current?.expand();
+
+  //configurações da modal ///promoções
+
+  const refPromocoes = useRef(null);
+  const snapPointPromocoes = useMemo(() => ["35%", "50%"], []);
+  const handleOpenPromocoes = () => refPromocoes.current?.expand();
+
+  //configurações da modal ///histórico
+
+  const refHistorico = useRef(null);
+  const snapPointHistorico = useMemo(() => ["35%", "60%"], []);
+  const handleOpenHistorico = () => refHistorico.current?.expand();
+
+  //configurações da modal ///sobre
+
+  const refSobre = useRef(null);
+  const snapPointSobre = useMemo(() => ["35%", "60%"], []);
+  const handleOpenSobre = () => refSobre.current?.expand();
 
   // =============== FIM DAS MODALS ===============
 
@@ -187,7 +210,10 @@ function TelaConfigs() {
                 </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenPromocoes}
+              >
                 <MCI name="sale" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -199,7 +225,10 @@ function TelaConfigs() {
                 </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenHistorico}
+              >
                 <FA6 name="clock-rotate-left" size={20} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -227,7 +256,10 @@ function TelaConfigs() {
 
           <View style={styleSettings.alignConfig}>
             <View style={styleSettings.configSection}>
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={() => navigation.navigate("Ajuda")}
+              >
                 <MCI name="help-circle" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -239,7 +271,10 @@ function TelaConfigs() {
                 </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={() => navigation.navigate("Feedback")}
+              >
                 <MatIcons name="feedback" size={25} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -251,7 +286,10 @@ function TelaConfigs() {
                 </View>
               </Pressable>
 
-              <Pressable style={styleSettings.pressableSpace}>
+              <Pressable
+                style={styleSettings.pressableSpace}
+                onPress={handleOpenSobre}
+              >
                 <MCI name="account-group" size={23} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
@@ -318,12 +356,57 @@ function TelaConfigs() {
         <BottomSheet
           ref={refDarkMode}
           index={-1}
-          snapPoints={snapPointNotificacoes}
+          snapPoints={snapPointDarkMode}
           enablePanDownToClose={true}
           style={styleSettings.modalStyle}
           backgroundStyle={{ backgroundColor: "#fafafa" }}
         >
           <DarkModeModal />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///promoções
+        */}
+
+        <BottomSheet
+          ref={refPromocoes}
+          index={-1}
+          snapPoints={snapPointPromocoes}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <TelaPromocoes />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///histórico
+        */}
+
+        <BottomSheet
+          ref={refHistorico}
+          index={-1}
+          snapPoints={snapPointHistorico}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <TelaHistorico />
+        </BottomSheet>
+
+        {/* 
+          modal estilo bottom-sheet ///Sobre
+        */}
+
+        <BottomSheet
+          ref={refSobre}
+          index={-1}
+          snapPoints={snapPointSobre}
+          enablePanDownToClose={true}
+          style={styleSettings.modalStyle}
+          backgroundStyle={{ backgroundColor: "#fafafa" }}
+        >
+          <TelaSobre />
         </BottomSheet>
       </SafeAreaView>
     </GestureHandlerRootView>
@@ -338,7 +421,8 @@ function Telas() {
       }}
     >
       <Stack.Screen name="Configs" component={TelaConfigs} />
-      <Stack.Screen name="Editar" component={TelaConfigs} />
+      <Stack.Screen name="Ajuda" component={TelaAjuda} />
+      <Stack.Screen name="Feedback" component={TelaFeedback} />
     </Stack.Navigator>
   );
 }
