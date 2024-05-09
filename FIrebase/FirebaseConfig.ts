@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,16 +23,51 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-import { collection, addDoc, deleteDoc, getDoc} from "firebase/firestore"; 
+import { collection, addDoc, deleteDoc, getDoc, setDoc} from "firebase/firestore"; 
 
 //algumas variaveis para usar posterioremnte ~~ Rafinha
 let pnome, ppreco, pimagem, pingredientes;
 let lnome, lpreco, limagem;
 
+async function updatedataP(colecao: string, id: string, preco: number, titulo: string, url: string): Promise<any> {
+
+  const [pizzaURL, setPizzaURL] = useState([]);
+  const [pizzaTitle, setPizzaTitle] = useState([]);
+  const [pizzaPreco, setPizzaPreco] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    const docRef = doc(db, colecao, id);
+    const docSnap = await getDoc(docRef)
+  
+    try {
+        docSnap;
+    } catch (e) {
+      console.error("Erro ao encontrar documento do ID:", id)
+    }
+  
+    if (docSnap.exists()) {
+      console.log("Documento do ID:" + id + ":", docSnap.data());
+    }else {
+      console.log("nenhum documento encontrado!");
+    }
+
+    try{
+      const docRef = await setDoc(doc(db,"pizzaCards", id ), {
+
+      });
+      console.log("Documento atualizado com valor:", titulo)
+    } catch (e) {
+      console.error("Erro ao atualizar documento", e)
+    }
+  }, []);
+}
+
 
 //função de adicionar documentos ao firestore ~~ Rafinha
 //adicionar USUARIO:  ~~Rafinha
-async function writedata(unome: string, tel: number, email: string, senha: string): Promise<any> {
+async function writedataU(unome: string, tel: number, email: string, senha: string): Promise<any> {
 try {
   const docRef = await addDoc(collection(db, "usuario"), {
     email: email,
@@ -46,15 +82,17 @@ try {
 
 }
 
-async function updatedata(unome: string, tel: number, email: string, senha: string): Promise<any> {
+
+//função de atualizar um documento no firestore ~~Rafinha
+async function updatedataU(id: string, unome: string, tel: number, email: string, senha: string): Promise<any> {
   try {
-    const docRef = await addDoc(collection(db, "usuario"), {
+    const docRef = await setDoc(doc(db,"usuario", id), {
       email: email,
       nome: unome,
       telefone: tel,
       senha: senha
     });
-    console.log("Documento registrado no ID: ", docRef.id);
+    console.log("Documento do ID: " + id + "alterado");
   } catch (e) {
     console.error("Erro em adicionar documento:", e);
   }
@@ -62,18 +100,21 @@ async function updatedata(unome: string, tel: number, email: string, senha: stri
   }
 
 
-async function deletedata(collection: string, id: string) {
+//Deletar QUALQUER documento do BD ~~Rafinha
+async function deletedata(colecao: string, id: string) {
     try {
-      const docRef = await deleteDoc(doc(db,collection, id));
+      const docRef = await deleteDoc(doc(db,colecao, id));
       console.log("Documento deletado com sucesso");
     } catch (e) {
       console.error("Erro ao deletar documento do ID:", id)
     }
 }
 
-async function readata(collection: string, id: string,) {
 
-  const docRef = doc(db, collection, id);
+//Ler qualquer documetno do BD ~~Rafinha
+async function readata(colecao: string, id: string,) {
+
+  const docRef = doc(db, colecao, id);
   const docSnap = await getDoc(docRef)
 
   try {
@@ -89,9 +130,11 @@ async function readata(collection: string, id: string,) {
   }
 }
 
+//junção de todas as opreções
 const dataoperations = {
   deletedata,
-  writedata,
+  updatedataU,
+  writedataU,
   readata
 }
 
