@@ -31,37 +31,42 @@ let lnome, lpreco, limagem;
 
 async function updatedataP(colecao: string, id: string, preco: number, titulo: string, url: string): Promise<any> {
 
-  const [pizzaURL, setPizzaURL] = useState([]);
-  const [pizzaTitle, setPizzaTitle] = useState([]);
-  const [pizzaPreco, setPizzaPreco] = useState([]);
+  const [pURL, setPizzaURL] = useState([]);
+  const [pTitle, setPizzaTitle] = useState([]);
+  const [pPreco, setPizzaPreco] = useState([]);
   const [loading, setLoading] = useState(false);
-
-
+  
   useEffect(() => {
-    const docRef = doc(db, colecao, id);
-    const docSnap = await getDoc(docRef)
-  
-    try {
-        docSnap;
-    } catch (e) {
-      console.error("Erro ao encontrar documento do ID:", id)
-    }
-  
-    if (docSnap.exists()) {
-      console.log("Documento do ID:" + id + ":", docSnap.data());
-    }else {
-      console.log("nenhum documento encontrado!");
-    }
+    const fetchData = async () => {
 
-    try{
-      const docRef = await setDoc(doc(db,"pizzaCards", id ), {
+      const cardRef = doc(db, colecao , id);
+      const cardSnap = await getDoc(cardRef);
 
-      });
-      console.log("Documento atualizado com valor:", titulo)
-    } catch (e) {
-      console.error("Erro ao atualizar documento", e)
-    }
+      // atribuindo os valores obtidos da requisição às variáveis do useState
+
+      if (cardSnap.exists()) {
+        setPizzaURL(cardSnap.data().pizzaURL);
+        setPizzaTitle(cardSnap.data().pizzaTitle);
+        setPizzaPreco(cardSnap.data().pizzaPreco);
+      } else {
+        console.log("Documento não encontrado.");
+      }
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
+
+  try {
+    const docRef = await setDoc(doc(db, colecao, id), {
+        pizzaPreco: {pPreco, preco},
+        pizzaTitle: {pTitle, titulo},
+        pizzaURL: {pURL, url}
+    });
+    console.log("Documento" + id + "Alterado com sucesso")
+  } catch (e) {
+    console.error("Erro ao alterar documento:", e);
+  }
 }
 
 
@@ -134,6 +139,7 @@ async function readata(colecao: string, id: string,) {
 const dataoperations = {
   deletedata,
   updatedataU,
+  updatedataP,
   writedataU,
   readata
 }
