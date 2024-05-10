@@ -34,7 +34,6 @@ async function updatedataP(colecao: string, id: string, preco: number, titulo: s
   const [pURL, setPizzaURL] = useState([]);
   const [pTitle, setPizzaTitle] = useState([]);
   const [pPreco, setPizzaPreco] = useState([]);
-  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     const fetchData = async () => {
