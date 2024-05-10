@@ -18,6 +18,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/telaReserva";
 import Carousel from "react-native-reanimated-carousel";
+import TelaAjuda from "./sub_config/configAjuda";
 
 function TelaPrincipal() {
   const width = Dimensions.get("window").width;
@@ -27,6 +28,12 @@ function TelaPrincipal() {
   const abrirDueste = () => {
     Linking.openURL(
       "https://www.ifood.com.br/delivery/sorocaba-sp/pizzaria-dueste-parque-dos-eucaliptos/eb313658-3916-4283-9181-c03b48c312db?prato=64558822"
+    );
+  };
+
+  const abrirEndereco = () => {
+    Linking.openURL(
+      "https://www.google.com/maps/dir//Av.+Paulo+Emanuel+de+Almeida,+910+-+Parque+dos+Eucaliptos,+Sorocaba+-+SP,+18053-505/@-23.4907192,-47.5854728,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94c58b27bd3e6d81:0x7a647876856aedba!2m2!1d-47.5030712!2d-23.4907409?entry=ttu"
     );
   };
 
@@ -83,24 +90,20 @@ function TelaPrincipal() {
           </Pressable>
         </View>
 
-        {/*balão que mostra o endereço de entrega escolhido pelo usuário
-        ~Stardust
-        */}
+        <View style={styleHome.spacingCarousel}>
+          {/*
+            balão que mostra o endereço de entrega escolhido pelo usuário
+              ~Stardust
+          */}
+          <View style={styleHome.pinBGstyle}>
+            <FA5 name="map-marker-alt" size={20} color={"#fff"}>
+              <Text style={styleHome.localAlign}>
+                  Av. Paulo Emanuel de Almeida, 910
+              </Text>
+            </FA5>
+          </View>
 
-        <View style={styleHome.pinBGstyle}>
-          <FA5
-            name="map-marker-alt"
-            size={20}
-            style={styleHome.pinStyle}
-            color={"#fff"}
-          >
-            <Text style={styleHome.localAlign}>
-                Rua Natal, Jardim Paulistano, Nº340
-            </Text>
-          </FA5>
-        </View>
-
-        {/*
+          {/*
         fileira de botões.
         um tem função de abrir no maps o endereço da Dueste;
         outro tem função de abrir uma página de ajuda, pro usuário aprender cada função do app;
@@ -109,72 +112,76 @@ function TelaPrincipal() {
         ~Stardust
         */}
 
-        <View style={styleHome.btnRowAlign2}>
-          <Pressable style={styleHome.pressBorder}>
-            <Feather name="map" size={25} color={"#000"} />
-          </Pressable>
+          <View style={styleHome.btnRowAlign2}>
+            <Pressable style={styleHome.pressBorder} onPress={abrirEndereco}>
+              <Feather name="map" size={25} color={"#000"} />
+            </Pressable>
 
-          <Pressable style={styleHome.pressBorder}>
-            <Feather name="help-circle" size={25} color={"#000"} />
-          </Pressable>
+            <Pressable
+              style={styleHome.pressBorder}
+              onPress={() => navigation.navigate("Ajuda")}
+            >
+              <Feather name="help-circle" size={25} color={"#000"} />
+            </Pressable>
 
-          <Pressable style={styleHome.pressBorder}>
-            <Ionicons
-              name="chatbubble-ellipses-outline"
-              size={25}
-              color={"#000"}
-            />
-          </Pressable>
-        </View>
+            <Pressable style={styleHome.pressBorder}>
+              <Ionicons
+                name="chatbubble-ellipses-outline"
+                size={25}
+                color={"#000"}
+              />
+            </Pressable>
+          </View>
 
-        {/*
+          {/*
         medida temporária pros botões terem nome embaixo.
         quando coloquei o nome dos botões na mesma View que os botões,
         ficaram todos tortos e feios. 
         ~Stardust
         */}
 
-        <View style={styleHome.txtBtnAlign}>
-          <Text style={{ fontFamily: "Montserrat_400Regular" }}>Local</Text>
-          <Text style={{ fontFamily: "Montserrat_400Regular" }}>Ajuda</Text>
-          <Text style={{ fontFamily: "Montserrat_400Regular" }}>Chat</Text>
-        </View>
+          <View style={styleHome.txtBtnAlign}>
+            <Text style={{ fontFamily: "Montserrat_400Regular" }}>Maps</Text>
+            <Text style={{ fontFamily: "Montserrat_400Regular" }}>Ajuda</Text>
+            <Text style={{ fontFamily: "Montserrat_400Regular" }}>Chat</Text>
+          </View>
 
-        {/*
+          {/*
         botões principais da tela inicial. o botão de delivery leva pro iFood da Dueste,
         e o botão de reservas leva pra uma tela pra reservar mesas no restaurante, aproveitando que
         o restaurante tem um chatbot no Whatsapp.
         ~Stardust
         */}
 
-        <View style={styleHome.alignBtnRow}>
-          <View style={styleHome.alignBtn}>
-            <Pressable style={styleHome.btn} onPress={abrirDueste}>
-              <Text
-                style={{
-                  fontFamily: "Montserrat_400Regular",
-                  fontSize: 20,
-                  color: "#222",
-                }}
-              >
-                Delivery
-              </Text>
-            </Pressable>
+          <View style={styleHome.alignBtnRow}>
+            <View style={styleHome.alignBtn}>
+              <Pressable style={styleHome.btn} onPress={abrirDueste}>
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_400Regular",
+                    fontSize: 20,
+                    color: "#222",
+                  }}
+                >
+                  Delivery
+                </Text>
+              </Pressable>
 
-            <Pressable
-              style={styleHome.btn}
-              onPress={() => navigation.navigate("Reserva")}
-            >
-              <Text
-                style={{
-                  fontFamily: "Montserrat_400Regular",
-                  fontSize: 20,
-                  color: "#222",
-                }}
+              <Pressable
+                style={styleHome.btn}
+                onPress={() => navigation.navigate("Reserva")}
               >
-                Reserva
-              </Text>
-            </Pressable>
+                <Text
+                  style={{
+                    fontFamily: "Montserrat_400Regular",
+                    fontSize: 20,
+                    color: "#222",
+                  }}
+                >
+                  Reserva
+                </Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </View>
@@ -191,6 +198,7 @@ function Telas() {
     >
       <Stack.Screen name="Home" component={TelaPrincipal} />
       <Stack.Screen name="Reserva" component={TelaReserva} />
+      <Stack.Screen name="Ajuda" component={TelaAjuda} />
     </Stack.Navigator>
   );
 }

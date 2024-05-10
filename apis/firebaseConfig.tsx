@@ -5,7 +5,7 @@
 // componentes criados que usam dados do DB. :)
 
 import React, { useState, useEffect } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TextInput } from "react-native";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
@@ -15,9 +15,10 @@ import {
   getDoc,
   doc,
 } from "firebase/firestore";
-import * as SplashScreen from "expo-splash-screen";
 import styleCardapio from "../styles/stylesCardapio";
 import AppLoading from "expo-app-loading";
+import stylePadrao from "../styles/stylesDefault";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -60,7 +61,7 @@ async function writeData() {
 // ==========================================================
 
 function PizzasSalgadas() {
-  const [pizzaURL, setPizzaURL] = useState([]);
+  const [pizzaURL, setPizzaURL] = useState<string[]>([]);
   const [pizzaTitle, setPizzaTitle] = useState([]);
   const [pizzaPreco, setPizzaPreco] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -90,10 +91,29 @@ function PizzasSalgadas() {
   if (loading) {
     return <AppLoading />;
   }
+  const [busca, setBusca] = useState("");
+
+  const pizzasFiltradas = pizzaTitle
+    .map(String)
+    .filter((title) => title.startsWith(busca));
 
   return (
     <View>
-      {pizzaTitle.map((title, index) => (
+      <View style={stylePadrao.searchBarAlign}>
+        <View style={stylePadrao.searchBar}>
+          <View style={stylePadrao.alignInput}>
+            <AntDesign name="search1" size={20} color={"#333"} />
+            <TextInput
+              selectionColor={"#d69e04"}
+              style={stylePadrao.inputStyle}
+              autoCorrect={false}
+              value={busca}
+              onChangeText={(busca) => setBusca(busca)}
+            />
+          </View>
+        </View>
+      </View>
+      {pizzasFiltradas.map((title, index) => (
         <View style={styleCardapio.styleCard}>
           <Image
             source={{ uri: pizzaURL[index] }}
