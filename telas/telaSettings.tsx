@@ -103,23 +103,6 @@ function TelaConfigs() {
         </Pressable>
 
         <ScrollView style={stylePadrao.scrollStyle}>
-          {/*
-      barra de pesquisa da página de configurações
-      ~Stardust
-      */}
-
-          <View style={stylePadrao.searchBarAlign}>
-            <View style={stylePadrao.searchBar}>
-              <View style={stylePadrao.alignInput}>
-                <AntDesign name="search1" size={20} color={"#333"} />
-                <TextInput
-                  selectionColor={"#d69e04"}
-                  style={stylePadrao.inputStyle}
-                />
-              </View>
-            </View>
-          </View>
-
           <View style={styleSettings.configTitleAlign}>
             <Text style={styleSettings.configTitle}>Conta</Text>
             <Text style={{ fontFamily: "Montserrat_400Regular" }}>

@@ -11,6 +11,8 @@ import PizzasSalgadas from "../apis/firebaseConfig";
 function TelaCardapio() {
   const navigation = useNavigation();
 
+  //configuraçoes searchbar
+
   // função que divide os cards em linhas
 
   return (
@@ -38,18 +40,6 @@ function TelaCardapio() {
       barra de pesquisa da página de configurações
       ~Stardust
       */}
-
-        <View style={stylePadrao.searchBarAlign}>
-          <View style={stylePadrao.searchBar}>
-            <View style={stylePadrao.alignInput}>
-              <AntDesign name="search1" size={20} color={"#333"} />
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-              />
-            </View>
-          </View>
-        </View>
 
         {/* cartões de sabores e itens no cardápio */}
         <View style={styleCardapio.pizzaTitleAlign}>

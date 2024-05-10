@@ -67,20 +67,19 @@ const styleHome = StyleSheet.create({
 
   //balão de endereço
 
-  pinStyle: {
-    marginTop: 10,
-    marginLeft: 15,
-  },
   localAlign: {
     fontFamily: "Montserrat_400Regular",
-    fontSize: 17,
+    fontSize: 17.5,
   },
   pinBGstyle: {
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 15,
     marginHorizontal: 15,
     backgroundColor: "#d4473d",
     borderRadius: 50,
     height: height * 0.05,
+
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -118,6 +117,12 @@ const styleHome = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     gap: 55,
+  },
+
+  // allinhar resto dos botões em relacão ao carousel
+
+  spacingCarousel: {
+    marginTop: height * 0.31,
   },
 });
 
