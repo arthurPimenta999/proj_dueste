@@ -29,15 +29,20 @@ import FirebaseConfig from "../FIrebase/FirebaseConfig";
 
 function TelaCRUD() {
 
-  const [value, onChangeText] = React.useState('');
-  let titulo
+  const [nPizza, onPizzaChange] = React.useState('');
+  const [pPizza, onPrecoChange] = React.useState('');
+  const [uPizza, onUrlChange] = React.useState('');
+  let preco, titulo, url;
+  
+  function updatedataP() {
+    throw new Error("Function not implemented.");
+  }
 
     return (
 
       
 
       <SafeAreaView>
-
         <View style={stylePadrao.textTopAlign}>
           <Text style={stylePadrao.textTop}>Adicionar Dados</Text>
         </View>
@@ -50,20 +55,29 @@ function TelaCRUD() {
               <TextInput
                 selectionColor={"#d69e04"}
                 style={stylePadrao.inputStyle}
-                
+                onChangetext = {onUrlChange(onUrlChange)}
               />
               <Text> Nome da Pizza:</Text>
               <TextInput
                 selectionColor={"#d69e04"}
                 style={stylePadrao.inputStyle}
-                value = [value]
-                onChangeText = {onChangeText = (Text)}
+                onChangeText = {onPizzaChange(onPizzaChange)}
                 placeholder = "Digite o nome da pizza"
               />
               <Text> Preço da Pizza:</Text>
               <TextInput
                 selectionColor={"#d69e04"}
                 style={stylePadrao.inputStyle}
+                onChangeText = {onPrecoChange(onPrecoChange)}
+              />
+              <Pressable 
+                onPress = {
+                  preco = pPizza,
+                  titulo = nPizza,
+                  url = uPizza
+
+                  updatedataP(preco, titulo, url)
+                }
               />
             </View>
           </View>
