@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styleReserva from "../../styles/sub_home/stylesReserva";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import SwitchSelector from "react-native-switch-selector";
+import stylePadrao from "../../styles/stylesDefault";
 
 function TelaReserva() {
   return (
@@ -12,8 +13,8 @@ function TelaReserva() {
         Título da tela
       */}
 
-      <View style={styleReserva.titleAlign}>
-        <Text style={styleReserva.titleFont}>Reserva</Text>
+      <View style={stylePadrao.generalTitleAlign}>
+        <Text style={stylePadrao.generalTitleStyle}>Reserva</Text>
       </View>
 
       {/* 

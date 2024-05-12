@@ -16,6 +16,7 @@ import {
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
 import AppLoading from "expo-app-loading";
+import EditarDados from "./telas/sub_config/configDados";
 
 //=========== app ==========
 
@@ -81,6 +82,20 @@ function MyTabs() {
       <Tab.Screen
         name="Cardápio"
         component={TelaCardapio}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicon
+              name="pizza"
+              size={23}
+              style={styles.icons}
+              color={focused ? "black" : "#333"}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Teste"
+        component={EditarDados}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicon

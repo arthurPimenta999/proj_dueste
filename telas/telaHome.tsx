@@ -154,8 +154,8 @@ function TelaPrincipal() {
         */}
 
           <View style={styleHome.alignBtnRow}>
-            <View style={styleHome.alignBtn}>
-              <Pressable style={styleHome.btn} onPress={abrirDueste}>
+            <View style={stylePadrao.alignBtn}>
+              <Pressable style={stylePadrao.btn} onPress={abrirDueste}>
                 <Text
                   style={{
                     fontFamily: "Montserrat_400Regular",
@@ -168,7 +168,7 @@ function TelaPrincipal() {
               </Pressable>
 
               <Pressable
-                style={styleHome.btn}
+                style={stylePadrao.btn}
                 onPress={() => navigation.navigate("Reserva")}
               >
                 <Text

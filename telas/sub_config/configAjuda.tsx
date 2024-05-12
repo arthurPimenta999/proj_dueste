@@ -6,6 +6,7 @@ import { ListItem } from "@rneui/themed";
 import Entypo from "react-native-vector-icons/Entypo";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MI from "react-native-vector-icons/MaterialIcons";
+import stylePadrao from "../../styles/stylesDefault";
 
 function TelaAjuda() {
   const [temaExpanded, setTemaExpanded] = useState(false);
@@ -15,8 +16,8 @@ function TelaAjuda() {
 
   return (
     <SafeAreaView style={styleAjuda.container}>
-      <View style={styleAjuda.titleAlign}>
-        <Text style={styleAjuda.titleStyle}>Ajuda</Text>
+      <View style={stylePadrao.generalTitleAlign}>
+        <Text style={stylePadrao.generalTitleStyle}>Ajuda</Text>
       </View>
 
       <View>

@@ -1,27 +1,17 @@
-import React, { useRef, useMemo } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  TextInput,
-  Dimensions,
-} from "react-native";
+import React, { useRef, useMemo, useState, useEffect } from "react";
+import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleSettings from "../styles/stylesSettings";
 import stylePadrao from "../styles/stylesDefault";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MatIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import FA6 from "react-native-vector-icons/FontAwesome6";
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
-import EditarDados from "./sub_config/configDados";
-import EditarSeguranca from "./sub_config/configSeguranca";
 import TelaNotificacoes from "./sub_config/configNotificacoes";
 import DarkModeModal from "./sub_config/configDarkMode";
 import TelaPromocoes from "./sub_config/configPromocoes";
@@ -29,6 +19,10 @@ import TelaHistorico from "./sub_config/configHistorico";
 import TelaSobre from "./sub_config/configSobre";
 import TelaFeedback from "./sub_config/configFeedback";
 import TelaAjuda from "./sub_config/configAjuda";
+import { TelaLogin, auth, fetchLoginDados } from "../apis/firebaseConfig";
+import { fetchLoginSeguranca } from "../apis/firebaseConfig";
+import EditarDados from "./sub_config/configDados";
+import { User, onAuthStateChanged } from "firebase/auth";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -36,18 +30,6 @@ function TelaConfigs() {
   const { width, height } = Dimensions.get("window");
 
   // =============== MODALS ===============
-
-  //configurações da modal ///dados
-
-  const refDados = useRef(null);
-  const snapPointDados = useMemo(() => ["30%", "35%"], []);
-  const handleOpenDados = () => refDados.current?.expand();
-
-  //configurações da modal ///segurança
-
-  const refSeguranca = useRef(null);
-  const snapPointSeguranca = useMemo(() => ["40%", "60%"], []);
-  const handleOpenSeguranca = () => refSeguranca.current?.expand();
 
   //configurações da modal ///segurança
 
@@ -80,6 +62,8 @@ function TelaConfigs() {
   const handleOpenSobre = () => refSobre.current?.expand();
 
   // =============== FIM DAS MODALS ===============
+
+  // função para saber se o usuário está logado
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -119,13 +103,13 @@ function TelaConfigs() {
             <View style={styleSettings.configSection}>
               <Pressable
                 style={styleSettings.pressableSpace}
-                onPress={handleOpenDados}
+                onPress={() => navigation.navigate("User")}
               >
                 <MCI name="account-circle" size={25} color={"#000"} />
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
                 >
-                  Editar dados
+                  Perfil
                 </Text>
                 <View style={styleSettings.arrowAlign}>
                   <Entypo name="chevron-right" size={18} />
@@ -134,7 +118,7 @@ function TelaConfigs() {
 
               <Pressable
                 style={styleSettings.pressableSpace}
-                onPress={handleOpenSeguranca}
+                // onPress={handleOpenSeguranca}
               >
                 <MCI name="security" size={25} color={"#000"} />
                 <Text
@@ -291,32 +275,6 @@ function TelaConfigs() {
           modal estilo bottom-sheet ///dados
         */}
 
-        <BottomSheet
-          ref={refDados}
-          index={-1}
-          snapPoints={snapPointDados}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <EditarDados />
-        </BottomSheet>
-
-        {/* 
-          modal estilo bottom-sheet ///seguranca
-        */}
-
-        <BottomSheet
-          ref={refSeguranca}
-          index={-1}
-          snapPoints={snapPointSeguranca}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <EditarSeguranca />
-        </BottomSheet>
-
         {/* 
           modal estilo bottom-sheet ///notificações
         */}
@@ -397,6 +355,15 @@ function TelaConfigs() {
 }
 
 function Telas() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log("user: " + user);
+      setUser(user);
+    });
+  }, []);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -406,6 +373,17 @@ function Telas() {
       <Stack.Screen name="Configs" component={TelaConfigs} />
       <Stack.Screen name="Ajuda" component={TelaAjuda} />
       <Stack.Screen name="Feedback" component={TelaFeedback} />
+
+      {/*
+      condicional. se o usuário não estiver logado, mostra a tela de login. 
+      se ele estiver logado, mostra a tela de configs de perfil.
+      */}
+
+      {user ? (
+        <Stack.Screen name="User" component={EditarDados} />
+      ) : (
+        <Stack.Screen name="User" component={TelaLogin} />
+      )}
     </Stack.Navigator>
   );
 }
