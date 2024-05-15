@@ -10,6 +10,7 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
+import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleHome from "../styles/stylesHome";
 import stylePadrao from "../styles/stylesDefault";
@@ -25,17 +26,32 @@ import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/reserva";
 import Carousel from "react-native-reanimated-carousel";
 import * as SplashScreen from "expo-splash-screen";
-import FirebaseConfig from "../FIrebase/FirebaseConfig";
+import dataoperations from "../FIrebase/FirebaseConfig";
 
 function TelaCRUD() {
 
-  const [nPizza, onPizzaChange] = React.useState('');
-  const [pPizza, onPrecoChange] = React.useState('');
-  const [uPizza, onUrlChange] = React.useState('');
-  let preco, titulo, url;
+  const [nPizza, setPizzaChange] = React.useState('');
+  const [pPizza, setPrecoChange] = React.useState(0);
+  const [uPizza, setUrlChange] = React.useState('');
+  const [cmbBox, setcmbBox] = React.useState('');
   
-  function updatedataP() {
-    throw new Error("Function not implemented.");
+  function AddPizza() {
+      if(nPizza === '' || pPizza === '' || uPizza === ''){
+        alert("prencha os campos corretamente!")
+
+        return
+      }else {
+
+      return(dataoperations.updatedataP("pizzaSal", pPizza, nPizza, uPizza))
+      }
+
+      // somente para verificar se os valores recebidos pela função do config são os mesmos da tela CRUD ~~Rafinha
+      const datapizza = {
+          nPizza,
+          pPizza,
+          uPizza,
+      }
+      console.log(datapizza)
   }
 
     return (
@@ -51,34 +67,37 @@ function TelaCRUD() {
           <View style={stylePadrao.searchBar}>
             <View style={stylePadrao.alignInput}>
               <AntDesign name="search1" size={20} color={"#333"} />
-              <Text> Pizza URL:</Text>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                onChangetext = {onUrlChange(onUrlChange)}
-              />
-              <Text> Nome da Pizza:</Text>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                onChangeText = {onPizzaChange(onPizzaChange)}
-                placeholder = "Digite o nome da pizza"
-              />
-              <Text> Preço da Pizza:</Text>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                onChangeText = {onPrecoChange(onPrecoChange)}
-              />
-              <Pressable 
-                onPress = {
-                  preco = pPizza,
-                  titulo = nPizza,
-                  url = uPizza
 
-                  updatedataP(preco, titulo, url)
-                }
+              <Text> Selecione uma Opção: </Text>
+
+              <RNPickerSelect 
+              onValueChange={(value) => setcmbBox(value)} 
+              items={[
+                {label: 'pizzaSal', value: 'pizzaSal'},
+                {label: 'pizzaDoce', value:'pizzaDoce'}
+              ]}/>
+
+              <TextInput
+                selectionColor={"#d69e04"}
+                style={stylePadrao.inputStyle}
+                placeholder = "Copie aqui o URL da imagem"
+                onChangetext = {setUrlChange}
               />
+              <TextInput
+                selectionColor={"#d69e04"}
+                style={stylePadrao.inputStyle}
+                placeholder = "Digite o nome da pizza"
+                onChangeText = {setPizzaChange}
+              />
+              <TextInput
+                selectionColor={"#d69e04"}
+                style={stylePadrao.inputStyle}
+                placeholder= "Digite o preço da pizza"
+                onChangeText = {setPrecoChange}
+              />
+
+              <Pressable onPress = {AddPizza} />
+
             </View>
           </View>
         </View>

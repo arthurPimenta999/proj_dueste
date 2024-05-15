@@ -23,6 +23,7 @@ import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/reserva";
 import Carousel from "react-native-reanimated-carousel";
 import * as SplashScreen from "expo-splash-screen";
+import TelaCRUD from "./telaFirestoreCRUD";
 
 function TelaPrincipal() {
   const width = Dimensions.get("window").width;
@@ -204,6 +205,7 @@ function Telas() {
     >
       <Stack.Screen name="Home" component={TelaPrincipal} />
       <Stack.Screen name="Reserva" component={TelaReserva} />
+      <Stack.Screen name="Reserva" component={TelaCRUD} />
     </Stack.Navigator>
   );
 }

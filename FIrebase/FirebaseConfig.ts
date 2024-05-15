@@ -26,27 +26,29 @@ const db = getFirestore(app);
 import { collection, addDoc, deleteDoc, getDoc, setDoc} from "firebase/firestore"; 
 
 //algumas variaveis para usar posterioremnte ~~ Rafinha
-let pnome, ppreco, pimagem, pingredientes;
-let lnome, lpreco, limagem;
 
-async function updatedataP(colecao: string, id: string, preco: number, titulo: string, url: string): Promise<any> {
+async function updatedataP(id: string, pPizza2: number, nome: string, url: string): Promise<any> {
 
-  const [pURL, setPizzaURL] = useState([]);
-  const [pTitle, setPizzaTitle] = useState([]);
-  const [pPreco, setPizzaPreco] = useState([]);
+  let nome2
   
+  const [pPreco, setpPreco] = React.useState('')
+  const [pTitle, setpTitle] = React.useState('')
+  const [pURL, setpURL] = React.useState('')
+  const [loading, setLoading] = React.useState('')
+
+  // Puxa a tabela de pizzas ja registradas na coleção X
   useEffect(() => {
     const fetchData = async () => {
 
-      const cardRef = doc(db, colecao , id);
+      const cardRef = doc(db, "pizzaCards" , id);
       const cardSnap = await getDoc(cardRef);
 
       // atribuindo os valores obtidos da requisição às variáveis do useState
 
       if (cardSnap.exists()) {
-        setPizzaURL(cardSnap.data().pizzaURL);
-        setPizzaTitle(cardSnap.data().pizzaTitle);
-        setPizzaPreco(cardSnap.data().pizzaPreco);
+        setpURL(cardSnap.data().pizzaURL);
+        setpTitle(cardSnap.data().pizzaTitle);
+        setpPreco(cardSnap.data().pizzaPreco);""
       } else {
         console.log("Documento não encontrado.");
       }
@@ -58,9 +60,9 @@ async function updatedataP(colecao: string, id: string, preco: number, titulo: s
 
   try {
     const docRef = await setDoc(doc(db, colecao, id), {
-        pizzaPreco: {pPreco, preco},
-        pizzaTitle: {pTitle, titulo},
-        pizzaURL: {pURL, url}
+        pizzaPreco: {pPreco, preco: pPizza2},
+        pizzaTitle: {pTitle, titulo: nome},
+        pizzaURL: {pURL, url: url}
     });
     console.log("Documento" + id + "Alterado com sucesso")
   } catch (e) {
@@ -142,5 +144,6 @@ const dataoperations = {
   writedataU,
   readata
 }
+
 
 export default dataoperations;
