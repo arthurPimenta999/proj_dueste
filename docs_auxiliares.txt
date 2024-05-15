@@ -9,6 +9,7 @@ react-native-reanimated-carousel
 react-native-gesture-handler
 react-native-ui-datepicker
 react-native-elements
+react-native-switch
 react-navigation
 react-navigation/material-bottom-tabs
 react-navigation/stack

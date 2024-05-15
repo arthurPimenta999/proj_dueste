@@ -19,8 +19,7 @@ import TelaHistorico from "./sub_config/configHistorico";
 import TelaSobre from "./sub_config/configSobre";
 import TelaFeedback from "./sub_config/configFeedback";
 import TelaAjuda from "./sub_config/configAjuda";
-import { TelaLogin, auth, fetchLoginDados } from "../apis/firebaseConfig";
-import { fetchLoginSeguranca } from "../apis/firebaseConfig";
+import { TelaLogin, auth } from "../apis/firebaseConfig";
 import EditarDados from "./sub_config/configDados";
 import { User, onAuthStateChanged } from "firebase/auth";
 
@@ -124,7 +123,7 @@ function TelaConfigs() {
                 <Text
                   style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
                 >
-                  Segurança e Login
+                  Segurança
                 </Text>
                 <View style={styleSettings.arrowAlign}>
                   <Entypo name="chevron-right" size={18} />

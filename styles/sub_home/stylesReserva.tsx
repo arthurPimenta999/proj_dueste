@@ -10,6 +10,12 @@ const styleReserva = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
+
+  // alinhar datetimepicker
+
+  datepickerAlign: {
+    marginHorizontal: width * 0.025,
+  },
 });
 
 export default styleReserva;
