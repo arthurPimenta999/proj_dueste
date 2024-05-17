@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,17 @@ import {
   TextInput,
   Pressable,
   KeyboardAvoidingView,
+  Button,
+  Alert,
 } from "react-native";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  multiFactor,
+  PhoneAuthProvider,
+  signInWithCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -28,6 +33,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FA from "react-native-vector-icons/FontAwesome";
 import styleLogin from "../styles/stylesLogin";
+import styleSeguranca from "../styles/sub_config/styleSeguranca";
+import Recaptcha from "react-native-recaptcha-that-works";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -40,11 +47,11 @@ const firebaseConfig = {
   measurementId: "G-BH2VJ1FDZN",
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 // ========== funções exemplo pra ler/gravar dados ==========
 
@@ -190,6 +197,7 @@ export function TelaLogin() {
         <View>
           <Text style={styleLogin.inputTitle}>Email</Text>
           <TextInput
+            keyboardType="email-address"
             spellCheck={false}
             style={styleLogin.inputStyle}
             onChangeText={(text) => setEmail(text)}
@@ -257,31 +265,33 @@ export function TelaLogin() {
 
       {/* facebook */}
 
-      <View style={styleLogin.socialAlign}>
-        <Pressable>
+      <Pressable>
+        <View style={styleLogin.socialAlign}>
           <View style={styleLogin.facebookButton}>
             <FA name="facebook-square" size={40} color={"#fff"} />
             <Text style={styleLogin.loginTextWhite}>Entrar com Facebook</Text>
           </View>
-        </Pressable>
-      </View>
+        </View>
+      </Pressable>
 
       {/* google */}
 
-      <View>
-        <Pressable>
+      <Pressable>
+        <View>
           <View style={styleLogin.googleButton}>
             <FA name="google" size={40} color={"#000"} />
             <Text style={styleLogin.loginTextBlack}>Entrar com Google</Text>
           </View>
-        </Pressable>
-      </View>
+        </View>
+      </Pressable>
     </SafeAreaView>
   );
 }
 
-export function Username() {
+export function UserEmail() {
   const [email, setEmail] = useState<string | null>(null);
+
+  // retorna email do usuario em formato de string.
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -292,7 +302,67 @@ export function Username() {
     return () => unsubscribe();
   }, []);
 
-  return <Text>Email Cadastrado: {email}</Text>;
+  return email;
+}
+
+export function VerifyEmail() {
+  const [verificarEmail, setVerificarEmail] = useState<string | null>(null);
+
+  // função que pega o telefone cadastrado do database.
+  // SE o usuario tem um telefone, retorna string com telefone.
+  // SE o usuario NAO tem um telefone, retorna string 'nenhum nº cadastrado.
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setVerificarEmail(
+        user && user.emailVerified
+          ? "Email verificado. Autenticação de Dois Fatores Permitida."
+          : "Email não verificado. Autenticação de Dois Fatores não permitida."
+      );
+    });
+
+    // Limpar a inscrição ao desmontar
+    return () => unsubscribe();
+  }, []);
+
+  return verificarEmail;
+}
+
+export function VerifyEmailButton() {
+  const [isCadastrado, setIsCadastrado] = useState("#fcba04");
+
+  // função que pega o telefone cadastrado do database.
+  // SE o usuario tem um telefone, retorna string com telefone.
+  // SE o usuario NAO tem um telefone, retorna string 'nenhum nº cadastrado.
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const telefone = user.phoneNumber;
+        if (telefone) {
+          setIsCadastrado("#4caf50");
+        }
+      }
+    });
+
+    // Limpar a inscrição ao desmontar
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <View style={styleSeguranca.telefoneBtnAlign}>
+      <Pressable>
+        <View
+          style={[
+            styleSeguranca.telefoneBtnStyle,
+            { backgroundColor: isCadastrado },
+          ]}
+        >
+          <Text style={styleSeguranca.telefoneBtnFont}>Verificar Email</Text>
+        </View>
+      </Pressable>
+    </View>
+  );
 }
 
 export default PizzasSalgadas;

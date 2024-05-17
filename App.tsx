@@ -17,6 +17,8 @@ import {
 } from "@expo-google-fonts/montserrat";
 import AppLoading from "expo-app-loading";
 import EditarDados from "./telas/sub_config/configDados";
+import EditarSeguranca from "./telas/sub_config/configSeguranca";
+import { TelaTeste } from "./telas/teste";
 
 //=========== app ==========
 
@@ -42,7 +44,7 @@ export default function App() {
       <NavigationContainer>
         <MyTabs />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor="transparent" />
     </SafeAreaProvider>
   );
 }
@@ -74,7 +76,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Configurações"
+      initialRouteName="Início"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}
@@ -93,20 +95,7 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Teste"
-        component={EditarDados}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicon
-              name="pizza"
-              size={23}
-              style={styles.icons}
-              color={focused ? "black" : "#333"}
-            />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Início"
         component={TelaPrincipal}

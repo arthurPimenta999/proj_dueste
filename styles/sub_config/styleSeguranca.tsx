@@ -1,78 +1,87 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
+import { CadastrarNumero } from "../../apis/firebaseConfig";
 
 const { width, height } = Dimensions.get("window");
 
 const styleSeguranca = StyleSheet.create({
-  // configs universais de seção
+  // configs universais
 
   container: {
-    flex: 1,
     marginHorizontal: width * 0.05,
   },
-  titleText: {
+  generalFont600: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 23,
+  },
+  generalFont400: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 16,
+  },
+
+  // campo com info do usuário.
+
+  databoxStyle: {
+    backgroundColor: "#ccc",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: height * 0.01,
+    borderRadius: 15,
+  },
+
+  // botão pra cadastrar telefone
+
+  telefoneBtnAlign: {
+    marginTop: height * 0.01,
+    alignItems: "center",
+  },
+  telefoneBtnStyle: {
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: "#fcba04",
+  },
+  telefoneBtnFont: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 15,
+  },
+
+  // icone de info de autenticação
+
+  authIconAlign: {
+    flexDirection: "row",
+    gap: width * 0.35,
+    alignItems: "center",
+  },
+
+  // alinhar margem do conteudo da modal de info.
+
+  modalContentAlign: {
+    marginTop: height * 0.0025,
+    marginHorizontal: width * 0.08,
+  },
+  modalContentStyle: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  modalTitleAlign: {
+    marginBottom: height * 0.01,
+    alignItems: "center",
+  },
+  modalTitleStyle: {
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 18,
   },
 
-  sectionAlign: {
-    alignItems: "flex-start",
-    justifyContent: "center",
-    marginBottom: height * 0.03,
-  },
+  // switch 2FA
 
-  sectionTitle: {
-    fontFamily: "Montserrat_600SemiBold",
-    fontSize: 20,
-  },
-
-  sectionContentText2: {
-    fontSize: 20,
-    backgroundColor: "#dcdcdc",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 7,
-  },
-
-  sectionContentText: {
-    backgroundColor: "#dcdcdc",
-    padding: 10,
-    borderRadius: 7,
-  },
-  sectionContentFont: {
-    fontFamily: "Montserrat_400Regular",
-    fontSize: 15,
-  },
-  sectionContent: {
-    backgroundColor: "#aaa",
-  },
-
-  iconAlign: {
-    flexDirection: "row",
-    gap: 5,
+  switchRow: {
+    position: "absolute",
     alignItems: "center",
+    flexDirection: "row",
+    gap: width * 0.3,
   },
-
-  // btn senha
-
-  senhaButton: {
-    backgroundColor: "#fcba03",
-    borderRadius: 8,
-    padding: 10,
-  },
-  sideText: {
-    fontFamily: "Montserrat_400Regular",
-    fontSize: 15,
-  },
-  sideMargin: {
-    marginHorizontal: width * 0.01,
-  },
-
-  // telefone verificado?
-
-  telefoneButton: {
-    backgroundColor: "#33b249",
-    borderRadius: 8,
-    padding: 10,
+  switchAlign: {
+    marginHorizontal: width * 0.05,
   },
 });
 
