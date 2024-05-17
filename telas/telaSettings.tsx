@@ -22,6 +22,7 @@ import TelaAjuda from "./sub_config/configAjuda";
 import { TelaLogin, auth } from "../apis/firebaseConfig";
 import EditarDados from "./sub_config/configDados";
 import { User, onAuthStateChanged } from "firebase/auth";
+import EditarSeguranca from "./sub_config/configSeguranca";
 
 function TelaConfigs() {
   const navigation = useNavigation();
@@ -117,7 +118,7 @@ function TelaConfigs() {
 
               <Pressable
                 style={styleSettings.pressableSpace}
-                // onPress={handleOpenSeguranca}
+                onPress={() => navigation.navigate("Seguranca")}
               >
                 <MCI name="security" size={25} color={"#000"} />
                 <Text
@@ -382,6 +383,12 @@ function Telas() {
         <Stack.Screen name="User" component={EditarDados} />
       ) : (
         <Stack.Screen name="User" component={TelaLogin} />
+      )}
+
+      {user ? (
+        <Stack.Screen name="Seguranca" component={EditarSeguranca} />
+      ) : (
+        <Stack.Screen name="Seguranca" component={TelaLogin} />
       )}
     </Stack.Navigator>
   );

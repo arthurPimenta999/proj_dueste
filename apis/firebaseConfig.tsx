@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,17 @@ import {
   TextInput,
   Pressable,
   KeyboardAvoidingView,
+  Button,
+  Alert,
 } from "react-native";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendSignInLinkToEmail,
+  multiFactor,
+  PhoneAuthProvider,
+  signInWithCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -30,6 +34,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FA from "react-native-vector-icons/FontAwesome";
 import styleLogin from "../styles/stylesLogin";
 import styleSeguranca from "../styles/sub_config/styleSeguranca";
+import Recaptcha from "react-native-recaptcha-that-works";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -192,6 +197,7 @@ export function TelaLogin() {
         <View>
           <Text style={styleLogin.inputTitle}>Email</Text>
           <TextInput
+            keyboardType="email-address"
             spellCheck={false}
             style={styleLogin.inputStyle}
             onChangeText={(text) => setEmail(text)}
