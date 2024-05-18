@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
 
-const { width } = Dimensions.get("window");
-const { height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const marginOS = Platform.OS === "android" ? height * 0.03 : height * 0.01;
 const marginTopOS = Platform.OS === "android" ? height * 0.04 : height * 0;
@@ -86,6 +85,62 @@ const stylePadrao = StyleSheet.create({
     fontSize: 18,
     height: height * 0.025,
     marginLeft: width * 0.02,
+  },
+
+  // modal
+
+  container: {
+    flex: 1,
+    marginHorizontal: width * 0.1,
+  },
+  titleAlign: {
+    marginVertical: height * 0.01,
+    alignItems: "center",
+  },
+  title: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 20,
+  },
+  contentAlign: {
+    marginTop: height * 0.025,
+    alignItems: "center",
+  },
+
+  // botões amarelos
+
+  btn: {
+    width: 160,
+    height: 60,
+    backgroundColor: "#fcba03",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  alignBtn: {
+    flexDirection: "row",
+    gap: 25,
+  },
+
+  // titulo geral das telas. canto superior esquerdo.
+
+  generalTitleAlign: {
+    marginVertical: height * 0.025,
+    marginHorizontal: width * 0.05,
+  },
+  generalTitleStyle: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 30,
   },
 });
 

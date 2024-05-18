@@ -1,62 +1,40 @@
-import { StyleSheet, Dimensions, Platform } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
 const styleEditar = StyleSheet.create({
   container: {
-    marginHorizontal: width * 0.07,
     flex: 1,
+    marginHorizontal: width * 0.05,
   },
-  optionAlign: {
-    flexDirection: "row",
-    gap: 7,
-    alignItems: "center",
-  },
-  optionTitle: {
+  generalFont600: {
     fontFamily: "Montserrat_600SemiBold",
-    fontSize: 20,
+    fontSize: 23,
   },
-  nomeStyle: {
+  generalFont400: {
     fontFamily: "Montserrat_400Regular",
     fontSize: 16,
   },
-  pencilAlign: {
-    marginLeft: width * 0.2,
+
+  // caixas com dados do usuário
+
+  databoxAlign: {
+    marginVertical: height * 0.01,
   },
-
-  // facebook
-
-  facebookStyle: {
-    marginVertical: height * 0.025,
-    backgroundColor: "#1877F2",
+  databoxStyle: {
+    backgroundColor: "#ccc",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: height * 0.01,
     borderRadius: 15,
   },
 
-  alignIconRow: {
-    flexDirection: "row",
-    gap: 15,
-    alignItems: "center",
-  },
-  FBicon: {
-    color: "#fff",
-    paddingVertical: "5%",
-    paddingLeft: "5%",
-  },
-  connectText: {
-    color: "#fff",
-    fontFamily: "Montserrat_600SemiBold",
-    fontSize: 20,
-    maxWidth: "80%",
-  },
+  // alinhar botão de sair
 
-  // recomendações
-
-  recomendaAlign: {
-    flexDirection: "row",
-  },
-  recomendaText: {
-    fontFamily: "Montserrat_400Regular",
-    maxWidth: "90%",
+  alignSair: {
+    position: "absolute",
+    marginHorizontal: width * 0.25,
+    marginTop: height * 0.7,
   },
 });
 

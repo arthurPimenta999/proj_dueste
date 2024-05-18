@@ -15,12 +15,28 @@ import TelaCRUD from "./telas/telaFirestoreCRUD";
 //=========== app ==========
 
 export default function App() {
+  {
+    /*
+  useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
+  só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
+  ~Stardust
+  */
+  }
+
+  let [fontsLoaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <SafeAreaProvider style={styles.container}>
       <NavigationContainer>
         <MyTabs />
       </NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor="transparent" />
     </SafeAreaProvider>
   );
 }
@@ -71,6 +87,7 @@ function MyTabs() {
           ),
         }}
       />
+
       <Tab.Screen
         name="Início"
         component={TelaPrincipal}
