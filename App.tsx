@@ -10,6 +10,7 @@ import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTheme } from "react-native-paper";
+import TelaCRUD from "./telas/telaFirestoreCRUD";
 
 //=========== app ==========
 
@@ -51,7 +52,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Início"
+      initialRouteName="CRUD"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}
@@ -87,6 +88,20 @@ function MyTabs() {
       <Tab.Screen
         name="Configurações"
         component={TelaConfigs}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicon
+              name="settings"
+              size={23}
+              style={styles.icons}
+              color={focused ? "black" : "#333"}
+            />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="CRUD"
+        component={TelaCRUD}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicon

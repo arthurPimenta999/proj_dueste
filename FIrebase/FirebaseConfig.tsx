@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { FieldValue, arrayUnion, doc, getFirestore, updateDoc } from "firebase/firestore";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://support.google.com/firebase/answer/7015592
+
 const firebaseConfig = {
     apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
   authDomain: "projetodueste.firebaseapp.com",
@@ -21,50 +20,22 @@ const app = initializeApp(firebaseConfig);
 
 
 // Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 import { collection, addDoc, deleteDoc, getDoc, setDoc} from "firebase/firestore"; 
+import { Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
+import stylePadrao from "../styles/stylesDefault";
 
 //algumas variaveis para usar posterioremnte ~~ Rafinha
 
-async function updatedataP(id: string, pPizza2: number, nome: string, url: string): Promise<any> {
-
-  let nome2
-  
-  const [pPreco, setpPreco] = React.useState('')
-  const [pTitle, setpTitle] = React.useState('')
-  const [pURL, setpURL] = React.useState('')
-  const [loading, setLoading] = React.useState('')
-
-  // Puxa a tabela de pizzas ja registradas na coleção X
-  useEffect(() => {
-    const fetchData = async () => {
-
-      const cardRef = doc(db, "pizzaCards" , id);
-      const cardSnap = await getDoc(cardRef);
-
-      // atribuindo os valores obtidos da requisição às variáveis do useState
-
-      if (cardSnap.exists()) {
-        setpURL(cardSnap.data().pizzaURL);
-        setpTitle(cardSnap.data().pizzaTitle);
-        setpPreco(cardSnap.data().pizzaPreco);""
-      } else {
-        console.log("Documento não encontrado.");
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
+export async function UpdatedataP(){
   try {
-    const docRef = await setDoc(doc(db, colecao, id), {
-        pizzaPreco: {pPreco, preco: pPizza2},
-        pizzaTitle: {pTitle, titulo: nome},
-        pizzaURL: {pURL, url: url}
+    const docRef = await updateDoc(doc(db, "pizzaCards", "pizzaSal"), {
+      pizzaPreco: arrayUnion(pPizza),
+      pizzaTitle: arrayUnion(nPizza),
+      pizzaURL: arrayUnion(uPizza)
     });
-    console.log("Documento" + id + "Alterado com sucesso")
+    return ([docRef, console.log("Documento Alterado com sucesso")]);
   } catch (e) {
     console.error("Erro ao alterar documento:", e);
   }
@@ -107,7 +78,7 @@ async function updatedataU(id: string, unome: string, tel: number, email: string
 
 
 //Deletar QUALQUER documento do BD ~~Rafinha
-async function deletedata(colecao: string, id: string) {
+async function DeleteData(colecao: string, id: string) {
     try {
       const docRef = await deleteDoc(doc(db,colecao, id));
       console.log("Documento deletado com sucesso");
@@ -118,7 +89,7 @@ async function deletedata(colecao: string, id: string) {
 
 
 //Ler qualquer documetno do BD ~~Rafinha
-async function readata(colecao: string, id: string,) {
+async function ReadData(colecao: string, id: string,) {
 
   const docRef = doc(db, colecao, id);
   const docSnap = await getDoc(docRef)
@@ -136,14 +107,9 @@ async function readata(colecao: string, id: string,) {
   }
 }
 
-//junção de todas as opreções
-const dataoperations = {
-  deletedata,
+
+
+export default [DeleteData,
   updatedataU,
-  updatedataP,
   writedataU,
-  readata
-}
-
-
-export default dataoperations;
+  ReadData];

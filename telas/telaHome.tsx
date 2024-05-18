@@ -205,7 +205,6 @@ function Telas() {
     >
       <Stack.Screen name="Home" component={TelaPrincipal} />
       <Stack.Screen name="Reserva" component={TelaReserva} />
-      <Stack.Screen name="Reserva" component={TelaCRUD} />
     </Stack.Navigator>
   );
 }

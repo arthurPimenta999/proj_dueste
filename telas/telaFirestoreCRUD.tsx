@@ -3,8 +3,7 @@ import {
   View,
   Text,
   TextInput,
-  AntDesign,
-  Pressable,
+    Pressable,
   Image,
   useWindowDimensions,
   Platform,
@@ -12,100 +11,93 @@ import {
 } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from "react-native-safe-area-context";
-import styleHome from "../styles/stylesHome";
 import stylePadrao from "../styles/stylesDefault";
-import { useFonts } from "expo-font";
-import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
-import Feather from "react-native-vector-icons/Feather";
-import FA5 from "react-native-vector-icons/FontAwesome5";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import logoDueste from "../components/images/duesteLogo.png";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import dataoperations, { db } from "../FIrebase/FirebaseConfig";
+import { UpdatedataP } from "../FIrebase/FirebaseConfig";
 import AppLoading from "expo-app-loading";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
-import TelaReserva from "./sub_home/reserva";
-import Carousel from "react-native-reanimated-carousel";
-import * as SplashScreen from "expo-splash-screen";
-import dataoperations from "../FIrebase/FirebaseConfig";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+
+
 
 function TelaCRUD() {
 
-  const [nPizza, setPizzaChange] = React.useState('');
-  const [pPizza, setPrecoChange] = React.useState(0);
-  const [uPizza, setUrlChange] = React.useState('');
-  const [cmbBox, setcmbBox] = React.useState('');
-  
-  function AddPizza() {
-      if(nPizza === '' || pPizza === '' || uPizza === ''){
-        alert("prencha os campos corretamente!")
-
-        return
-      }else {
-
-      return(dataoperations.updatedataP("pizzaSal", pPizza, nPizza, uPizza))
-      }
-
-      // somente para verificar se os valores recebidos pela função do config são os mesmos da tela CRUD ~~Rafinha
-      const datapizza = {
-          nPizza,
-          pPizza,
-          uPizza,
-      }
-      console.log(datapizza)
+  async function UpdatedataP(){
+    if(pPizza === ''|| nPizza === ''||  uPizza === '' ){
+      alert("Preencha todos os dados antes de continuar.")
+    }else{
+      await updateDoc(doc(db, "pizzaCards", "pizzaSal"), {
+        pizzaPreco: arrayUnion(pPizza),
+        pizzaTitle: arrayUnion(nPizza),
+        pizzaURL: arrayUnion(uPizza)
+      });
+      console.log("Documento Alterado com sucesso");
+      alert("Documento alterado com sucesso")
+    }
+      
   }
 
-    return (
+  const [nPizza, setPizzaChange] = useState('');
+  const [pPizza, setPrecoChange] = useState('');
+  const [uPizza, setUrlChange] = useState('');
+  const [cmbBox, setcmbBox] = useState('');
 
-      
+  function AddPizzaPress(){
+    if(nPizza === '' || uPizza === '' || pPizza === '' ){
+      alert("prencha os campos corretamente!")
+    }else {
 
-      <SafeAreaView>
-        <View style={stylePadrao.textTopAlign}>
-          <Text style={stylePadrao.textTop}>Adicionar Dados</Text>
-        </View>
+    return(UpdatedataP)
+    }
+  }
 
-        <View style={stylePadrao.searchBarAlign}>
-          <View style={stylePadrao.searchBar}>
-            <View style={stylePadrao.alignInput}>
-              <AntDesign name="search1" size={20} color={"#333"} />
+  return (
+    <SafeAreaView>
+      <View style={stylePadrao.textTopAlign}>
+        <Text style={stylePadrao.textTop}>Adicionar Dados</Text>
+      </View>
 
-              <Text> Selecione uma Opção: </Text>
+      <View style={stylePadrao.searchBarAlign}>
+        <View >
 
-              <RNPickerSelect 
-              onValueChange={(value) => setcmbBox(value)} 
-              items={[
-                {label: 'pizzaSal', value: 'pizzaSal'},
-                {label: 'pizzaDoce', value:'pizzaDoce'}
-              ]}/>
+            <AntDesign name="search1" size={20} color={"#333"} />
 
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                placeholder = "Copie aqui o URL da imagem"
-                onChangetext = {setUrlChange}
-              />
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                placeholder = "Digite o nome da pizza"
-                onChangeText = {setPizzaChange}
-              />
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.inputStyle}
-                placeholder= "Digite o preço da pizza"
-                onChangeText = {setPrecoChange}
-              />
+            <Text> Selecione uma Opção: </Text>
 
-              <Pressable onPress = {AddPizza} />
+            {/* <RNPickerSelect 
+            onValueChange={(value) => setcmbBox(value)} 
+            items={[
+              {label: 'pizzaSal', value: 'pizzaSal'},
+              {label: 'pizzaDoce', value:'pizzaDoce'}
+            ]}/> */}
 
-            </View>
+            <TextInput
+              selectionColor={"#d69e04"}
+              style={stylePadrao.searchBar}
+              placeholder = "Copie aqui o URL da imagem"
+              onChangeText = {setUrlChange}
+            />
+            <TextInput
+              selectionColor={"#d69e04"}
+              style={stylePadrao.searchBar}
+              placeholder = "Digite o nome da pizza"
+              onChangeText = {setPizzaChange}
+            />
+            <TextInput
+              selectionColor={"#d69e04"}
+              style={stylePadrao.searchBar}
+              placeholder= "Digite o preço da pizza"
+              onChangeText = {setPrecoChange}
+            />
+
+            <Pressable onPress={UpdatedataP}> 
+              <Text> Adicionar Pizza! </Text>
+            </Pressable>
           </View>
-        </View>
+      </View>
+    </SafeAreaView>
 
-
-      </SafeAreaView>
-
-    )
+  )
 }
 
 export default TelaCRUD;
