@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -16,7 +16,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import dataoperations, { db } from "../FIrebase/FirebaseConfig";
 import { UpdatedataP } from "../FIrebase/FirebaseConfig";
 import AppLoading from "expo-app-loading";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { Firestore, arrayUnion, doc, updateDoc, onSnapshot  } from "firebase/firestore";
+import { finishScreenTransition } from "react-native-reanimated";
 
 
 
@@ -41,21 +42,37 @@ function TelaCRUD() {
   const [pPizza, setPrecoChange] = useState('');
   const [uPizza, setUrlChange] = useState('');
   const [cmbBox, setcmbBox] = useState('');
+  const [cmbValue, setcmbValue] = useState('');
 
-  function AddPizzaPress(){
-    if(nPizza === '' || uPizza === '' || pPizza === '' ){
-      alert("prencha os campos corretamente!")
-    }else {
 
-    return(UpdatedataP)
+  useEffect(() => {
+
+    async function opcao() {
+
+      try{
+        const getopcao = await onSnapshot(db, collection('pizzaCards'), )
+        const opcaoescolhida = getopcao.docs.map(doc => ({
+          nome: doc.data().label,
+          value: doc.data().value
+        }));
+        setcmbBox(opcaoescolhida);        
+      } catch (error) {
+        console.error('Erro ao buscar dados no Firestore:', error);
+      }
+      
     }
-  }
+  })
 
   return (
     <SafeAreaView>
       <View style={stylePadrao.textTopAlign}>
         <Text style={stylePadrao.textTop}>Adicionar Dados</Text>
       </View>
+
+      <RNPickerSelect onValueChange ={(value) => setcmbBox(value)} 
+      Items = {cmbBox}
+      value = {cmbValue}
+      />
 
       <View style={stylePadrao.searchBarAlign}>
         <View >

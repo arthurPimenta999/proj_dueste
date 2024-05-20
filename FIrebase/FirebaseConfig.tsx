@@ -28,7 +28,7 @@ import stylePadrao from "../styles/stylesDefault";
 
 //algumas variaveis para usar posterioremnte ~~ Rafinha
 
-export async function UpdatedataP(){
+async function UpdatedataP(pPizza: string, nPizza: string, uPizza: string){
   try {
     const docRef = await updateDoc(doc(db, "pizzaCards", "pizzaSal"), {
       pizzaPreco: arrayUnion(pPizza),
@@ -109,7 +109,9 @@ async function ReadData(colecao: string, id: string,) {
 
 
 
+
 export default [DeleteData,
   updatedataU,
   writedataU,
-  ReadData];
+  UpdatedataP
+];
