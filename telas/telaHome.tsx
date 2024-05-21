@@ -18,7 +18,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import TelaReserva from "./sub_home/telaReserva";
 import Carousel from "react-native-reanimated-carousel";
+<<<<<<< HEAD
+import * as SplashScreen from "expo-splash-screen";
+import TelaCRUD from "./telaFirestoreCRUD";
+=======
 import TelaAjuda from "./sub_config/configAjuda";
+>>>>>>> 2b989ca57479edf8fdc54e2bcaad4ad448f2564c
 
 function TelaPrincipal() {
   const width = Dimensions.get("window").width;

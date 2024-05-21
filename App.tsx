@@ -73,7 +73,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Início"
+      initialRouteName="CRUD"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}
@@ -110,6 +110,20 @@ function MyTabs() {
       <Tab.Screen
         name="Configurações"
         component={TelaConfigs}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Ionicon
+              name="settings"
+              size={23}
+              style={styles.icons}
+              color={focused ? "black" : "#333"}
+            />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="CRUD"
+        component={TelaCRUD}
         options={{
           tabBarIcon: ({ focused }) => (
             <Ionicon
