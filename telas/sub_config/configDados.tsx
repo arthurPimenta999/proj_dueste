@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, Pressable } from "react-native";
 import styleEditar from "../../styles/sub_config/styleDados";
 import stylePadrao from "../../styles/stylesDefault";
@@ -14,18 +14,18 @@ function EditarDados() {
 
       <View style={styleEditar.container}>
         <View style={styleEditar.databoxAlign}>
-          <Text style={styleEditar.generalFont600}>Nome de usuário:</Text>
+          <Text style={stylePadrao.generalFont600}>Nome de usuário:</Text>
           <View style={styleEditar.databoxStyle}>
-            <Text style={styleEditar.generalFont400}>
+            <Text style={stylePadrao.generalFont400}>
               <UserEmail />
             </Text>
           </View>
         </View>
 
         <View style={styleEditar.databoxAlign}>
-          <Text style={styleEditar.generalFont600}>Email cadastrado:</Text>
+          <Text style={stylePadrao.generalFont600}>Email cadastrado:</Text>
           <View style={styleEditar.databoxStyle}>
-            <Text style={styleEditar.generalFont400}>
+            <Text style={stylePadrao.generalFont400}>
               <UserEmail />
             </Text>
           </View>

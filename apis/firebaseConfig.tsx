@@ -62,7 +62,7 @@ async function readData() {
   });
 }
 
-async function writeData() {
+export async function writeData() {
   try {
     const docRef = await addDoc(collection(db, "oirsrs"), {
       first: "Allan",

@@ -16,9 +16,6 @@ import {
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
 import AppLoading from "expo-app-loading";
-import EditarDados from "./telas/sub_config/configDados";
-import EditarSeguranca from "./telas/sub_config/configSeguranca";
-import { TelaTeste } from "./telas/teste";
 
 //=========== app ==========
 

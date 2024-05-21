@@ -7,14 +7,6 @@ const styleEditar = StyleSheet.create({
     flex: 1,
     marginHorizontal: width * 0.05,
   },
-  generalFont600: {
-    fontFamily: "Montserrat_600SemiBold",
-    fontSize: 23,
-  },
-  generalFont400: {
-    fontFamily: "Montserrat_400Regular",
-    fontSize: 16,
-  },
 
   // caixas com dados do usuário
 
