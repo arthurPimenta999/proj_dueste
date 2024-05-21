@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import stylePadrao from "../../styles/stylesDefault";
-import styleDarkMode from "../../styles/sub_config/stylesDarkMode";
 import DropDownPicker from "react-native-dropdown-picker";
 
 function DarkModeModal() {

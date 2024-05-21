@@ -36,11 +36,6 @@ function TelaCardapio() {
       </Pressable>
 
       <ScrollView style={stylePadrao.scrollStyle}>
-        {/*
-      barra de pesquisa da página de configurações
-      ~Stardust
-      */}
-
         {/* cartões de sabores e itens no cardápio */}
         <View style={styleCardapio.pizzaTitleAlign}>
           <Text style={styleCardapio.pizzaTitleStyle}>Pizzas salgadas</Text>

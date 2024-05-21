@@ -25,6 +25,17 @@ const stylePadrao = StyleSheet.create({
     borderTopRightRadius: 25,
   },
 
+  // styles de textos definidos por padrão
+
+  generalFont600: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 23,
+  },
+  generalFont400: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 16,
+  },
+
   // titulo da pagina
 
   textTopAlign: {
@@ -141,6 +152,37 @@ const stylePadrao = StyleSheet.create({
   generalTitleStyle: {
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 30,
+  },
+
+  // modal estilo bottomsheet
+
+  modalStyle: {
+    backgroundColor: "rgba(52, 52, 52, 0.0)",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 100,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 24,
+    elevation: 10,
+  },
+  modalContentAlign: {
+    marginTop: height * 0.0025,
+    marginHorizontal: width * 0.08,
+  },
+  modalContentStyle: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  modalTitleAlign: {
+    marginBottom: height * 0.01,
+    alignItems: "center",
+  },
+  modalTitleStyle: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 18,
   },
 });
 
