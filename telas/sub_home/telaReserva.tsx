@@ -44,9 +44,13 @@ function TelaReserva() {
     const dataUrl = encodeURIComponent(dataString);
     const qtdPessoasUrl = encodeURIComponent(qtdPessoas.toString());
 
-    Linking.openURL(
-      `https://api.whatsapp.com/send?phone=5515996280197&text=%5BRESERVA%20VIA%20APP%5D%0A%0ANome%3A%20${nomeUrl}%0AData%3A%20${dataUrl}%0AQuantidade%20de%20pessoas%3A%20${qtdPessoasUrl}`
-    );
+    if (qtdPessoas == 0) {
+      alert("Selecione a quantidade de pessoas.");
+    } else {
+      Linking.openURL(
+        `https://api.whatsapp.com/send?phone=5515996280197&text=%5BRESERVA%20VIA%20APP%5D%0A%0ANome%3A%20${nomeUrl}%0AData%3A%20${dataUrl}%0AQuantidade%20de%20pessoas%3A%20${qtdPessoasUrl}`
+      );
+    }
   };
 
   return (
@@ -82,6 +86,14 @@ function TelaReserva() {
             date={data.toDate()}
             onChange={dataFormatada}
             locale={"pt-br"}
+            selectedItemColor="#d69e04"
+            headerTextStyle={{
+              fontSize: 20,
+              fontFamily: "Montserrat_400Regular",
+            }}
+            displayFullDays={true}
+            calendarTextStyle={{ fontSize: 16 }}
+            headerButtonsPosition="left"
           />
         </View>
 
@@ -116,10 +128,6 @@ function TelaReserva() {
       </ScrollView>
     </SafeAreaView>
   );
-}
-
-function ReciboFinal() {
-  return <></>;
 }
 
 export default TelaReserva;

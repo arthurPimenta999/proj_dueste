@@ -93,13 +93,13 @@ function EditarSeguranca() {
           style={styleSettings.modalStyle}
           backgroundStyle={{ backgroundColor: "#fafafa" }}
         >
-          <View style={styleSeguranca.modalContentAlign}>
-            <View style={styleSeguranca.modalTitleAlign}>
-              <Text style={styleSeguranca.modalTitleStyle}>
+          <View style={stylePadrao.modalContentAlign}>
+            <View style={stylePadrao.modalTitleAlign}>
+              <Text style={stylePadrao.modalTitleStyle}>
                 Autenticação de Dois Fatores
               </Text>
             </View>
-            <Text style={styleSeguranca.modalContentStyle}>
+            <Text style={stylePadrao.modalContentStyle}>
               A autenticação de dois fatores (2FA) adiciona uma camada extra de
               segurança à sua conta. Após inserir sua senha, um segundo fator -
               geralmente um código enviado ao seu email - é necessário para

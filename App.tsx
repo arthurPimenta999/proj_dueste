@@ -10,7 +10,12 @@ import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useTheme } from "react-native-paper";
-import TelaCRUD from "./telas/telaFirestoreCRUD";
+import { useFonts } from "@expo-google-fonts/montserrat";
+import {
+  Montserrat_400Regular,
+  Montserrat_600SemiBold,
+} from "@expo-google-fonts/montserrat";
+import AppLoading from "expo-app-loading";
 
 //=========== app ==========
 
