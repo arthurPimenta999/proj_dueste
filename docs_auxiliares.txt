@@ -13,7 +13,7 @@ react-native-switch
 react-navigation
 react-navigation/material-bottom-tabs
 react-navigation/stack
-expo-splash-screen
+expo-app-loading
 expo-dev-client
 expo-google-fonts
 expo-fonts
@@ -23,6 +23,7 @@ npm@10.5.0
 @gorhom/bottom-sheet
 firebase
 firebase/firestore
+firebase/auth
 
 
 ===========================================================
