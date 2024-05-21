@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,17 +6,12 @@ import {
   TextInput,
   Pressable,
   KeyboardAvoidingView,
-  Button,
-  Alert,
 } from "react-native";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  multiFactor,
-  PhoneAuthProvider,
-  signInWithCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -34,7 +29,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FA from "react-native-vector-icons/FontAwesome";
 import styleLogin from "../styles/stylesLogin";
 import styleSeguranca from "../styles/sub_config/styleSeguranca";
-import Recaptcha from "react-native-recaptcha-that-works";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -113,7 +107,7 @@ function PizzasSalgadas() {
 
   const pizzasFiltradas = pizzaTitle
     .map(String)
-    .filter((title) => title.startsWith(busca));
+    .filter((title) => title.toLowerCase().includes(busca.toLowerCase()));
 
   return (
     <View>
@@ -131,6 +125,11 @@ function PizzasSalgadas() {
           </View>
         </View>
       </View>
+
+      <View style={styleCardapio.pizzaTitleAlign}>
+        <Text style={styleCardapio.pizzaTitleStyle}>Pizzas salgadas</Text>
+      </View>
+
       {pizzasFiltradas.map((title, index) => (
         <View style={styleCardapio.styleCard}>
           <Image
@@ -153,7 +152,6 @@ export function TelaLogin() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
-  const autenticacao = auth;
 
   const login = async () => {
     setLoading(true);

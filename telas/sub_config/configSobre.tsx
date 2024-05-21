@@ -7,7 +7,7 @@ function TelaSobre() {
   return (
     <View style={stylePadrao.container}>
       <View style={stylePadrao.titleAlign}>
-        <Text style={stylePadrao.title}>Editar dados</Text>
+        <Text style={stylePadrao.title}>Sobre</Text>
       </View>
 
       <ScrollView>

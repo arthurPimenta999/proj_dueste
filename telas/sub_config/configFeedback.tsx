@@ -6,7 +6,6 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../apis/firebaseConfig";
 import stylePadrao from "../../styles/stylesDefault";
 import BottomSheet from "@gorhom/bottom-sheet";
-import styleSeguranca from "../../styles/sub_config/styleSeguranca";
 import Foundation from "react-native-vector-icons/Foundation";
 
 function TelaFeedback() {

@@ -77,9 +77,9 @@ function TelaAjuda() {
               <Text style={styleAjuda.accordionContentText}>
                 Abra a página de configurações. Na seção Ajuda e Feedback,
                 existe a opção "Feedback". Lá você pode enviar não só denúncias
-                de falhas e travamentos do app, mas também suas opiniões e o que
-                você acha do app. Conte pra gente o que você está achando do
-                app!
+                de falhas e travamentos que aconteceram com você, mas também
+                suas opiniões e como está sendo sua experiência. Conte pra gente
+                o que você está achando do app!
               </Text>
             </View>
           </View>

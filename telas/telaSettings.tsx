@@ -58,7 +58,7 @@ function TelaConfigs() {
   //configurações da modal ///sobre
 
   const refSobre = useRef(null);
-  const snapPointSobre = useMemo(() => ["35%", "60%"], []);
+  const snapPointSobre = useMemo(() => ["35%", "45%"], []);
   const handleOpenSobre = () => refSobre.current?.expand();
 
   // =============== FIM DAS MODALS ===============

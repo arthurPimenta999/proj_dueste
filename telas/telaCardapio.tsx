@@ -37,10 +37,6 @@ function TelaCardapio() {
 
       <ScrollView style={stylePadrao.scrollStyle}>
         {/* cartões de sabores e itens no cardápio */}
-        <View style={styleCardapio.pizzaTitleAlign}>
-          <Text style={styleCardapio.pizzaTitleStyle}>Pizzas salgadas</Text>
-        </View>
-
         <PizzasSalgadas />
       </ScrollView>
     </SafeAreaView>
