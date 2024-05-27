@@ -48,8 +48,8 @@ const styleCardapio = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     borderRadius: 25,
-    shadowColor: "#000",
     alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 3,
@@ -68,6 +68,7 @@ const styleCardapio = StyleSheet.create({
     fontSize: 18,
     marginLeft: width * 0.07,
     marginVertical: height * 0.003,
+    maxWidth: "70%",
   },
   precoAlign: {
     fontFamily: "Montserrat_400Regular",

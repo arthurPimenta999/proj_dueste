@@ -53,7 +53,6 @@ const { height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
   },
   icons: {
     alignItems: "center",
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
   },
   materialTabStyle: {
     backgroundColor: "#dedede",
-    borderTopWidth: 0,
     height: height * 0.1,
   },
 });
@@ -73,7 +71,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="CRUD"
+      initialRouteName="Cardápio"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}
@@ -87,7 +85,7 @@ function MyTabs() {
               name="pizza"
               size={23}
               style={styles.icons}
-              color={focused ? "black" : "#333"}
+              color={focused ? "black" : "#444"}
             />
           ),
         }}
@@ -102,7 +100,7 @@ function MyTabs() {
               name="home"
               size={23}
               style={styles.icons}
-              color={focused ? "black" : "#333"}
+              color={focused ? "black" : "#444"}
             />
           ),
         }}
@@ -116,21 +114,7 @@ function MyTabs() {
               name="settings"
               size={23}
               style={styles.icons}
-              color={focused ? "black" : "#333"}
-            />
-          ),
-        }}
-      />
-       <Tab.Screen
-        name="CRUD"
-        component={TelaCRUD}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicon
-              name="settings"
-              size={23}
-              style={styles.icons}
-              color={focused ? "black" : "#333"}
+              color={focused ? "black" : "#444"}
             />
           ),
         }}

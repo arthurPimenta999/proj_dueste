@@ -38,6 +38,7 @@ const styleSettings = StyleSheet.create({
     marginHorizontal: width * 0.06,
     marginVertical: height * 0.03,
   },
+
   searchBar: {
     backgroundColor: "#fff",
     padding: 10,
@@ -54,19 +55,27 @@ const styleSettings = StyleSheet.create({
 
   //styles global de título de configs
 
+  sectionTitle: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 18,
+  },
+
   configTitleAlign: {
     marginLeft: width * 0.06,
     marginTop: height * 0.03,
   },
+
   configTitle: {
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 18,
     marginVertical: height * 0.005,
   },
+
   alignConfig: {
     marginHorizontal: width * 0.06,
     marginVertical: height * 0.02,
   },
+
   configSection: {
     backgroundColor: "#ddd",
     borderRadius: 15,
@@ -79,16 +88,19 @@ const styleSettings = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7,
   },
+
   pressableSpace: {
     marginVertical: height * 0.03,
-    marginLeft: width * 0.05,
+    marginHorizontal: width * 0.05,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  alignIconText: {
     flexDirection: "row",
     gap: 15,
     alignItems: "center",
-  },
-  arrowAlign: {
-    position: "absolute",
-    marginLeft: width * 0.72,
   },
 
   // estilos da modal bottom-sheet
@@ -102,6 +114,13 @@ const styleSettings = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 24,
     elevation: 10,
+  },
+
+  // alinhar seta de cada pressable
+
+  alignArrow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 

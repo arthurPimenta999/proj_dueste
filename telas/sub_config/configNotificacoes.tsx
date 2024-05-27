@@ -1,79 +1,108 @@
-import React from "react";
-import { View, Text, ScrollView, Switch } from "react-native";
+import React, { useState } from "react";
+import { View, Text } from "react-native";
 import styleNotificacoes from "../../styles/sub_config/styleNotificacoes";
 import stylePadrao from "../../styles/stylesDefault";
+import { Switch } from "react-native-switch";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MI from "react-native-vector-icons/MaterialIcons";
 import { Divider } from "react-native-paper";
 
-function TelaNotificacoes() {
+export default function TelaNotificacoes() {
+  const [isActive, setIsActive] = useState(false);
+
+  const [isPushActive, setIsPushActive] = useState(false);
+  const [isSMSActive, setIsSMSActive] = useState(false);
+  const [isMailActive, setIsMailActive] = useState(false);
+
   return (
     <View style={stylePadrao.container}>
       <View style={stylePadrao.titleAlign}>
         <Text style={stylePadrao.title}>Notificações</Text>
       </View>
 
-      <ScrollView>
-        <Divider bold={true} style={styleNotificacoes.dividerMargin} />
-
-        <View style={styleNotificacoes.switchAlign}>
-          <View style={styleNotificacoes.singleAlignIcon}>
-            <MCI name="bell" size={20} />
-            <Text style={styleNotificacoes.titleStyle}>Notificações</Text>
+      <View style={styleNotificacoes.container}>
+        <View style={styleNotificacoes.alignTitleSwitch}>
+          <View style={styleNotificacoes.alignIconText}>
+            <MCI name="bell" size={18} />
+            <Text style={styleNotificacoes.notificationTitle}>
+              Notificações
+            </Text>
           </View>
 
-          <View>
-            <Switch style={styleNotificacoes.singleSwitchSpacing} />
-          </View>
+          <Switch
+            value={isActive}
+            onValueChange={(value) => setIsActive(!isActive)}
+            circleSize={30}
+            barHeight={30}
+            circleBorderWidth={3}
+            activeText={""}
+            inActiveText={""}
+            backgroundActive={"#4caf50"}
+          />
         </View>
 
-        <Divider bold={true} style={styleNotificacoes.dividerMargin} />
+        <Divider bold={true} />
 
-        {/* 
-        título de cada tipo de notificação
-      */}
-
-        <View style={styleNotificacoes.switchAlign}>
-          <View>
-            <View style={styleNotificacoes.alignSections}>
-              <View style={styleNotificacoes.alignIcon}>
-                <MCI name="cellphone" size={20} />
-                <Text style={styleNotificacoes.titleStyle}>
-                  Notificações Push
-                </Text>
-              </View>
-            </View>
-
-            <View style={styleNotificacoes.alignSections}>
-              <View style={styleNotificacoes.alignIcon}>
-                <MCI name="email" size={20} />
-                <Text style={styleNotificacoes.titleStyle}>Email</Text>
-              </View>
-            </View>
-
-            <View style={styleNotificacoes.alignSections}>
-              <View style={styleNotificacoes.alignIcon}>
-                <MI name="sms" size={20} />
-                <Text style={styleNotificacoes.titleStyle}>SMS</Text>
-              </View>
-            </View>
+        <View style={styleNotificacoes.alignTitleSwitch}>
+          <View style={styleNotificacoes.alignIconText}>
+            <MCI name="cellphone" size={18} />
+            <Text style={styleNotificacoes.notificationTitle}>
+              Notificações Push
+            </Text>
           </View>
 
-          {/* 
-        switches de cada tipo de notificação
-      */}
-
-          <View>
-            <Switch style={styleNotificacoes.switchSpacing} />
-            <Switch style={styleNotificacoes.switchSpacing} />
-            <Switch style={styleNotificacoes.switchSpacing} />
-          </View>
+          <Switch
+            value={isPushActive}
+            onValueChange={(value) => setIsPushActive(!isPushActive)}
+            circleSize={30}
+            barHeight={30}
+            circleBorderWidth={3}
+            activeText={""}
+            inActiveText={""}
+            backgroundActive={"#4caf50"}
+          />
         </View>
 
-        <Divider bold={true} style={styleNotificacoes.dividerMargin} />
-      </ScrollView>
+        <View style={styleNotificacoes.alignTitleSwitch}>
+          <View style={styleNotificacoes.alignIconText}>
+            <MI name="sms" size={18} />
+            <Text style={styleNotificacoes.notificationTitle}>
+              Notificações SMS
+            </Text>
+          </View>
+
+          <Switch
+            value={isSMSActive}
+            onValueChange={(value) => setIsSMSActive(!isSMSActive)}
+            circleSize={30}
+            barHeight={30}
+            circleBorderWidth={3}
+            activeText={""}
+            inActiveText={""}
+            backgroundActive={"#4caf50"}
+          />
+        </View>
+
+        <View style={styleNotificacoes.alignTitleSwitch}>
+          <View style={styleNotificacoes.alignIconText}>
+            <MCI name="email" size={18} />
+            <Text style={styleNotificacoes.notificationTitle}>
+              Notificações de Email
+            </Text>
+          </View>
+
+          <Switch
+            value={isMailActive}
+            onValueChange={(value) => setIsMailActive(!isMailActive)}
+            circleSize={30}
+            barHeight={30}
+            circleBorderWidth={3}
+            activeText={""}
+            inActiveText={""}
+            backgroundActive={"#4caf50"}
+          />
+        </View>
+      </View>
     </View>
   );
 }
-
-export default TelaNotificacoes;
