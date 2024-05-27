@@ -2,50 +2,40 @@ import { StyleSheet, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
-const switchMarginVertical =
-  Platform.OS === "android" ? height * 0 : height * 0.01;
-
-const switchMarginLeft =
-  Platform.OS === "android" ? height * 0.12 : height * 0.08;
-
-const singleSwitchMarginLeft =
-  Platform.OS === "android" ? height * 0.183 : height * 0.143;
-
-const singleMarginTop =
-  Platform.OS === "android" ? height * 0.017 : height * 0.007;
-
 const styleNotificacoes = StyleSheet.create({
+  // margem do topo da tela
+
+  container: {
+    flex: 1,
+    marginTop: height * 0.01,
+  },
+
+  // estilo do divider (linha que divide seções da tela)
+
   dividerMargin: {
-    marginVertical: height * 0.03,
+    marginVertical: height * 0.025,
   },
-  alignSections: {
-    marginVertical: height * 0.016,
-  },
-  alignIcon: {
-    flexDirection: "row",
-    gap: 5,
-  },
-  titleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+
+  // estilo de texto
+
+  notificationTitle: {
+    fontFamily: "Montserrat_400Regular",
     fontSize: 18,
   },
-  switchAlign: {
+
+  // alinhar icones, textos e switches
+
+  alignIconText: {
+    alignItems: "center",
     flexDirection: "row",
-  },
-  switchSpacing: {
-    marginVertical: switchMarginVertical,
-    marginLeft: switchMarginLeft,
+    gap: 7,
   },
 
-  // espaçamento individual de notificações gerais
-
-  singleSwitchSpacing: {
-    marginLeft: singleSwitchMarginLeft,
-  },
-  singleAlignIcon: {
-    marginTop: singleMarginTop,
+  alignTitleSwitch: {
+    marginVertical: height * 0.025,
+    marginHorizontal: width * 0.025,
     flexDirection: "row",
-    gap: 5,
+    justifyContent: "space-between",
   },
 });
 

@@ -154,6 +154,17 @@ const stylePadrao = StyleSheet.create({
     fontSize: 30,
   },
 
+  // styles de subtitulos de paginas
+
+  subTitle600: {
+    fontFamily: "Montserrat_600SemiBold",
+    fontSize: 23,
+  },
+  subTitle400: {
+    fontFamily: "Montserrat_400Regular",
+    fontSize: 20,
+  },
+
   // modal estilo bottomsheet
 
   modalStyle: {

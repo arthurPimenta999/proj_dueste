@@ -25,9 +25,9 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import EditarSeguranca from "./sub_config/configSeguranca";
 
 function TelaConfigs() {
-  const navigation = useNavigation();
+  const { height } = Dimensions.get("window");
 
-  const { width, height } = Dimensions.get("window");
+  const navigation = useNavigation();
 
   // =============== MODALS ===============
 
@@ -58,7 +58,7 @@ function TelaConfigs() {
   //configurações da modal ///sobre
 
   const refSobre = useRef(null);
-  const snapPointSobre = useMemo(() => ["35%", "60%"], []);
+  const snapPointSobre = useMemo(() => ["35%", "45%"], []);
   const handleOpenSobre = () => refSobre.current?.expand();
 
   // =============== FIM DAS MODALS ===============
@@ -105,45 +105,55 @@ function TelaConfigs() {
                 style={styleSettings.pressableSpace}
                 onPress={() => navigation.navigate("User")}
               >
-                <MCI name="account-circle" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Perfil
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="account-circle" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Perfil
+                  </Text>
                 </View>
+
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={() => navigation.navigate("Seguranca")}
               >
-                <MCI name="security" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Segurança
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="security" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Segurança
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={handleOpenNotificacoes}
               >
-                <Ionicon name="notifications" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Notificações
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <Ionicon name="notifications" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Notificações
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
@@ -166,45 +176,54 @@ function TelaConfigs() {
                 style={styleSettings.pressableSpace}
                 onPress={handleOpenDarkMode}
               >
-                <MCI name="theme-light-dark" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Modo Escuro
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="theme-light-dark" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Modo Escuro
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={handleOpenPromocoes}
               >
-                <MCI name="sale" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Promoções
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="sale" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Promoções
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={handleOpenHistorico}
               >
-                <FA6 name="clock-rotate-left" size={20} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Histórico
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <FA6 name="clock-rotate-left" size={20} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Histórico
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
@@ -227,53 +246,58 @@ function TelaConfigs() {
                 style={styleSettings.pressableSpace}
                 onPress={() => navigation.navigate("Ajuda")}
               >
-                <MCI name="help-circle" size={25} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Ajuda
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="help-circle" size={25} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Ajuda
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={() => navigation.navigate("Feedback")}
               >
-                <MatIcons name="feedback" size={25} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Feedback
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MatIcons name="feedback" size={25} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Feedback
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
 
               <Pressable
                 style={styleSettings.pressableSpace}
                 onPress={handleOpenSobre}
               >
-                <MCI name="account-group" size={23} color={"#000"} />
-                <Text
-                  style={{ fontFamily: "Montserrat_600SemiBold", fontSize: 18 }}
-                >
-                  Sobre
-                </Text>
-                <View style={styleSettings.arrowAlign}>
-                  <Entypo name="chevron-right" size={18} />
+                <View style={styleSettings.alignIconText}>
+                  <MCI name="account-group" size={22} color={"#000"} />
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat_600SemiBold",
+                      fontSize: 18,
+                    }}
+                  >
+                    Sobre
+                  </Text>
                 </View>
+                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
         </ScrollView>
-
-        {/* 
-          modal estilo bottom-sheet ///dados
-        */}
 
         {/* 
           modal estilo bottom-sheet ///notificações
@@ -282,7 +306,7 @@ function TelaConfigs() {
         <BottomSheet
           ref={refNotificacoes}
           index={-1}
-          snapPoints={snapPointDarkMode}
+          snapPoints={snapPointNotificacoes}
           enablePanDownToClose={true}
           style={styleSettings.modalStyle}
           backgroundStyle={{ backgroundColor: "#fafafa" }}
@@ -376,7 +400,7 @@ function Telas() {
 
       {/*
       condicional. se o usuário não estiver logado, mostra a tela de login. 
-      se ele estiver logado, mostra a tela de configs de perfil.
+      se ele estiver logado, mostra a tela de configs de perfil/segurança.
       */}
 
       {user ? (

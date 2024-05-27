@@ -1,15 +1,17 @@
 import React, { useMemo, useRef, useState } from "react";
-import { View, Text, Pressable, TextInput, ScrollView } from "react-native";
+import { View, Text, Pressable, TextInput, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleFeedback from "../../styles/sub_config/styleFeedback";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../apis/firebaseConfig";
 import stylePadrao from "../../styles/stylesDefault";
 import BottomSheet from "@gorhom/bottom-sheet";
-import styleSeguranca from "../../styles/sub_config/styleSeguranca";
 import Foundation from "react-native-vector-icons/Foundation";
+import MI from "react-native-vector-icons/MaterialIcons";
 
 function TelaFeedback() {
+  const { width, height } = Dimensions.get("window");
+
   // configurações da modal de info sobre 2FA
 
   const refInfo = useRef(null);
@@ -41,6 +43,7 @@ function TelaFeedback() {
       }
     }
   }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={stylePadrao.generalTitleAlign}>
@@ -58,66 +61,67 @@ function TelaFeedback() {
           </Pressable>
         </View>
 
-        <View style={styleFeedback.feedbackSectionAlign}>
+        <View style={{ marginTop: 15 }}>
           <View>
             <Text style={styleFeedback.feedbackSectionTitle}>Nome:</Text>
-            <View style={styleFeedback.titleInputStyle}>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.generalFont400}
-                autoCorrect={false}
-                value={nome}
-                onChangeText={(nome) => setNome(nome)}
-              />
-            </View>
           </View>
 
+          <View style={styleFeedback.textInputLine}>
+            <TextInput
+              style={stylePadrao.generalFont400}
+              selectionColor={"#d69e04"}
+              autoCorrect={false}
+              value={nome}
+              onChangeText={(nome) => setNome(nome)}
+            />
+          </View>
+        </View>
+
+        <View>
           <View>
             <Text style={styleFeedback.feedbackSectionTitle}>Título:</Text>
-            <View style={styleFeedback.titleInputStyle}>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.generalFont400}
-                autoCorrect={false}
-                value={title}
-                onChangeText={(title) => setTitle(title)}
-              />
-            </View>
           </View>
 
+          <View style={styleFeedback.textInputLine}>
+            <TextInput
+              style={stylePadrao.generalFont400}
+              selectionColor={"#d69e04"}
+              autoCorrect={false}
+              value={title}
+              onChangeText={(title) => setTitle(title)}
+            />
+          </View>
+        </View>
+
+        <View>
           <View>
-            <Text style={styleFeedback.feedbackSectionTitle}>Conteúdo:</Text>
-            <View style={styleFeedback.feedbackInputStyle}>
-              <TextInput
-                selectionColor={"#d69e04"}
-                style={stylePadrao.generalFont400}
-                autoCorrect={false}
-                value={feedback}
-                onChangeText={(feedback) => setFeedback(feedback)}
-                multiline
-              />
-            </View>
+            <Text style={styleFeedback.feedbackSectionTitle}>Feedback:</Text>
           </View>
 
-          {/* botão de enviar feedback */}
-
-          <View style={styleFeedback.alignSendButton}>
-            <View style={stylePadrao.alignBtn}>
-              <Pressable style={stylePadrao.btn} onPress={enviarFeedback}>
-                <Text
-                  style={{
-                    fontFamily: "Montserrat_400Regular",
-                    fontSize: 20,
-                    color: "#222",
-                  }}
-                >
-                  Enviar
-                </Text>
-              </Pressable>
-            </View>
+          <View style={styleFeedback.textInputFeedback}>
+            <TextInput
+              style={stylePadrao.generalFont400}
+              selectionColor={"#d69e04"}
+              autoCorrect={false}
+              value={feedback}
+              onChangeText={(feedback) => setFeedback(feedback)}
+              multiline
+            />
           </View>
         </View>
       </View>
+
+      <View style={styleFeedback.sendButtonAlign}>
+        <Pressable style={stylePadrao.btn} onPress={enviarFeedback}>
+          <View style={styleFeedback.sendButtonRow}>
+            <MI name="arrow-upward" size={18} />
+            <Text style={[stylePadrao.generalFont400, { fontSize: 20 }]}>
+              Enviar
+            </Text>
+          </View>
+        </Pressable>
+      </View>
+
       {/* 
         bottom sheet de informação de feedback.
         não é levada em consideração na renderização da

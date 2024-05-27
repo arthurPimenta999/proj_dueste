@@ -6,6 +6,7 @@ const styleFeedback = StyleSheet.create({
   // configurações de view geral
 
   container: {
+    flex: 1,
     marginHorizontal: width * 0.05,
   },
 
@@ -20,7 +21,7 @@ const styleFeedback = StyleSheet.create({
 
   alignInfoIcon: {
     flexDirection: "row",
-    gap: width * 0.2,
+    justifyContent: "space-between",
   },
 
   // ========== styles das seções de feedback ==========
@@ -40,12 +41,29 @@ const styleFeedback = StyleSheet.create({
 
   // estilo do input de titulo
 
-  titleInputStyle: {
+  textInputLine: {
     marginVertical: height * 0.01,
-    backgroundColor: "#ccc",
-    borderRadius: 25,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 10,
+    backgroundColor: "#ededed",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 4,
+  },
+
+  textInputFeedback: {
+    height: height * 0.35,
+    marginVertical: height * 0.01,
+    paddingHorizontal: 15,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    borderRadius: 10,
+    backgroundColor: "#ededed",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -53,34 +71,21 @@ const styleFeedback = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 7,
+    elevation: 4,
   },
 
-  // estilo do input de feedback
+  // botão de enviar feedback
 
-  feedbackInputStyle: {
-    marginVertical: height * 0.01,
-    backgroundColor: "#ccc",
-    borderRadius: 25,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    height: 300,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
+  sendButtonRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
   },
 
-  // alinhar botão de enviar feedback
-
-  alignSendButton: {
-    position: "absolute",
-    marginTop: height * 0.653,
-    marginHorizontal: width * 0.25,
+  sendButtonAlign: {
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginBottom: height * 0.05,
   },
 });
 
