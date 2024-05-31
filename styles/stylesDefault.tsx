@@ -28,11 +28,11 @@ const stylePadrao = StyleSheet.create({
   // styles de textos definidos por padrão
 
   generalFont600: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 23,
   },
   generalFont400: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 16,
   },
 
@@ -44,7 +44,7 @@ const stylePadrao = StyleSheet.create({
   },
 
   textTop: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
 
@@ -92,7 +92,7 @@ const stylePadrao = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
     height: height * 0.025,
     marginLeft: width * 0.02,
@@ -109,7 +109,7 @@ const stylePadrao = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
   contentAlign: {
@@ -150,18 +150,18 @@ const stylePadrao = StyleSheet.create({
     marginHorizontal: width * 0.05,
   },
   generalTitleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 30,
   },
 
   // styles de subtitulos de paginas
 
   subTitle600: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 23,
   },
   subTitle400: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 20,
   },
 
@@ -183,7 +183,7 @@ const stylePadrao = StyleSheet.create({
     marginHorizontal: width * 0.08,
   },
   modalContentStyle: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 16,
     textAlign: "center",
   },
@@ -192,7 +192,7 @@ const stylePadrao = StyleSheet.create({
     alignItems: "center",
   },
   modalTitleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
   },
 });

@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions, Platform } from "react-native";
-import { CadastrarNumero } from "../../apis/firebaseConfig";
 
 const { width, height } = Dimensions.get("window");
 
@@ -10,11 +9,11 @@ const styleSeguranca = StyleSheet.create({
     marginHorizontal: width * 0.05,
   },
   generalFont600: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 23,
   },
   generalFont400: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 16,
   },
 
@@ -40,7 +39,7 @@ const styleSeguranca = StyleSheet.create({
     backgroundColor: "#fcba04",
   },
   telefoneBtnFont: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 15,
   },
 
@@ -59,7 +58,7 @@ const styleSeguranca = StyleSheet.create({
     marginHorizontal: width * 0.08,
   },
   modalContentStyle: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 16,
     textAlign: "center",
   },
@@ -68,7 +67,7 @@ const styleSeguranca = StyleSheet.create({
     alignItems: "center",
   },
   modalTitleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
   },
 
@@ -82,6 +81,19 @@ const styleSeguranca = StyleSheet.create({
   },
   switchAlign: {
     marginHorizontal: width * 0.05,
+  },
+
+  // alihar botões de excluir conta e alterar senha
+
+  alignSecurityBtns: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+
+  bottomSecurityBtns: {
+    flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: height * 0.025,
   },
 });
 

@@ -1,16 +1,29 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styleSeguranca from "../../styles/sub_config/styleSeguranca";
 import stylePadrao from "../../styles/stylesDefault";
-import { VerifyEmailButton, VerifyEmail } from "../../apis/firebaseConfig";
+import {
+  VerifyEmailButton,
+  VerifyEmail,
+  auth,
+} from "../../apis/firebaseConfig";
 import Foundation from "react-native-vector-icons/Foundation";
 import BottomSheet from "@gorhom/bottom-sheet";
 import styleSettings from "../../styles/stylesSettings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Switch } from "react-native-switch";
+import { User, deleteUser, sendPasswordResetEmail } from "firebase/auth";
 
 function EditarSeguranca() {
+  // usuario atual
+
+  const usuario = auth.currentUser;
+
+  const [isLogged, setIslogged] = useState<User | null>(usuario);
+
+  const email = isLogged.email;
+
   //configurações da modal de info sobre 2FA
 
   const refInfoAuth = useRef(null);
@@ -20,6 +33,27 @@ function EditarSeguranca() {
   // configurações do switch
 
   const [twoFA, setTwoFA] = useState(false);
+
+  function deleteUserPress() {
+    const deleteUsuario = async () => {
+      {
+        isLogged ? deleteUser(isLogged) : console.log("null");
+      }
+    };
+
+    deleteUsuario();
+  }
+
+  function updatePasswordPress() {
+    const updatePassword = async (email) => {
+      {
+        isLogged ? sendPasswordResetEmail(auth, email) : console.log("null"),
+          alert("Verifique seu email!");
+      }
+    };
+
+    updatePassword(email);
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -78,6 +112,38 @@ function EditarSeguranca() {
               inActiveText={""}
               backgroundActive={"#4caf50"}
             />
+          </View>
+        </View>
+
+        <View style={styleSeguranca.bottomSecurityBtns}>
+          <View style={styleSeguranca.alignSecurityBtns}>
+            <Pressable style={stylePadrao.btn} onPress={updatePasswordPress}>
+              <Text
+                style={{
+                  fontFamily: "Mont400",
+                  fontSize: 20,
+                  color: "#222",
+                  position: "absolute",
+                  textAlign: "center",
+                }}
+              >
+                Alterar Senha
+              </Text>
+            </Pressable>
+
+            <Pressable style={stylePadrao.btn} onPress={deleteUserPress}>
+              <Text
+                style={{
+                  fontFamily: "Mont400",
+                  fontSize: 20,
+                  color: "#222",
+                  position: "absolute",
+                  textAlign: "center",
+                }}
+              >
+                Excluir Conta
+              </Text>
+            </Pressable>
           </View>
         </View>
 

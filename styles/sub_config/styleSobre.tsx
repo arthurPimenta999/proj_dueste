@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 
 const styleSobre = StyleSheet.create({
   sobreText: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
     textAlign: "center",
   },

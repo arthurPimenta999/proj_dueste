@@ -8,7 +8,7 @@ const stylesPromocoes = StyleSheet.create({
     alignItems: "center",
   },
   promoText: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
     textAlign: "center",
   },
@@ -25,7 +25,7 @@ const stylesPromocoes = StyleSheet.create({
     borderRadius: 15,
   },
   pressableText: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
   },
 });

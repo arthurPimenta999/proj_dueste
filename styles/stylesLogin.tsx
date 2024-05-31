@@ -12,14 +12,14 @@ const styleLogin = StyleSheet.create({
   // titulo
 
   titleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 30,
   },
 
   // TextInputs
 
   inputTitle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 15,
     marginTop: height * 0.025,
   },
@@ -30,7 +30,7 @@ const styleLogin = StyleSheet.create({
     backgroundColor: "#ddd",
     paddingVertical: 10,
     paddingHorizontal: 20,
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 15,
     borderRadius: 15,
     marginTop: 5,
@@ -48,12 +48,12 @@ const styleLogin = StyleSheet.create({
   },
 
   loginTextWhite: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 20,
     color: "#fff",
   },
   loginTextBlack: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 20,
     color: "#000",
   },

@@ -7,10 +7,10 @@ function DarkModeModal() {
   const [aberto, setAberto] = useState(false);
   const [valor, setValor] = useState(false);
   const [modo, setModo] = useState([
-    { label: "Claro", valor: "claro" },
-    { label: "Escuro", valor: "escuro" },
-    { label: "Padrão do Sistema", valor: "sistema" },
-    { label: "Dia/Noite", valor: "horario" },
+    { key: 1, label: "Claro", valor: "claro" },
+    { key: 2, label: "Escuro", valor: "escuro" },
+    { key: 3, label: "Padrão do Sistema", valor: "sistema" },
+    { key: 4, label: "Dia/Noite", valor: "horario" },
   ]);
 
   return (

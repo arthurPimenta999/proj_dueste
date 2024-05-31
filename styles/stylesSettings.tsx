@@ -14,7 +14,7 @@ const styleSettings = StyleSheet.create({
   },
 
   textTop: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
 
@@ -56,7 +56,7 @@ const styleSettings = StyleSheet.create({
   //styles global de título de configs
 
   sectionTitle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
   },
 
@@ -66,7 +66,7 @@ const styleSettings = StyleSheet.create({
   },
 
   configTitle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
     marginVertical: height * 0.005,
   },

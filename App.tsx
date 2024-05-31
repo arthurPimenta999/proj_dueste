@@ -15,25 +15,24 @@ import {
   Montserrat_400Regular,
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
+import { auth } from "./apis/firebaseConfig";
 
 //=========== app ==========
 
 export default function App() {
-  {
-    /*
-  useFonts pra carregar fonte externa e AppLoading pra deixar a tela carregando.
-  só parar de carregar a tela quando a fonte estiver 100% pronta pra uso.
-  ~Stardust
-  */
-  }
+  auth.onAuthStateChanged((user) => {
+    user && user.emailVerified
+      ? console.log("Email Verificado.")
+      : console.log("Email não verificado.");
+  });
 
   let [fontsLoaded] = useFonts({
-    Montserrat_400Regular,
-    Montserrat_600SemiBold,
+    Mont400: Montserrat_400Regular,
+    Mont600: Montserrat_600SemiBold,
   });
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return SplashScreen.preventAutoHideAsync;
   }
 
   return (
@@ -71,7 +70,7 @@ function MyTabs() {
   theme.colors.secondaryContainer = "#fcba03";
   return (
     <Tab.Navigator
-      initialRouteName="Cardápio"
+      initialRouteName="Início"
       activeColor="#d69e04"
       inactiveColor="#000"
       barStyle={styles.materialTabStyle}

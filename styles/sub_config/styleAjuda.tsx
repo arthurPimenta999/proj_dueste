@@ -11,7 +11,7 @@ const styleAjuda = StyleSheet.create({
     marginHorizontal: width * 0.05,
   },
   titleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 30,
   },
 
@@ -23,7 +23,7 @@ const styleAjuda = StyleSheet.create({
   },
 
   accordionTitle: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
   },
 
@@ -34,7 +34,7 @@ const styleAjuda = StyleSheet.create({
     marginBottom: height * 0.025,
   },
   accordionContentText: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 16,
   },
   accordionContentBG: {

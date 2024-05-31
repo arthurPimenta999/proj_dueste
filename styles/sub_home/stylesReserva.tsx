@@ -21,7 +21,7 @@ const styleReserva = StyleSheet.create({
 
   descriptionStyle: {
     marginBottom: height * 0.025,
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
   },
 
@@ -39,7 +39,7 @@ const styleReserva = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 15,
     marginBottom: height * 0.025,
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
   },
 
   // btn reservar

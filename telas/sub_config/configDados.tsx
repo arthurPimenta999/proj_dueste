@@ -35,7 +35,7 @@ function EditarDados() {
           <Pressable style={stylePadrao.btn} onPress={() => auth.signOut()}>
             <Text
               style={{
-                fontFamily: "Montserrat_400Regular",
+                fontFamily: "Mont400",
                 fontSize: 20,
                 color: "#222",
               }}

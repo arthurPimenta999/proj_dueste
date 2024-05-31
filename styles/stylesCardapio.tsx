@@ -22,7 +22,7 @@ const styleCardapio = StyleSheet.create({
   },
 
   textTop: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
 
@@ -39,7 +39,7 @@ const styleCardapio = StyleSheet.create({
     marginVertical: height * 0.02,
   },
   pizzaTitleStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
   styleCard: {
@@ -64,14 +64,14 @@ const styleCardapio = StyleSheet.create({
     borderRadius: 25,
   },
   pizzaTitle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 18,
     marginLeft: width * 0.07,
     marginVertical: height * 0.003,
     maxWidth: "70%",
   },
   precoAlign: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     marginLeft: width * 0.07,
   },
 });

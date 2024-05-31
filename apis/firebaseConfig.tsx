@@ -11,14 +11,20 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  getReactNativePersistence,
+  initializeAuth,
+  sendEmailVerification,
+  User,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 import stylePadrao from "../styles/stylesDefault";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FA from "react-native-vector-icons/FontAwesome";
 import styleLogin from "../styles/stylesLogin";
 import styleSeguranca from "../styles/sub_config/styleSeguranca";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDy2KiQXzy0Ce5CuR83G_LE6UxJLYsWFiA",
@@ -33,7 +39,9 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
 
 export const db = getFirestore(app);
 
@@ -116,7 +124,7 @@ export function TelaLogin() {
         </View>
 
         {loading ? (
-          <AppLoading />
+          SplashScreen.preventAutoHideAsync
         ) : (
           //  botões de login/criar conta
 
@@ -127,7 +135,7 @@ export function TelaLogin() {
               <Pressable style={stylePadrao.btn} onPress={login}>
                 <Text
                   style={{
-                    fontFamily: "Montserrat_400Regular",
+                    fontFamily: "Mont400",
                     fontSize: 20,
                     color: "#222",
                   }}
@@ -141,7 +149,7 @@ export function TelaLogin() {
               <Pressable style={stylePadrao.btn} onPress={cadastro}>
                 <Text
                   style={{
-                    fontFamily: "Montserrat_400Regular",
+                    fontFamily: "Mont400",
                     fontSize: 20,
                     color: "#222",
                   }}
@@ -222,7 +230,9 @@ export function VerifyEmail() {
 }
 
 export function VerifyEmailButton() {
-  const [isCadastrado, setIsCadastrado] = useState("#fcba04");
+  const [btnName, setBtnName] = useState("Verificar Email");
+
+  const [btnBackground, setBtnBackground] = useState("#fcba04");
 
   // função que pega o telefone cadastrado do database.
   // SE o usuario tem um telefone, retorna string com telefone.
@@ -230,28 +240,39 @@ export function VerifyEmailButton() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        const telefone = user.phoneNumber;
-        if (telefone) {
-          setIsCadastrado("#4caf50");
-        }
-      }
+      setBtnName(
+        user && user.emailVerified ? "Verificado." : "Verificar Email"
+      );
+      setBtnBackground(user && user.emailVerified ? "#4caf50" : "#fcba04");
     });
 
     // Limpar a inscrição ao desmontar
     return () => unsubscribe();
   }, []);
 
+  const usuario = auth.currentUser;
+
+  // função executada ao clicar no botão. SE o usuario nao tiver email verificado,
+  // ela manda verificação. se tiver, ela não faz nada.
+
+  const verify = () => {
+    if (usuario && !usuario.emailVerified) {
+      sendEmailVerification(usuario).then(() => alert("Verifique seu email!"));
+    } else {
+      alert("Email já verificado.");
+    }
+  };
+
   return (
     <View style={styleSeguranca.telefoneBtnAlign}>
-      <Pressable>
+      <Pressable onPress={verify}>
         <View
           style={[
             styleSeguranca.telefoneBtnStyle,
-            { backgroundColor: isCadastrado },
+            { backgroundColor: btnBackground },
           ]}
         >
-          <Text style={styleSeguranca.telefoneBtnFont}>Verificar Email</Text>
+          <Text style={styleSeguranca.telefoneBtnFont}>{btnName}</Text>
         </View>
       </Pressable>
     </View>

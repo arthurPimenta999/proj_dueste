@@ -13,7 +13,7 @@ const styleFeedback = StyleSheet.create({
   // style descrição
 
   descriptionStyle: {
-    fontFamily: "Montserrat_600SemiBold",
+    fontFamily: "Mont600",
     fontSize: 20,
   },
 
@@ -35,7 +35,7 @@ const styleFeedback = StyleSheet.create({
   // style de titulo da seção
 
   feedbackSectionTitle: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
   },
 

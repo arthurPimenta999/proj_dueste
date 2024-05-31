@@ -8,7 +8,7 @@ const stylesHistorico = StyleSheet.create({
     alignItems: "center",
   },
   historicoText: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
     textAlign: "center",
   },

@@ -89,7 +89,7 @@ function TelaConfigs() {
         <ScrollView style={stylePadrao.scrollStyle}>
           <View style={styleSettings.configTitleAlign}>
             <Text style={styleSettings.configTitle}>Conta</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
+            <Text style={{ fontFamily: "Mont400" }}>
               Gerencie as informações e dados da sua conta.
             </Text>
           </View>
@@ -109,7 +109,7 @@ function TelaConfigs() {
                   <MCI name="account-circle" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -128,7 +128,7 @@ function TelaConfigs() {
                   <MCI name="security" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -146,7 +146,7 @@ function TelaConfigs() {
                   <Ionicon name="notifications" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -165,7 +165,7 @@ function TelaConfigs() {
 
           <View style={styleSettings.configTitleAlign}>
             <Text style={styleSettings.configTitle}>Preferências</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
+            <Text style={{ fontFamily: "Mont400" }}>
               Configurações do aplicativo.
             </Text>
           </View>
@@ -180,7 +180,7 @@ function TelaConfigs() {
                   <MCI name="theme-light-dark" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -198,7 +198,7 @@ function TelaConfigs() {
                   <MCI name="sale" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -216,7 +216,7 @@ function TelaConfigs() {
                   <FA6 name="clock-rotate-left" size={20} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -235,7 +235,7 @@ function TelaConfigs() {
 
           <View style={styleSettings.configTitleAlign}>
             <Text style={styleSettings.configTitle}>Ajuda e Feedback</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
+            <Text style={{ fontFamily: "Mont400" }}>
               Suporte e perguntas frequentes.
             </Text>
           </View>
@@ -250,7 +250,7 @@ function TelaConfigs() {
                   <MCI name="help-circle" size={25} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -268,7 +268,7 @@ function TelaConfigs() {
                   <MatIcons name="feedback" size={25} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >
@@ -286,7 +286,7 @@ function TelaConfigs() {
                   <MCI name="account-group" size={22} color={"#000"} />
                   <Text
                     style={{
-                      fontFamily: "Montserrat_600SemiBold",
+                      fontFamily: "Mont600",
                       fontSize: 18,
                     }}
                   >

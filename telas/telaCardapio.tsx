@@ -17,7 +17,7 @@ import stylePadrao from "../styles/stylesDefault";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { db } from "../apis/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 
 function TelaCardapio() {
   const { width, height } = Dimensions.get("window");
@@ -79,7 +79,7 @@ function TelaCardapio() {
   }, []);
 
   if (loading) {
-    return <AppLoading />;
+    return SplashScreen.preventAutoHideAsync;
   }
 
   const [busca, setBusca] = useState("");

@@ -19,7 +19,7 @@ const styleNotificacoes = StyleSheet.create({
   // estilo de texto
 
   notificationTitle: {
-    fontFamily: "Montserrat_400Regular",
+    fontFamily: "Mont400",
     fontSize: 18,
   },
 

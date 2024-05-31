@@ -89,7 +89,7 @@ function TelaReserva() {
             selectedItemColor="#d69e04"
             headerTextStyle={{
               fontSize: 20,
-              fontFamily: "Montserrat_400Regular",
+              fontFamily: "Mont400",
             }}
             displayFullDays={true}
             calendarTextStyle={{ fontSize: 16 }}
@@ -116,7 +116,7 @@ function TelaReserva() {
           <Pressable style={stylePadrao.btn} onPress={linkPronto}>
             <Text
               style={{
-                fontFamily: "Montserrat_400Regular",
+                fontFamily: "Mont400",
                 fontSize: 20,
                 color: "#222",
               }}
