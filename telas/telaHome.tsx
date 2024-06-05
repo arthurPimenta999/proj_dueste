@@ -7,7 +7,7 @@ import {
   Dimensions,
   Linking,
 } from "react-native";
-import styles from "../styles/styles";
+import { styles } from "../styles/styles";
 import rusticBG from "../assets/splashBG.jpg";
 import duesteLogo from "../assets/duesteLogo.png";
 import Carousel from "react-native-reanimated-carousel";
@@ -21,15 +21,18 @@ import TelaAjuda from "./sub_config/configAjuda";
 import FA5 from "react-native-vector-icons/FontAwesome5";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { TelaLogin, auth } from "../apis/firebaseConfig";
-import {
-  GestureHandlerRootView,
-  ScrollView,
-} from "react-native-gesture-handler";
+import { auth } from "../apis/firebaseConfig";
+import { ScrollView } from "react-native-gesture-handler";
 import { User, onAuthStateChanged } from "firebase/auth";
 import EditarDados from "./sub_config/configDados";
+import { useTheme } from "../components/theme";
+import { TelaLogin } from "./telaLogin";
 
 function TelaPrincipal() {
+  const style = styles();
+
+  const { theme } = useTheme();
+
   const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
@@ -96,41 +99,37 @@ function TelaPrincipal() {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
       {/* imagem de fundo e cumprimento */}
-      <View style={styles.backgroundImageAlign}>
-        <Image source={rusticBG} style={styles.backgroundImage} />
+      <View style={style.backgroundImageAlign}>
+        <Image source={rusticBG} style={style.backgroundImage} />
       </View>
 
-      <View style={styles.alignGreetings}>
-        <Text style={{ fontFamily: "Mont600", fontSize: 30 }}>
+      <View style={style.alignGreetings}>
+        <Text
+          style={{ fontFamily: "Mont600", fontSize: 30, color: theme.txtColor }}
+        >
           {boasVindas}!
         </Text>
-        <Text style={{ fontFamily: "Mont400", fontSize: 20 }}>
+        <Text
+          style={{ fontFamily: "Mont400", fontSize: 20, color: theme.txtColor }}
+        >
           E aí, qual vai ser a boa de hoje?
         </Text>
 
-        <View style={styles.alignButtonRow}>
+        <View style={style.alignButtonRow}>
           <Pressable
-            style={styles.defaultButtonStyle}
+            style={style.defaultButtonStyle}
             onPress={() => navigation.navigate("Reserva")}
           >
-            <View style={styles.defaultButtonInside}>
-              <Text
-                style={{ fontFamily: "Mont600", fontSize: 18, color: "#fff" }}
-              >
-                Reserva
-              </Text>
+            <View style={style.defaultButtonInside}>
+              <Text style={style.defaultButtonText}>Reserva</Text>
             </View>
           </Pressable>
 
-          <Pressable style={styles.defaultButtonStyle} onPress={abrirDueste}>
-            <View style={styles.defaultButtonInside}>
-              <Text
-                style={{ fontFamily: "Mont600", fontSize: 18, color: "#fff" }}
-              >
-                Delivery
-              </Text>
+          <Pressable style={style.defaultButtonStyle} onPress={abrirDueste}>
+            <View style={style.defaultButtonInside}>
+              <Text style={style.defaultButtonText}>Delivery</Text>
             </View>
           </Pressable>
         </View>
@@ -138,12 +137,12 @@ function TelaPrincipal() {
 
       {/* ========== tela do app ========== */}
 
-      <View style={styles.borderView}>
+      <View style={style.borderView}>
         <ScrollView style={{ marginBottom: 0 }}>
           {/* logo Dueste */}
 
-          <View style={styles.alignLogo}>
-            <Image source={duesteLogo} style={styles.logoStyle} />
+          <View style={style.alignLogo}>
+            <Image source={duesteLogo} style={style.logoStyle} />
           </View>
 
           {/* carousel de imagens. ao clicar vai pro iFood Dueste. */}
@@ -161,13 +160,13 @@ function TelaPrincipal() {
             data={imagensBanner}
             scrollAnimationDuration={1000}
             renderItem={({ index }) => (
-              <View key={index} style={styles.bannerView}>
-                <View style={styles.child}>
+              <View key={index} style={style.bannerView}>
+                <View style={style.child}>
                   <Image
                     source={{
                       uri: imagensBanner[index],
                     }}
-                    style={styles.child}
+                    style={style.child}
                   />
                 </View>
               </View>
@@ -176,7 +175,7 @@ function TelaPrincipal() {
 
           {/* balão de endereço dueste */}
 
-          <View style={styles.pinBGstyle}>
+          <View style={style.pinBGstyle}>
             <FA5 name="map-marker-alt" size={20} color={"#fff"}>
               <Text style={{ fontFamily: "Mont400", fontSize: 17.5 }}>
                   Av. Paulo Emanuel de Almeida, 910
@@ -189,53 +188,77 @@ function TelaPrincipal() {
           e a "Align" serve pra centralizar eles em relação ao eixo X (horizontal) da tela.
         */}
 
-          <View style={styles.roundButtonRow}>
-            <View style={styles.roundButtonAlign}>
+          <View style={style.roundButtonRow}>
+            <View style={style.roundButtonAlign}>
               <Pressable onPress={abrirEndereco}>
-                <View style={styles.roundButtonStyle}>
+                <View style={style.roundButtonStyle}>
                   <Feather name="map" size={25} color={"#000"} />
                 </View>
               </Pressable>
-              <Text style={{ fontFamily: "Mont400", marginTop: 5 }}>
+              <Text
+                style={[
+                  style.themeTxtColor,
+                  { fontFamily: "Mont400", marginTop: 5 },
+                ]}
+              >
                 Endereço
               </Text>
             </View>
 
-            <View style={styles.roundButtonAlign}>
+            <View style={style.roundButtonAlign}>
               <Pressable onPress={() => navigation.navigate("Ajuda")}>
-                <View style={styles.roundButtonStyle}>
+                <View style={style.roundButtonStyle}>
                   <Feather name="help-circle" size={25} color={"#000"} />
                 </View>
               </Pressable>
-              <Text style={{ fontFamily: "Mont400", marginTop: 5 }}>Ajuda</Text>
+              <Text
+                style={[
+                  style.themeTxtColor,
+                  { fontFamily: "Mont400", marginTop: 5 },
+                ]}
+              >
+                Ajuda
+              </Text>
             </View>
 
-            <View style={styles.roundButtonAlign}>
+            <View style={style.roundButtonAlign}>
               <Pressable onPress={() => navigation.navigate("User")}>
-                <View style={styles.roundButtonStyle}>
+                <View style={style.roundButtonStyle}>
                   <AntDesign name="login" size={25} color={"#000"} />
                 </View>
               </Pressable>
-              <Text style={{ fontFamily: "Mont400", marginTop: 5 }}>Conta</Text>
+              <Text
+                style={[
+                  style.themeTxtColor,
+                  { fontFamily: "Mont400", marginTop: 5 },
+                ]}
+              >
+                Conta
+              </Text>
             </View>
           </View>
 
-          <View style={styles.alignSuggestion}>
-            <Text style={{ fontFamily: "Mont600", fontSize: 20 }}>
+          <View style={style.alignSuggestion}>
+            <Text
+              style={[
+                style.themeTxtColor,
+                { fontFamily: "Mont600", fontSize: 20 },
+              ]}
+            >
               Hmm... pra agora era só uma...
             </Text>
           </View>
 
           <ScrollView horizontal={true} style={{ marginVertical: 15 }}>
             {pizzaTitle.map((title, index) => (
-              <View key={index} style={styles.styleCard}>
+              <View key={index} style={style.styleCard}>
                 <Image
                   source={{ uri: pizzaUrl[index] }}
-                  style={styles.styleImage}
+                  style={style.styleImage}
                 />
                 <View>
-                  <Text style={styles.pizzaTitle}>{title}</Text>
-                  <Text style={styles.precoAlign}>{pizzaPreco[index]}</Text>
+                  <Text style={style.pizzaTitle}>{title}</Text>
+                  <Text style={style.precoAlign}>{pizzaPreco[index]}</Text>
                 </View>
               </View>
             ))}
@@ -251,7 +274,6 @@ function Telas() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("user: " + user);
       setUser(user);
     });
   }, []);
@@ -263,12 +285,18 @@ function Telas() {
       }}
     >
       <Stack.Screen name="Home" component={TelaPrincipal} />
-      <Stack.Screen name="Reserva" component={TelaReserva} />
       <Stack.Screen name="Ajuda" component={TelaAjuda} />
+
       {user ? (
         <Stack.Screen name="User" component={EditarDados} />
       ) : (
         <Stack.Screen name="User" component={TelaLogin} />
+      )}
+
+      {user ? (
+        <Stack.Screen name="Reserva" component={TelaReserva} />
+      ) : (
+        <Stack.Screen name="Reserva" component={TelaLogin} />
       )}
     </Stack.Navigator>
   );

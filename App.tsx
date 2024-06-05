@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -9,23 +9,47 @@ import TelaCardapio from "./telas/telaCardapio";
 import TelaConfigs from "./telas/telaSettings";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
-import { useTheme } from "react-native-paper";
+import { useTheme as useTheme1 } from "react-native-paper";
+import { useTheme } from "./components/theme";
 import { useFonts } from "@expo-google-fonts/montserrat";
 import {
   Montserrat_400Regular,
   Montserrat_600SemiBold,
 } from "@expo-google-fonts/montserrat";
 import * as SplashScreen from "expo-splash-screen";
-import { auth } from "./apis/firebaseConfig";
+import { ThemeProvider } from "./components/theme";
+import EditarDados from "./telas/sub_config/configDados";
+import { PizzaProvider } from "./components/pizzaContext";
+import TelaReserva from "./telas/sub_home/telaReserva";
+import * as Font from "expo-font";
+import TelaAjuda from "./telas/sub_config/configAjuda";
+import TelaFeedback from "./telas/sub_config/configFeedback";
 
 //=========== app ==========
 
 export default function App() {
-  auth.onAuthStateChanged((user) => {
-    user && user.emailVerified
-      ? console.log("Email Verificado.")
-      : console.log("Email não verificado.");
-  });
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync({
+          Ionicon: require("react-native-vector-icons/Fonts/Ionicons.ttf"),
+          Entypo: require("react-native-vector-icons/Fonts/Entypo.ttf"),
+          AntDesign: require("react-native-vector-icons/Fonts/AntDesign.ttf"),
+          FA5: require("react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"),
+          Feather: require("react-native-vector-icons/Fonts/Feather.ttf"),
+          MCI: require("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
+          MI: require("react-native-vector-icons/Fonts/MaterialIcons.ttf"),
+          Foundation: require("react-native-vector-icons/Fonts/Foundation.ttf"),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        SplashScreen.hideAsync();
+      }
+    }
+
+    prepare();
+  }, []);
 
   let [fontsLoaded] = useFonts({
     Mont400: Montserrat_400Regular,
@@ -35,13 +59,19 @@ export default function App() {
     return SplashScreen.preventAutoHideAsync;
   }
 
+  const style = styles();
+
   return (
-    <SafeAreaProvider style={styles.container}>
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
-      <StatusBar style="auto" backgroundColor="transparent" />
-    </SafeAreaProvider>
+    <PizzaProvider>
+      <ThemeProvider>
+        <SafeAreaProvider style={style.container}>
+          <NavigationContainer>
+            <MyTabs />
+          </NavigationContainer>
+          <StatusBar style="auto" backgroundColor="transparent" />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </PizzaProvider>
   );
 }
 
@@ -49,31 +79,45 @@ export default function App() {
 
 const { height } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  icons: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  materialTabStyle: {
-    backgroundColor: "#dedede",
-    height: height * 0.1,
-  },
-});
+function styles() {
+  const marginOS = Platform.OS === "android" ? height * 0.1 : height * 0.12;
+
+  const { theme } = useTheme();
+
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    icons: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    materialTabStyle: {
+      borderTopWidth: 2,
+      borderColor: theme.navigatorBorder,
+      backgroundColor: theme.barColor,
+      height: marginOS,
+    },
+  });
+}
 
 // função da barra de navegação no rodapé do app :)
 
 function MyTabs() {
-  const theme = useTheme();
-  theme.colors.secondaryContainer = "#fcba03";
+  const style = styles();
+
+  // theme do useTheme criado por mim
+  const { theme } = useTheme();
+
+  // theme do rn-paper
+  const theme1 = useTheme1();
+  theme1.colors.secondaryContainer = theme.yellow;
   return (
     <Tab.Navigator
-      initialRouteName="Início"
+      initialRouteName="Teste"
       activeColor="#d69e04"
-      inactiveColor="#000"
-      barStyle={styles.materialTabStyle}
+      inactiveColor={theme.txtColor}
+      barStyle={style.materialTabStyle}
     >
       <Tab.Screen
         name="Cardápio"
@@ -83,8 +127,8 @@ function MyTabs() {
             <Ionicon
               name="pizza"
               size={23}
-              style={styles.icons}
-              color={focused ? "black" : "#444"}
+              style={style.icons}
+              color={focused ? "black" : theme.txtColor}
             />
           ),
         }}
@@ -98,12 +142,13 @@ function MyTabs() {
             <Entypo
               name="home"
               size={23}
-              style={styles.icons}
-              color={focused ? "black" : "#444"}
+              style={style.icons}
+              color={focused ? "black" : theme.txtColor}
             />
           ),
         }}
       />
+
       <Tab.Screen
         name="Configurações"
         component={TelaConfigs}
@@ -112,8 +157,8 @@ function MyTabs() {
             <Ionicon
               name="settings"
               size={23}
-              style={styles.icons}
-              color={focused ? "black" : "#444"}
+              style={style.icons}
+              color={focused ? "black" : theme.txtColor}
             />
           ),
         }}
