@@ -1,18 +1,20 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import stylePadrao from "../../styles/stylesDefault";
-import styleSobre from "../../styles/sub_config/styleSobre";
+import { View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import styles from "../../styles/styles";
 
 function TelaSobre() {
+  const style = styles();
+
   return (
-    <View style={stylePadrao.container}>
-      <View style={stylePadrao.titleAlign}>
-        <Text style={stylePadrao.title}>Sobre</Text>
+    <View style={style.container}>
+      <View style={style.modalTitleAlign}>
+        <Text style={style.modalTitleStyle}>Sobre</Text>
       </View>
 
-      <ScrollView>
+      <ScrollView style={style.modalContentAlign}>
         <View>
-          <Text style={styleSobre.sobreText}>
+          <Text style={[style.generalFont400, { textAlign: "center" }]}>
             O app Pizzaria Dueste é o Trabalho de Conclusão de Curso dos alunos
             de Desenvolvimento de Sistemas da Etec Fernando Prestes Sorocaba. O
             grupo Scorpion se disponibilizou a fazer um aplicativo para a

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import styleNotificacoes from "../../styles/sub_config/styleNotificacoes";
-import stylePadrao from "../../styles/stylesDefault";
 import { Switch } from "react-native-switch";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MI from "react-native-vector-icons/MaterialIcons";
 import { Divider } from "react-native-paper";
+import styles from "../../styles/styles";
+import { useTheme } from "../../components/theme";
 
 export default function TelaNotificacoes() {
+  const style = styles();
+  const { theme } = useTheme();
+
   const [isActive, setIsActive] = useState(false);
 
   const [isPushActive, setIsPushActive] = useState(false);
@@ -15,18 +18,16 @@ export default function TelaNotificacoes() {
   const [isMailActive, setIsMailActive] = useState(false);
 
   return (
-    <View style={stylePadrao.container}>
-      <View style={stylePadrao.titleAlign}>
-        <Text style={stylePadrao.title}>Notificações</Text>
+    <View style={style.container}>
+      <View style={style.modalTitleAlign}>
+        <Text style={style.modalTitleStyle}>Notificações</Text>
       </View>
 
-      <View style={styleNotificacoes.container}>
-        <View style={styleNotificacoes.alignTitleSwitch}>
-          <View style={styleNotificacoes.alignIconText}>
-            <MCI name="bell" size={18} />
-            <Text style={styleNotificacoes.notificationTitle}>
-              Notificações
-            </Text>
+      <View style={style.modalContentAlign}>
+        <View style={style.notifyAlignTitleSwitch}>
+          <View style={style.notifyAlignIconText}>
+            <MCI name="bell" size={18} color={theme.txtColor} />
+            <Text style={style.generalFont400}>Notificações</Text>
           </View>
 
           <Switch
@@ -43,12 +44,10 @@ export default function TelaNotificacoes() {
 
         <Divider bold={true} />
 
-        <View style={styleNotificacoes.alignTitleSwitch}>
-          <View style={styleNotificacoes.alignIconText}>
-            <MCI name="cellphone" size={18} />
-            <Text style={styleNotificacoes.notificationTitle}>
-              Notificações Push
-            </Text>
+        <View style={style.notifyAlignTitleSwitch}>
+          <View style={style.notifyAlignIconText}>
+            <MCI name="cellphone" size={18} color={theme.txtColor} />
+            <Text style={style.generalFont400}>Notificações Push</Text>
           </View>
 
           <Switch
@@ -63,12 +62,10 @@ export default function TelaNotificacoes() {
           />
         </View>
 
-        <View style={styleNotificacoes.alignTitleSwitch}>
-          <View style={styleNotificacoes.alignIconText}>
-            <MI name="sms" size={18} />
-            <Text style={styleNotificacoes.notificationTitle}>
-              Notificações SMS
-            </Text>
+        <View style={style.notifyAlignTitleSwitch}>
+          <View style={style.notifyAlignIconText}>
+            <MI name="sms" size={18} color={theme.txtColor} />
+            <Text style={style.generalFont400}>Notificações SMS</Text>
           </View>
 
           <Switch
@@ -83,12 +80,10 @@ export default function TelaNotificacoes() {
           />
         </View>
 
-        <View style={styleNotificacoes.alignTitleSwitch}>
-          <View style={styleNotificacoes.alignIconText}>
-            <MCI name="email" size={18} />
-            <Text style={styleNotificacoes.notificationTitle}>
-              Notificações de Email
-            </Text>
+        <View style={style.notifyAlignTitleSwitch}>
+          <View style={style.notifyAlignIconText}>
+            <MCI name="email" size={18} color={theme.txtColor} />
+            <Text style={style.generalFont400}>Notificações de Email</Text>
           </View>
 
           <Switch

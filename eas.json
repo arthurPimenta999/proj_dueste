@@ -7,8 +7,16 @@
       "developmentClient": true,
       "distribution": "internal"
     },
-    "preview": {
+    "Dueste": {
+      "android":{
+        "buildType":"apk"
+      },
       "distribution": "internal"
+    },
+    "Dueste2":{
+      "android":{
+        "gradleCommand":":app:assembleRelease"
+      }
     },
     "production": {}
   },

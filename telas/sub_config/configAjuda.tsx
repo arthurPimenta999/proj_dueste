@@ -1,152 +1,141 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import styleAjuda from "../../styles/sub_config/styleAjuda";
+import { View, Text, Dimensions, ScrollView } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Divider } from "react-native-paper";
+import styles from "../../styles/styles";
+import { useTheme } from "../../components/theme";
 import { ListItem } from "@rneui/themed";
 import Entypo from "react-native-vector-icons/Entypo";
 import MCI from "react-native-vector-icons/MaterialCommunityIcons";
 import MI from "react-native-vector-icons/MaterialIcons";
-import stylePadrao from "../../styles/stylesDefault";
 
-function TelaAjuda() {
+export default function TelaAjuda() {
+  const { theme } = useTheme();
+  const style = styles();
+  const { height } = Dimensions.get("window");
+
+  // ----- booleanos de accordion -----
+
   const [temaExpanded, setTemaExpanded] = useState(false);
   const [falhaExpanded, setFalhaExpanded] = useState(false);
-  const [faqExpanded, setFaqExpanded] = useState(false);
   const [enderecoExpanded, setEnderecoExpanded] = useState(false);
 
   return (
-    <SafeAreaView style={styleAjuda.container}>
-      <View style={stylePadrao.generalTitleAlign}>
-        <Text style={stylePadrao.generalTitleStyle}>Ajuda</Text>
+    <GestureHandlerRootView
+      style={[style.container, { paddingTop: height * 0.04 }]}
+    >
+      <View>
+        <View style={style.topTitleAlign}>
+          <Text style={style.topTitleStyle}>Ajuda</Text>
+        </View>
+
+        <Divider />
       </View>
 
-      <View>
-        {/* tema escuro */}
+      {/* view inteira */}
 
-        <ListItem.Accordion
-          content={
-            <>
-              <ListItem.Content>
-                <View style={styleAjuda.accordionIcon}>
-                  <Entypo name="moon" color={"#000"} size={20} />
-                  <ListItem.Title style={styleAjuda.accordionTitle}>
+      <ScrollView>
+        <View>
+          {/* =================== SEÇÃO DE AJUDA - TEMA ESCURO =================== */}
+          <ListItem.Accordion
+            // conteúdo do cabeçalho da seção. tem um icone e um texto dentro.
+            content={
+              <ListItem.Content style={{ backgroundColor: theme.screenColor }}>
+                <View style={style.AjudaAccordionIcon}>
+                  <Entypo name="moon" color={theme.txtColor} size={20} />
+                  <ListItem.Title style={style.AjudaAccordionTitle}>
                       Como mudar o tema do app
                   </ListItem.Title>
                 </View>
               </ListItem.Content>
-            </>
-          }
-          isExpanded={temaExpanded}
-          onPress={() => {
-            setTemaExpanded(!temaExpanded);
-          }}
-        >
-          <View style={styleAjuda.accordionContentBG}>
-            <View style={styleAjuda.accordionContentAlign}>
-              <Text style={styleAjuda.accordionContentText}>
-                Abra a página de configurações. Na seção de Preferências, existe
-                a opção "Modo Escuro". Selecione a opção que desejar.
-              </Text>
+            }
+            // props da seção
+            isExpanded={temaExpanded}
+            onPress={() => {
+              setTemaExpanded(!temaExpanded);
+            }}
+            containerStyle={{
+              backgroundColor: theme.screenColor,
+            }}
+          >
+            {/* AGOOORA SIM, isso é o que é revelado quando você usa o accordeon. :) */}
+            <View style={style.AjudaAccordionContentBG}>
+              <View style={style.AjudaAccordionContentAlign}>
+                <Text style={style.AjudaAccordionContentText}>
+                  Abra a página de configurações. Na seção de Preferências,
+                  existe a opção "Modo Escuro". Selecione a opção que desejar.
+                </Text>
+              </View>
             </View>
-          </View>
-        </ListItem.Accordion>
+          </ListItem.Accordion>
 
-        {/* denunciar bug */}
-
-        <ListItem.Accordion
-          content={
-            <>
-              <ListItem.Content>
-                <View style={styleAjuda.accordionIcon}>
-                  <MI name="bug-report" color={"#000"} size={20} />
-
-                  <ListItem.Title style={styleAjuda.accordionTitle}>
+          {/* =================== SEÇÃO DE AJUDA - DENUNCIAR BUG =================== */}
+          <ListItem.Accordion
+            // conteúdo do cabeçalho da seção. tem um icone e um texto dentro.
+            content={
+              <ListItem.Content style={{ backgroundColor: theme.screenColor }}>
+                <View style={style.AjudaAccordionIcon}>
+                  <MI name="bug-report" color={theme.txtColor} size={20} />
+                  <ListItem.Title style={style.AjudaAccordionTitle}>
                       Como denunciar uma falha
                   </ListItem.Title>
                 </View>
               </ListItem.Content>
-            </>
-          }
-          isExpanded={falhaExpanded}
-          onPress={() => {
-            setFalhaExpanded(!falhaExpanded);
-          }}
-        >
-          <View style={styleAjuda.accordionContentBG}>
-            <View style={styleAjuda.accordionContentAlign}>
-              <Text style={styleAjuda.accordionContentText}>
-                Abra a página de configurações. Na seção Ajuda e Feedback,
-                existe a opção "Feedback". Lá você pode enviar não só denúncias
-                de falhas e travamentos que aconteceram com você, mas também
-                suas opiniões e como está sendo sua experiência. Conte pra gente
-                o que você está achando do app!
-              </Text>
+            }
+            // props da seção
+            isExpanded={falhaExpanded}
+            onPress={() => {
+              setFalhaExpanded(!falhaExpanded);
+            }}
+            containerStyle={{
+              backgroundColor: theme.screenColor,
+            }}
+          >
+            {/* AGOOORA SIM, isso é o que é revelado quando você usa o accordeon. :) */}
+            <View style={style.AjudaAccordionContentBG}>
+              <View style={style.AjudaAccordionContentAlign}>
+                <Text style={style.AjudaAccordionContentText}>
+                  Abra a página de configurações. Na seção de Preferências,
+                  existe a opção "Modo Escuro". Selecione a opção que desejar.
+                </Text>
+              </View>
             </View>
-          </View>
-        </ListItem.Accordion>
+          </ListItem.Accordion>
 
-        {/* denunciar bug */}
-
-        <ListItem.Accordion
-          content={
-            <>
-              <ListItem.Content>
-                <View style={styleAjuda.accordionIcon}>
-                  <MCI name="map-marker" color={"#000"} size={20} />
-
-                  <ListItem.Title style={styleAjuda.accordionTitle}>
+          {/* =================== SEÇÃO DE AJUDA - ENDEREÇO =================== */}
+          <ListItem.Accordion
+            // conteúdo do cabeçalho da seção. tem um icone e um texto dentro.
+            content={
+              <ListItem.Content style={{ backgroundColor: theme.screenColor }}>
+                <View style={style.AjudaAccordionIcon}>
+                  <MCI name="map-marker" color={theme.txtColor} size={20} />
+                  <ListItem.Title style={style.AjudaAccordionTitle}>
                       Onde fica a Pizzaria Dueste?
                   </ListItem.Title>
                 </View>
               </ListItem.Content>
-            </>
-          }
-          isExpanded={enderecoExpanded}
-          onPress={() => {
-            setEnderecoExpanded(!enderecoExpanded);
-          }}
-        >
-          <View style={styleAjuda.accordionContentBG}>
-            <View style={styleAjuda.accordionContentAlign}>
-              <Text style={styleAjuda.accordionContentText}>
-                A Pizzaria Dueste fica na Avenida Paulo Emanuel de Almeida,
-                Nº910, Parque dos Eucaliptos. Você também pode abrir o endereço
-                direto no Google Maps usando o botão "Endereço" da tela
-                principal!
-              </Text>
+            }
+            // props da seção
+            isExpanded={enderecoExpanded}
+            onPress={() => {
+              setEnderecoExpanded(!enderecoExpanded);
+            }}
+            containerStyle={{
+              backgroundColor: theme.screenColor,
+            }}
+          >
+            {/* AGOOORA SIM, isso é o que é revelado quando você usa o accordeon. :) */}
+            <View style={style.AjudaAccordionContentBG}>
+              <View style={style.AjudaAccordionContentAlign}>
+                <Text style={style.AjudaAccordionContentText}>
+                  Abra a página de configurações. Na seção de Preferências,
+                  existe a opção "Modo Escuro". Selecione a opção que desejar.
+                </Text>
+              </View>
             </View>
-          </View>
-        </ListItem.Accordion>
-
-        {/* faq */}
-
-        <ListItem.Accordion
-          content={
-            <>
-              <ListItem.Content>
-                <View style={styleAjuda.accordionIcon}>
-                  <MCI name="account-question" color={"#000"} size={20} />
-                  <ListItem.Title style={styleAjuda.accordionTitle}>
-                      Perguntas frequentes
-                  </ListItem.Title>
-                </View>
-              </ListItem.Content>
-            </>
-          }
-          isExpanded={faqExpanded}
-          onPress={() => {
-            setFaqExpanded(!faqExpanded);
-          }}
-        >
-          <View style={styleAjuda.accordionContentBG}>
-            <View style={styleAjuda.accordionContentAlign}>
-              <Text style={styleAjuda.accordionContentText}>oiiiiiiiii</Text>
-            </View>
-          </View>
-        </ListItem.Accordion>
-      </View>
-    </SafeAreaView>
+          </ListItem.Accordion>
+        </View>
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 }
-
-export default TelaAjuda;

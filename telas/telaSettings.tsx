@@ -1,34 +1,81 @@
-import React, { useRef, useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import styleSettings from "../styles/stylesSettings";
-import stylePadrao from "../styles/stylesDefault";
-import MCI from "react-native-vector-icons/MaterialCommunityIcons";
-import MatIcons from "react-native-vector-icons/MaterialIcons";
-import Ionicon from "react-native-vector-icons/Ionicons";
-import Entypo from "react-native-vector-icons/Entypo";
-import FA6 from "react-native-vector-icons/FontAwesome6";
-import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import styles from "../styles/styles";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import BottomSheet from "@gorhom/bottom-sheet";
-import TelaNotificacoes from "./sub_config/configNotificacoes";
-import DarkModeModal from "./sub_config/configDarkMode";
-import TelaPromocoes from "./sub_config/configPromocoes";
-import TelaHistorico from "./sub_config/configHistorico";
-import TelaSobre from "./sub_config/configSobre";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { useNavigation } from "@react-navigation/native";
+import { User, onAuthStateChanged } from "firebase/auth";
+import { Switch } from "react-native-switch";
+import { useTheme } from "../components/theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// import de telas
 import TelaFeedback from "./sub_config/configFeedback";
 import TelaAjuda from "./sub_config/configAjuda";
-import { TelaLogin, auth } from "../apis/firebaseConfig";
 import EditarDados from "./sub_config/configDados";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../apis/firebaseConfig";
 import EditarSeguranca from "./sub_config/configSeguranca";
+import TelaNotificacoes from "./sub_config/configNotificacoes";
+import TelaHistorico from "./sub_config/configHistorico";
+import TelaSobre from "./sub_config/configSobre";
+
+// import de icones
+
+import MCI from "react-native-vector-icons/MaterialCommunityIcons"; //  Material Community Icons
+import Ionicon from "react-native-vector-icons/Ionicons"; // Ionicons
+import MI from "react-native-vector-icons/MaterialIcons";
+import { Divider } from "react-native-paper";
+import { TelaLogin } from "./telaLogin";
 
 function TelaConfigs() {
   const { height } = Dimensions.get("window");
 
   const navigation = useNavigation();
 
+  const { theme, toggleTheme } = useTheme(theme === "light");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const style = styles();
+
+  if (theme === "dark") {
+    setIsDarkMode(true);
+  } else if (theme === "light") {
+    setIsDarkMode(false);
+  }
+
+  useEffect(() => {
+    const loadDarkModeState = async () => {
+      try {
+        const darkModeState = await AsyncStorage.getItem("darkModeState");
+        if (darkModeState !== null) {
+          setIsDarkMode(JSON.parse(darkModeState));
+        }
+      } catch (error) {
+        console.error(
+          "Erro ao pegar estado armazenado do modo escuro: ",
+          error
+        );
+      }
+    };
+
+    loadDarkModeState();
+  }, []);
+
+  const handleChange = async () => {
+    try {
+      const newDarkModeState = !isDarkMode;
+      setIsDarkMode(newDarkModeState);
+      await AsyncStorage.setItem(
+        "darkModeState",
+        JSON.stringify(newDarkModeState)
+      );
+    } catch (error) {
+      console.error("Erro ao pegar estado armazenado do modo escuro: ", error);
+    }
+
+    toggleTheme();
+  };
   // =============== MODALS ===============
 
   //configurações da modal ///segurança
@@ -37,17 +84,12 @@ function TelaConfigs() {
   const snapPointNotificacoes = useMemo(() => ["40%", "60%"], []);
   const handleOpenNotificacoes = () => refNotificacoes.current?.expand();
 
-  //configurações da modal ///segurança
-
-  const refDarkMode = useRef(null);
-  const snapPointDarkMode = useMemo(() => ["20%", "47%"], []);
-  const handleOpenDarkMode = () => refDarkMode.current?.expand();
-
   //configurações da modal ///promoções
 
   const refPromocoes = useRef(null);
   const snapPointPromocoes = useMemo(() => ["35%", "50%"], []);
   const handleOpenPromocoes = () => refPromocoes.current?.expand();
+  const handleClosePromocoes = () => refPromocoes.current?.close();
 
   //configurações da modal ///histórico
 
@@ -63,317 +105,342 @@ function TelaConfigs() {
 
   // =============== FIM DAS MODALS ===============
 
-  // função para saber se o usuário está logado
-
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView>
-        {/* cabeçalho */}
-
-        <View style={stylePadrao.textTopAlign}>
-          <Text style={stylePadrao.textTop}>Configurações</Text>
+    <GestureHandlerRootView
+      style={[style.container, { paddingTop: height * 0.04 }]}
+    >
+      <View>
+        <View style={style.topTitleAlign}>
+          <Text style={style.topTitleStyle}>Configurações</Text>
         </View>
 
-        {/*
-      botão que leva pra tela Index
-      ~Stardust
-      */}
+        <Divider />
+      </View>
 
-        <Pressable
-          style={stylePadrao.backBtn}
-          onPress={() => navigation.navigate("Início")}
-        >
-          <Ionicon name="arrow-back" size={18} color={"#333"} />
-        </Pressable>
+      {/* view inteira */}
 
-        <ScrollView style={stylePadrao.scrollStyle}>
-          <View style={styleSettings.configTitleAlign}>
-            <Text style={styleSettings.configTitle}>Conta</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
-              Gerencie as informações e dados da sua conta.
-            </Text>
-          </View>
+      <ScrollView style={{ flex: 1, paddingVertical: 10 }}>
+        {/* ===== SEÇÃO DE CONFIGURAÇÕES - CONTA ===== */}
+        <View style={style.settingsSectionAlign}>
+          {/* --- titulo e subtitulo --- */}
+          <Text style={style.settingsSectionTitle}>Conta</Text>
+          <Text style={style.settingsSectionSubtitle}>
+            Informações de login e dados da conta.
+          </Text>
 
-          {/*
-        configurações de conta
-        ~Stardust
-        */}
-
-          <View style={styleSettings.alignConfig}>
-            <View style={styleSettings.configSection}>
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={() => navigation.navigate("User")}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="account-circle" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Perfil
-                  </Text>
+          {/* seção de itens clicáveis */}
+          <View style={style.settingsSectionStyle}>
+            {/* subseção: perfil */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={() => navigation.navigate("User")}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI
+                        name="account-circle"
+                        size={18}
+                        color={theme.txtColor}
+                      />
+                      <Text style={style.settingsSubsectionTitle}>Perfil</Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
+            </View>
 
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={() => navigation.navigate("Seguranca")}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="security" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Segurança
-                  </Text>
+            {/* subseção: segurança */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={() => navigation.navigate("Seguranca")}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI name="security" size={18} color={theme.txtColor} />
+                      <Text style={style.settingsSubsectionTitle}>
+                        Segurança
+                      </Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
+            </View>
 
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={handleOpenNotificacoes}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <Ionicon name="notifications" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Notificações
-                  </Text>
+            {/* subseção: notificações */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={handleOpenNotificacoes}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI name="bell" size={18} color={theme.txtColor} />
+                      <Text style={style.settingsSubsectionTitle}>
+                        Notificações
+                      </Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
+        </View>
 
-          {/*
-        configurações do app
-        ~Stardust
-        */}
+        {/* ===== SEÇÃO DE CONFIGURAÇÕES - PREFERÊNCIAS ===== */}
+        <View style={style.settingsSectionAlign}>
+          {/* --- titulo e subtitulo --- */}
+          <Text style={style.settingsSectionTitle}>Preferências</Text>
+          <Text style={style.settingsSectionSubtitle}>
+            Configurações do aplicativo.
+          </Text>
 
-          <View style={styleSettings.configTitleAlign}>
-            <Text style={styleSettings.configTitle}>Preferências</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
-              Configurações do aplicativo.
-            </Text>
-          </View>
-
-          <View style={styleSettings.alignConfig}>
-            <View style={styleSettings.configSection}>
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={handleOpenDarkMode}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="theme-light-dark" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Modo Escuro
-                  </Text>
+          {/* seção de itens clicáveis */}
+          <View style={style.settingsSectionStyle}>
+            {/* subseção: modo escuro */}
+            <View style={style.settingsSubsectionAlign}>
+              {/* view que containeriza (icone+texto) e seta de seção. */}
+              <View style={style.settingsSubsectionArrowRow}>
+                <View>
+                  {/* view que containeriza icone e texto de seção */}
+                  <View style={style.settingsSubsectionIconRow}>
+                    <MCI
+                      name="theme-light-dark"
+                      size={18}
+                      color={theme.txtColor}
+                    />
+                    <Text style={style.settingsSubsectionTitle}>
+                      Modo Escuro
+                    </Text>
+                  </View>
                 </View>
-                <Entypo name="chevron-right" size={18} />
+                <Switch
+                  value={isDarkMode}
+                  onValueChange={handleChange}
+                  circleSize={30}
+                  barHeight={30}
+                  circleBorderWidth={2}
+                  activeText={""}
+                  inActiveText={""}
+                  backgroundActive={"#4caf50"}
+                  renderInsideCircle={() => (
+                    <Ionicon name={theme.themeIcon} size={18} color="#555" />
+                  )}
+                />
+              </View>
+            </View>
+
+            {/* subseção: promoções */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={handleOpenPromocoes}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI name="sale" size={18} color={theme.txtColor} />
+                      <Text style={style.settingsSubsectionTitle}>
+                        Promoções
+                      </Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
+                </View>
               </Pressable>
+            </View>
 
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={handleOpenPromocoes}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="sale" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Promoções
-                  </Text>
+            {/* subseção: histórico */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={handleOpenHistorico}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI name="history" size={18} color={theme.txtColor} />
+                      <Text style={style.settingsSubsectionTitle}>
+                        Histórico
+                      </Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
-              </Pressable>
-
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={handleOpenHistorico}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <FA6 name="clock-rotate-left" size={20} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Histórico
-                  </Text>
-                </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
+        </View>
 
-          {/*
-        ajuda & feedback
-        ~Stardust
-        */}
+        {/* ===== SEÇÃO DE CONFIGURAÇÕES - AJUDA E FEEDBACK ===== */}
+        <View style={style.settingsSectionAlign}>
+          {/* --- titulo e subtitulo --- */}
+          <Text style={style.settingsSectionTitle}>Ajuda e Feedback</Text>
+          <Text style={style.settingsSectionSubtitle}>
+            Suporte e perguntas frequentes.
+          </Text>
 
-          <View style={styleSettings.configTitleAlign}>
-            <Text style={styleSettings.configTitle}>Ajuda e Feedback</Text>
-            <Text style={{ fontFamily: "Montserrat_400Regular" }}>
-              Suporte e perguntas frequentes.
-            </Text>
-          </View>
-
-          <View style={styleSettings.alignConfig}>
-            <View style={styleSettings.configSection}>
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={() => navigation.navigate("Ajuda")}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="help-circle" size={25} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Ajuda
-                  </Text>
+          {/* seção de itens clicáveis */}
+          <View style={style.settingsSectionStyle}>
+            {/* subseção: ajuda */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={() => navigation.navigate("Ajuda")}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI
+                        name="help-circle"
+                        size={18}
+                        color={theme.txtColor}
+                      />
+                      <Text style={style.settingsSubsectionTitle}>Ajuda</Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
+            </View>
 
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={() => navigation.navigate("Feedback")}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MatIcons name="feedback" size={25} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Feedback
-                  </Text>
+            {/* subseção: segurança */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={() => navigation.navigate("Feedback")}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MI name="feedback" size={18} color={theme.txtColor} />
+                      <Text style={style.settingsSubsectionTitle}>
+                        Feedback
+                      </Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
+            </View>
 
-              <Pressable
-                style={styleSettings.pressableSpace}
-                onPress={handleOpenSobre}
-              >
-                <View style={styleSettings.alignIconText}>
-                  <MCI name="account-group" size={22} color={"#000"} />
-                  <Text
-                    style={{
-                      fontFamily: "Montserrat_600SemiBold",
-                      fontSize: 18,
-                    }}
-                  >
-                    Sobre
-                  </Text>
+            {/* subseção: notificações */}
+            <View style={style.settingsSubsectionAlign}>
+              <Pressable onPress={handleOpenSobre}>
+                {/* view que containeriza (icone+texto) e seta de seção. */}
+                <View style={style.settingsSubsectionArrowRow}>
+                  <View>
+                    {/* view que containeriza icone e texto de seção */}
+                    <View style={style.settingsSubsectionIconRow}>
+                      <MCI
+                        name="account-group"
+                        size={18}
+                        color={theme.txtColor}
+                      />
+                      <Text style={style.settingsSubsectionTitle}>Sobre</Text>
+                    </View>
+                  </View>
+                  <MCI name="chevron-right" size={25} color={theme.txtColor} />
                 </View>
-                <Entypo name="chevron-right" size={18} />
               </Pressable>
             </View>
           </View>
-        </ScrollView>
+        </View>
 
-        {/* 
+        <View style={{ marginBottom: 15 }} />
+      </ScrollView>
+
+      {/* 
           modal estilo bottom-sheet ///notificações
         */}
 
-        <BottomSheet
-          ref={refNotificacoes}
-          index={-1}
-          snapPoints={snapPointNotificacoes}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <TelaNotificacoes />
-        </BottomSheet>
+      <BottomSheet
+        ref={refNotificacoes}
+        index={-1}
+        snapPoints={snapPointNotificacoes}
+        enablePanDownToClose={true}
+        style={style.modalStyle}
+        backgroundStyle={{ backgroundColor: theme.screenColor }}
+        handleIndicatorStyle={{ backgroundColor: theme.txtColor }}
+        backdropComponent={BottomSheetBackdrop}
+      >
+        <TelaNotificacoes />
+      </BottomSheet>
 
-        {/* 
-          modal estilo bottom-sheet ///modo escuro
-        */}
-
-        <BottomSheet
-          ref={refDarkMode}
-          index={-1}
-          snapPoints={snapPointDarkMode}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <DarkModeModal />
-        </BottomSheet>
-
-        {/* 
+      {/* 
           modal estilo bottom-sheet ///promoções
         */}
 
-        <BottomSheet
-          ref={refPromocoes}
-          index={-1}
-          snapPoints={snapPointPromocoes}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <TelaPromocoes />
-        </BottomSheet>
+      <BottomSheet
+        ref={refPromocoes}
+        index={-1}
+        snapPoints={snapPointPromocoes}
+        enablePanDownToClose={true}
+        style={style.modalStyle}
+        backgroundStyle={{ backgroundColor: theme.screenColor }}
+        handleIndicatorStyle={{ backgroundColor: theme.txtColor }}
+        backdropComponent={BottomSheetBackdrop}
+      >
+        <View style={style.container}>
+          <View style={style.modalTitleAlign}>
+            <Text style={style.modalTitleStyle}>Promoções</Text>
+          </View>
 
-        {/* 
+          <View style={style.modalContentAlign}>
+            <Text style={[style.generalFont400, { textAlign: "center" }]}>
+              Sem promoções no momento. Ative as notificações para ficar por
+              dentro!
+            </Text>
+          </View>
+
+          <View style={{ alignItems: "center", marginVertical: 10 }}>
+            <Pressable
+              onPress={() => {
+                handleClosePromocoes();
+                handleOpenNotificacoes();
+              }}
+            >
+              <View style={style.securityButton}>
+                <Text style={style.defaultButtonText}>Notificações</Text>
+              </View>
+            </Pressable>
+          </View>
+        </View>
+      </BottomSheet>
+
+      {/* 
           modal estilo bottom-sheet ///histórico
         */}
 
-        <BottomSheet
-          ref={refHistorico}
-          index={-1}
-          snapPoints={snapPointHistorico}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <TelaHistorico />
-        </BottomSheet>
+      <BottomSheet
+        ref={refHistorico}
+        index={-1}
+        snapPoints={snapPointHistorico}
+        enablePanDownToClose={true}
+        style={style.modalStyle}
+        backgroundStyle={{ backgroundColor: theme.screenColor }}
+        handleIndicatorStyle={{ backgroundColor: theme.txtColor }}
+        backdropComponent={BottomSheetBackdrop}
+      >
+        <TelaHistorico />
+      </BottomSheet>
 
-        {/* 
+      {/* 
           modal estilo bottom-sheet ///Sobre
         */}
 
-        <BottomSheet
-          ref={refSobre}
-          index={-1}
-          snapPoints={snapPointSobre}
-          enablePanDownToClose={true}
-          style={styleSettings.modalStyle}
-          backgroundStyle={{ backgroundColor: "#fafafa" }}
-        >
-          <TelaSobre />
-        </BottomSheet>
-      </SafeAreaView>
+      <BottomSheet
+        ref={refSobre}
+        index={-1}
+        snapPoints={snapPointSobre}
+        enablePanDownToClose={true}
+        style={style.modalStyle}
+        backgroundStyle={{ backgroundColor: theme.screenColor }}
+        handleIndicatorStyle={{ backgroundColor: theme.txtColor }}
+        backdropComponent={BottomSheetBackdrop}
+      >
+        <TelaSobre />
+      </BottomSheet>
     </GestureHandlerRootView>
   );
 }
@@ -383,7 +450,6 @@ function Telas() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("user: " + user);
       setUser(user);
     });
   }, []);
@@ -396,7 +462,6 @@ function Telas() {
     >
       <Stack.Screen name="Configs" component={TelaConfigs} />
       <Stack.Screen name="Ajuda" component={TelaAjuda} />
-      <Stack.Screen name="Feedback" component={TelaFeedback} />
 
       {/*
       condicional. se o usuário não estiver logado, mostra a tela de login. 
@@ -413,6 +478,12 @@ function Telas() {
         <Stack.Screen name="Seguranca" component={EditarSeguranca} />
       ) : (
         <Stack.Screen name="Seguranca" component={TelaLogin} />
+      )}
+
+      {user ? (
+        <Stack.Screen name="Feedback" component={TelaFeedback} />
+      ) : (
+        <Stack.Screen name="Feedback" component={TelaLogin} />
       )}
     </Stack.Navigator>
   );

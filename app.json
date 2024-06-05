@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "proj_dueste",
+    "name": "Dueste",
     "slug": "proj_dueste",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,12 +25,15 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.proj_dueste",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [],
+    "plugins": [
+      "expo-font"
+    ],
     "extra": {
       "eas": {
         "projectId": "ad566fb8-e9b4-427f-9a45-2469b9e05b99"
